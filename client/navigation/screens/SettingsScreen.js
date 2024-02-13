@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
 export default function SettingsScreen({ navigation }) {
   return (
@@ -11,6 +11,30 @@ export default function SettingsScreen({ navigation }) {
         {" "}
         SettingsScreen
       </Text>
+
+      {/* Anders Programmieren -> 'dont repeat yourself' */}
+      <Button
+        title="Go to Login Page / Nur als Test"
+        onPress={() => navigation.navigate("Login")}
+      />
+      <Button
+        title="Go to Profile Page"
+        onPress={() => navigation.navigate("Profile")}
+      />
+
+      <Button
+        title="Go to Routenübersicht Page"
+        onPress={() => navigation.navigate("Profile")}
+      />
+      <Button
+        title="Go to Support Page"
+        onPress={() => navigation.navigate("Profile")}
+      />
+
+      <Button
+        title="Go to Themewechseln Page"
+        onPress={() => navigation.navigate("Profile")}
+      />
     </View>
   );
 }
