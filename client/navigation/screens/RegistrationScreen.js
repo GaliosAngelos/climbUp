@@ -1,19 +1,19 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 
-export default function KletternScreen({ navigation }) {
+export default function RegistrationScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text
-        onPress={() => navigation.navigate("Dashboard")}
+        onPress={() => navigation.navigate("Login")}
         style={{ fontSize: 26, fontWeight: "bold" }}
       >
         {" "}
-        KletternScreen
+        RegistrationScreen
       </Text>
       <Button
-        title="Go to RoutenScreen"
-        onPress={() => navigation.navigate("Routen")}
+        title="Go to Login Page"
+        onPress={() => navigation.navigate("Login")}
       />
     </View>
   );

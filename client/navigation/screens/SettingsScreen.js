@@ -21,11 +21,6 @@ export default function SettingsScreen({ navigation }) {
         title="Go to Profile Page"
         onPress={() => navigation.navigate("Profile")}
       />
-
-      <Button
-        title="Go to Routenübersicht Page"
-        onPress={() => navigation.navigate("Profile")}
-      />
       <Button
         title="Go to Support Page"
         onPress={() => navigation.navigate("Profile")}

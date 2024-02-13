@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 
-export default function KletternScreen({ navigation }) {
+export default function RoutenViewScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text
@@ -9,11 +9,11 @@ export default function KletternScreen({ navigation }) {
         style={{ fontSize: 26, fontWeight: "bold" }}
       >
         {" "}
-        KletternScreen
+        RoutenViewScreen
       </Text>
       <Button
-        title="Go to RoutenScreen"
-        onPress={() => navigation.navigate("Routen")}
+        title="Go to Dashboard / zurück"
+        onPress={() => navigation.navigate("Dashboard")}
       />
     </View>
   );

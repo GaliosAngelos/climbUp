@@ -8,6 +8,10 @@ import DashboardScreen from "./screens/DashboardScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import KletternScreen from "./screens/KletternScreen";
+import RegistrationScreen from "./screens/RegistrationScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import RoutenScreen from "./screens/RoutenScreen";
+import RoutenViewScreen from "./screens/RoutenViewScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,6 +21,8 @@ export default function MainContainer() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Registration" component={RegistrationScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         {/* Weiter unten findest du die DashboardTabs! */}
         <Stack.Screen name="Dashboard" component={DashboardTabs} />
       </Stack.Navigator>
@@ -85,6 +91,24 @@ function DashboardTabs() {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
+        options={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarButton: () => "",
+        }}
+      />
+      <Tab.Screen
+        name="RoutenView"
+        component={RoutenViewScreen}
+        options={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarButton: () => "",
+        }}
+      />
+      <Tab.Screen
+        name="Routen"
+        component={RoutenScreen}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
