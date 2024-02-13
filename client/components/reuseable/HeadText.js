@@ -1,15 +1,11 @@
 import React from "react";
 import { SafeAreaView, View, Text } from "react-native";
+import styles from "./allStyles";
 
 export default function HeadText({ content }) {
   return (
     <>
-      <SafeAreaView
-        style={{
-          height: "25%",
-          justifyContent: "center",
-        }}
-      >
+      <SafeAreaView style={styles.head}>
         <View
           style={{
             marginHorizontal: "5%",
