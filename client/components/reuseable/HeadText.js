@@ -19,7 +19,6 @@ export default function HeadText({ content }) {
             style={{
               fontSize: 30,
               fontWeight: "bold",
-              fontFamily: "Rubik-Bold",
             }}
           >
             {content}

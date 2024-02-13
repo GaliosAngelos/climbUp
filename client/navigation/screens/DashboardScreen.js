@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
 export default function DashboardScreen({ navigation }) {
   return (
@@ -11,6 +11,10 @@ export default function DashboardScreen({ navigation }) {
         {" "}
         Dashboard
       </Text>
+      <Button
+        title="Go to Routenübersicht Page"
+        onPress={() => navigation.navigate("RoutenView")}
+      />
     </View>
   );
 }
