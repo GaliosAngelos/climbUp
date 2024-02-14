@@ -39,26 +39,36 @@ function DashboardTabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          let rn = route.name;
 
-          if (rn == "Dashboard") {
-            iconName = "home-outline";
-          } else if (rn == "Klettern") {
-            iconName = "accessibility-outline";
-          } else if (rn == "Settings") {
-            iconName = "settings-outline";
-          } else if (rn == "Profile") {
-            iconName = "settings-outline";
+          if (route.name == "Dashboard") {
+            iconName = focused
+              ? "clipboard"
+              : "clipboard-outline";
+          } else if (route.name === "Klettern") {
+            iconName = focused
+              ? "flame"
+              : "flame-outline";
+          } else if (route.name === "Settings") {
+            iconName = focused
+              ? "cog"
+              : "cog-outline";
+          // } else if (route.name === "Profile") {
+          //   iconName = focused
+          //     ? "ios-information-circle"
+          //     : "ios-information-circle-outline";
           }
 
           return <Ionicons name={iconName} size={40} color={color} />;
         },
+        tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
+        tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
         tabBarStyle: {
           position: "absolute",
-          bottom: 60, // Abstand nach unten
-          left: "20%", // Abstand nach links
-          right: "20%", // Abstand nach rechts
-          height: 60, // Höhe der Bar
+          bottom: 0, // Positionierung am unteren Rand des Bildschirms
+          left: 0,
+          right: 0,
+          height: 100, // Erhöhen Sie die Höhe der Navigationsleiste
+          backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
           borderRadius: 40, // Abrunden aller Ecken
           // Schatteneigenschaften für iOS
           shadowColor: "#000",
@@ -68,10 +78,7 @@ function DashboardTabs() {
           },
           shadowOpacity: 0.25, // Transparenz des Schattens
           shadowRadius: 5, // Weichheit des Schattens
-          // Schatteneigenschaften für Android
-          elevation: 10,
-          tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
-          tabBarInactiveTintColor: "white", // Farbe Icon wenn Inaktiv
+          elevation: 10, // Schatteneigenschaften für Android
         },
       })}
     >
