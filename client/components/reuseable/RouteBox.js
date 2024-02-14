@@ -1,3 +1,4 @@
+
 import React, {useState} from "react";
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
@@ -44,7 +45,8 @@ export default function Route({ routename, sector, levelofdifficulty, color, lin
               <Button text={"Made it."}/>
             </View>
           </View>
-        )}
-      </>
-    );
-  }
+        </View>
+      </TouchableWithoutFeedback>
+    </>
+  );
+}

@@ -10,24 +10,22 @@ import styles from "../../components/reuseable/allStyles.js";
 export default function KletternScreen({ navigation }) {
   return (
     <>
-    <View style={styles.container}>
-    <HeadText content="My favourite climbing gym." />
-    <Button
+      <HeadText content="My favourite climbing gym." />
+      <Button
         title="Go to RoutenScreen"
         onPress={() => navigation.navigate("Routen")}
       />
-    <View>
-      {hallen.map((item, index) => (
-        <ClimbingHallBox
-          key={index}
-          name={item.hall_name}
-          street={item.street_address}
-          city={item.city}
-        />
-      ))}
-    </View>
-    </View>
-
-  </>
+      <View>
+        {hallen.map((item, index) => (
+          <ClimbingHallBox
+            key={index}
+            hall_name={item.hall_name}
+            street_address={item.street_address}
+            city={item.city}
+            navigation={navigation}
+          />
+        ))}
+      </View>
+    </>
   );
 }
