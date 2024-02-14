@@ -1,33 +1,38 @@
-import React from "react";
-import { View } from "react-native";
+import React, {useState} from "react";
+import { View, TouchableOpacity } from "react-native";
 import CustTextInput from "../../components/reuseable/CustTextInput.js";
 import styles from "../../components/reuseable/allStyles.js";
-
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function ClimbingHallBar() {
-    const [showIcon, setShowIcon] = React.useState(false);
-  
-    // Function to toggle the password visibility state
-    const toggleShowIcon = () => {
-      setShowIcon(!showIcon);
-    };
-  
-    return (
-      <>
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: 4 }}>
-            <CustTextInput text={"Route"} keyboardType={"default"} />
-          </View>
-          <View style={{ flex: 2 }}>
-            <CustTextInput text={"Sektor"} keyboardType={"default"} />
-          </View>
-          <View style={{ flex: 2 }}>
-            <CustTextInput text={"Level"} keyboardType={"number-pad"} />
-          </View>
-  
-          <View style={{ flex: 1 }} />
-          {/* Placeholder für den Recommendation Button (Zauberstab) */}
+  const [iconName, setIconName] = useState("sparkles-outline");
+
+  const toggleIcon = () => {
+    if (iconName === "sparkles-outline") {
+      setIconName("sparkles");
+
+    } else {
+      setIconName("sparkles-outline");
+    }
+  };
+  return (
+    <>
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ flex: 4, marginRight: 5 }}>
+          <CustTextInput text={"Route"} keyboardType={"default"} />
         </View>
-      </>
-    );
-  }
+        <View style={{ flex: 2, marginRight: 5 }}>
+          <CustTextInput text={"Sektor"} keyboardType={"default"} />
+        </View>
+        <View style={{ flex: 2, marginRight: 5 }}>
+          <CustTextInput text={"Level"} keyboardType={"number-pad"} />
+        </View>
+
+        <View style={{ flex: 1}} />
+        <TouchableOpacity onPress={toggleIcon}>
+          <Ionicons name={iconName} size={30} color="purple" />
+        </TouchableOpacity>
+      </View>
+    </>
+  );
+}

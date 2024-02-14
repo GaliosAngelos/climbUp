@@ -6,9 +6,7 @@ export default function HeadText({ content }) {
   return (
     <>
       <SafeAreaView style={styles.head}>
-        <View style={styles.container}>
         <Text style={styles.h1}>{content}</Text>
-        </View>
       </SafeAreaView>
     </>
   );

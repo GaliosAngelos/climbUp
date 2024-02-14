@@ -13,15 +13,14 @@ export default function ClimbingHallBox({
     navigation.navigate("Routen", { hall_name: hall_name });
   };
 
-  return (
-    <TouchableOpacity onPress={openHallWithRoutes}>
-      <View style={styles.container}>
-        <View key={key} style={styles.borderBox}>
-          <Text style={styles.h3}>{hall_name}</Text>
-          <Text style={styles.text}>{street_address}</Text>
-          <Text style={styles.text}>{city}</Text>
-        </View>
-      </View>
+  
+  return (  
+  <TouchableOpacity onPress={openHallWithRoutes}>
+    <View key={key} style={styles.borderBox}>
+      <Text style={styles.h3}>{hall_name}</Text>
+      <Text style={styles.text}>{street_address}</Text>
+      <Text style={styles.text}>{city}</Text>
+    </View>
     </TouchableOpacity>
   );
 }
