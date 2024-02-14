@@ -12,6 +12,7 @@ import RegistrationScreen from "./screens/RegistrationScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import RoutenScreen from "./screens/RoutenScreen";
 import RoutenViewScreen from "./screens/RoutenViewScreen";
+import SupportScreen from "./screens/SupportScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,11 +21,12 @@ export default function MainContainer() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} /> */}
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="Support" component={SupportScreen} />
         {/* Weiter unten findest du die DashboardTabs! */}
-        <Stack.Screen name="Dashboard" component={DashboardTabs} />
+        <Stack.Screen name="DashboardTabs" component={DashboardTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -33,7 +35,7 @@ export default function MainContainer() {
 function DashboardTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="DashboardTabs"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;

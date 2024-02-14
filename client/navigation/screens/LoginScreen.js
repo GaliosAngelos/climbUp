@@ -1,39 +1,29 @@
 import React, { useState } from "react";
 // Components
-import { Text } from "react-native";
 import HeadText from "../../components/reuseable/HeadText";
 import CustTextInput from "../../components/reuseable/CustTextInput";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import ButtonSmall from "../../components/reuseable/ButtonSmall";
 import Button from "../../components/reuseable/Button";
-import styles from "../../components/reuseable/allStyles.js";
 
 export default function LoginScreen({ navigation }) {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [isUser, setIsUser] = useState(false);
+  const [user, setUser] = useState("ag");
+  const [password, setPassword] = useState("123");
 
   // Momentan nur Abfrage um reinzukommen
   // Später Abfrage von Backend
   const handleLogin = () => {
     if (user === "ag" && password === "123") {
       console.log("user, password :>> ", user, password);
-      setIsUser(true);
+      navigation.replace("DashboardTabs");
     } else {
       console.log("Anmeldung nicht geklappt");
-      setIsUser(false);
     }
   };
-
-  if (isUser) {
-    navigation.replace("Dashboard");
-  }
 
   return (
     <>
       <HeadText content="Welcome back, climber!" />
-      <Text>User: ag; Password: 123</Text>
       <CustTextInput
         text={"Username or E-Mail"}
         keyboardType={"email-address"}
