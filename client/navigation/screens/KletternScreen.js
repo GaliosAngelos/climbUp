@@ -12,10 +12,6 @@ export default function KletternScreen({ navigation }) {
     <>
     
       <HeadText content="My favourite climbing gym." />
-      <Button
-        title="Go to RoutenScreen"
-        onPress={() => navigation.navigate("Routen")}
-      />
       <View>
         {hallen.map((item, index) => (
           <ClimbingHallBox
