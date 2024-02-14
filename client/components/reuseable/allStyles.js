@@ -1,18 +1,6 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  sectiondiv: {
-    paddingBottom: "6%",
-  },
-
-  expandedArea: {
-    // Stil für den erweiterten Bereich
-  },
-
-  sidespace: {
-    marginHorizontal: "4%",
-  },
-
   h1: {
     fontSize: 30,
     fontWeight: "bold",
@@ -36,12 +24,10 @@ const styles = StyleSheet.create({
   numberbig: {
     fontSize: 50,
     fontWeight: "bold",
-    marginVertical: -10,
+
   },
 
   icon: {
-    marginLeft: 6,
-    marginVertical: -2,
   },
 
   image: {
@@ -51,28 +37,24 @@ const styles = StyleSheet.create({
   head: {
     height: 250,
     justifyContent: "center",
-    // backgroundColor: "grey",
   },
 
   textinput: {
     borderColor: "grey",
     borderWidth: 3,
-    padding: 10,
     borderRadius: 18,
-    margin: 3,
+    padding: "3%",
   },
 
   borderBox: {
-    padding: 23,
-    backgroundColor: "lightgrey",
-    borderColor: "green",
+    backgroundColor: "#E9E9E9",
+    borderColor: "#E9E9E9",
     borderWidth: 4,
     borderRadius: 20,
   },
 
   borderBoxExtended: {
-    padding: 23,
-    backgroundColor: "lightgrey",
+    backgroundColor: "E9E9E9",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderColor: "green",
@@ -82,8 +64,7 @@ const styles = StyleSheet.create({
   },
 
   routeExtension: {
-    padding: 23,
-    backgroundColor: "lightgrey",
+    backgroundColor: "#E9E9E9",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     borderColor: "green",
@@ -92,20 +73,28 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
   },
 
-  buttontext: {
+  buttonlarge: {
+
+  },
+
+  buttonlargetext: {
     textDecorationLine: "underline",
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "right",
   },
 
-  buttontextsmall: {
+  buttonsmall: {
+    
+  },
+
+  buttonsmalltext: {
     textDecorationLine: "underline",
     fontSize: 17,
     fontWeight: "bold",
     textAlign: "right",
     color: "grey",
-  },
+  }
 });
 
 export default styles;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextInput, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function CustTextInputPassword({ text, password, setPassword }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,28 +12,15 @@ export default function CustTextInputPassword({ text, password, setPassword }) {
   };
 
   return (
-    <View
-      style={{
-        marginHorizontal: "5%",
-      }}
-    >
       <View
-        style={{
-          flexDirection: "row",
-          borderColor: "grey",
-          borderWidth: 3,
-          marginTop: "5%",
-          padding: "4%",
-          borderRadius: 18,
-        }}
-      >
+        style={[styles.textinput, { flexDirection: "row" }]} >
         <TextInput
           // Set secureTextEntry prop to hide
           //password when showPassword is false
           secureTextEntry={!showPassword}
           value={password}
           onChangeText={setPassword}
-          style={{ flex: 10, fontSize: 16, fontWeight: "bold" }}
+          style={[styles.text, { flex: 10 }]}
           placeholder="Password"
         />
         <Ionicons
@@ -48,6 +36,5 @@ export default function CustTextInputPassword({ text, password, setPassword }) {
           onPress={toggleShowPassword}
         />
       </View>
-    </View>
   );
 }

@@ -1,5 +1,8 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
+import CustTextInput from "../../components/reuseable/CustTextInput";
+import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
+import RouteFilterBar from "../../components/reuseable/ButtonSmall";
 
 export default function KletternScreen({ navigation }) {
   return (

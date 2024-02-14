@@ -1,31 +1,14 @@
 import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function ButtonSmall({ text, onPress }) {
   return (
     <>
-      <View style={{ flexDirection: "row", marginHorizontal: "5%" }}>
+      <View style={{ flexDirection: "row"}}>
         <View style={{ flex: 1 }} />
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            paddingRight: "3%",
-            marginTop: "5%",
-            backgroundColor: "white",
-          }}
-          onPress={onPress}
-        >
-          <Text
-            style={{
-              textDecorationLine: "underline",
-              fontSize: 16,
-              fontWeight: "bold",
-              textAlign: "right",
-              color: "grey",
-            }}
-          >
-            {text}
-          </Text>
+        <TouchableOpacity style={styles.buttonsmall} onPress={onPress}>
+          <Text style={styles.buttonsmalltext}>{text}</Text>
         </TouchableOpacity>
       </View>
     </>

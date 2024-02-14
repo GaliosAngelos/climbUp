@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function RegistrationScreen({ navigation }) {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function ProfileScreen({ navigation }) {
   return (

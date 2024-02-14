@@ -1,25 +1,12 @@
 import React from "react";
-import { SafeAreaView, View, Text } from "react-native";
-import styles from "./allStyles";
+import { SafeAreaView, Text } from "react-native";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function HeadText({ content }) {
   return (
     <>
       <SafeAreaView style={styles.head}>
-        <View
-          style={{
-            marginHorizontal: "5%",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 30,
-              fontWeight: "bold",
-            }}
-          >
-            {content}
-          </Text>
-        </View>
+        <Text style={styles.h1}>{content}</Text>
       </SafeAreaView>
     </>
   );
