@@ -45,8 +45,7 @@ export default function Route({ routename, sector, levelofdifficulty, color, lin
               <Button text={"Made it."}/>
             </View>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        )}
     </>
   );
 }
