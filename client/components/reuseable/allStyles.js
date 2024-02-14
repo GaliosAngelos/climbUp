@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   h3: {
     fontSize: 19,
     fontWeight: "bold",
+    marginBottom: 5,
   },
 
   text: {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 3,
     borderRadius: 18,
-    padding: "3%",
+    padding: 8,
     marginBottom: 20,
   },
 
@@ -57,27 +58,31 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderRadius: 20,
     marginBottom: 20,
-    padding: 20,
+    padding: 10,
+    paddingLeft: 20,
   },
 
   borderBoxExtended: {
-    backgroundColor: "E9E9E9",
+    backgroundColor: "lightgrey",
+    borderColor: "lightgrey",
+    borderWidth: 4,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderColor: "green",
-    borderEndWidth: 4,
-    borderStartWidth: 4,
-    borderTopWidth: 4,
+    padding: 10,
+    paddingLeft: 20,
+
   },
 
   routeExtension: {
-    backgroundColor: "#E9E9E9",
+    backgroundColor: "lightgrey",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    borderColor: "green",
+    borderColor: "lightgrey",
     borderEndWidth: 4,
     borderStartWidth: 4,
     borderBottomWidth: 4,
+    height: 100,
+    marginBottom: 20,
   },
 
   buttonlarge: {

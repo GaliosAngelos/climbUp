@@ -3,6 +3,8 @@ import { View, Button, ScrollableView } from "react-native";
 import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox";
 import hallen from "../../_mock/hallen.js";
 import HeadText from "../../components/reuseable/HeadText";
+import RouteFilterBar from "../../components/reuseable/RouteFilterBar";
+import RouteBox from "../../components/reuseable/RouteBox";
 import styles from "../../components/reuseable/allStyles.js";
 
 export default function KletternScreen({ navigation }) {
