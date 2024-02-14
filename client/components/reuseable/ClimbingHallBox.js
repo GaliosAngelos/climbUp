@@ -1,13 +1,20 @@
 import React from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
-export default function ClimbingHallBox({ key, name, street, city }) {
+export default function ClimbingHallBox({ key, hall_name, street_address, city }) {
   return (
-    <TouchableWithoutFeedback key={key} style={styles.borderBox}>
-      <Text style={styles.h3}>{name}</Text>
-      <Text style={styles.text}>{street}</Text>
+    <>
+
+    <TouchableOpacity>
+    <View style={styles.container}>
+    <View key={key} style={styles.borderBox}>
+      <Text style={styles.h3}>{hall_name}</Text>
+      <Text style={styles.text}>{street_address}</Text>
       <Text style={styles.text}>{city}</Text>
-    </TouchableWithoutFeedback>
+    </View>
+    </View>
+    </TouchableOpacity>
+    </>
   );
 }
