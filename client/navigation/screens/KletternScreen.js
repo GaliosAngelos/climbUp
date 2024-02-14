@@ -1,19 +1,19 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
-import CustTextInput from "../../components/reuseable/CustTextInput";
-import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
-import RouteFilterBar from "../../components/reuseable/ButtonSmall";
+import { View, Button } from "react-native";
+import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox";
+import hallen from "../../_mock/hallen.js";
 
 export default function KletternScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text
-        onPress={() => navigation.navigate("Dashboard")}
-        style={{ fontSize: 26, fontWeight: "bold" }}
-      >
-        {" "}
-        KletternScreen
-      </Text>
+      {hallen.map((item, index) => (
+        <ClimbingHallBox
+          key={index}
+          name={item.name}
+          street={item.street}
+          city={item.city}
+        />
+      ))}
       <Button
         title="Go to RoutenScreen"
         onPress={() => navigation.navigate("Routen")}
