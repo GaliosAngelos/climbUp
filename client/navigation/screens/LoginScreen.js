@@ -25,7 +25,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <>
-    <View style={styles.section}>
+    <View style={styles.container}>
       <HeadText content="Welcome back, climber!" />
       <CustTextInput
         text={"Username or E-Mail"}

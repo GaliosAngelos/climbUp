@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 18,
     padding: "3%",
+    marginBottom: 20,
   },
 
   borderBox: {
@@ -81,18 +82,22 @@ const styles = StyleSheet.create({
   },
 
   buttonlarge: {
-
+    backgroundColor: "lightgrey",
+    paddingVertical: "2%",
+    paddingHorizontal: "5%",
+    marginVertical: 10,
+    borderRadius: 12,
   },
 
   buttonlargetext: {
-    textDecorationLine: "underline",
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
-    textAlign: "right",
+    textAlign: "center",
+    justifyContent: "center",
   },
 
   buttonsmall: {
-    
+    marginBottom: "3%",
   },
 
   buttonsmalltext: {
