@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Button from "../../components/reuseable/Button.js"
+import ButtonMedium from "../../components/reuseable/ButtonMedium"
 
 export default function Route({ routename, sector, levelofdifficulty, color, linenumber }) {
     const [expanded, setExpanded] = useState(false);
@@ -34,15 +34,17 @@ export default function Route({ routename, sector, levelofdifficulty, color, lin
         </TouchableWithoutFeedback>
   
         {expanded && (
-          <View style={[styles.routeExtension, {flexDirection: "row", justifyContent: "center"}]}>
-              <View style={{ flex: 1 }}>
-              <Button text={"Made it."}/>
+          <View style={styles.routeExtension}>
+            <View style={{flexDirection: "row"}}>
+              <View style={[styles.buttonmedium, { flex: 1, backgroundColor: "green"}]}>
+              <ButtonMedium text={"Made it."}/>
               </View>
-              <View style={{ flex: 1 }}>
-              <Button text={"Made it."}/>
+              <View style={[styles.buttonmedium, { flex: 1, backgroundColor: "green"}]}>
+              <ButtonMedium text={"Count Breaks."}/>
               </View>
-              <View style={{ flex: 1 }}>
-              <Button text={"Made it."}/>
+            </View>
+            <View style={styles.buttonmedium}>
+              <ButtonMedium text={"Commit."}/>
             </View>
           </View>
         )}

@@ -100,6 +100,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  buttonmedium:{
+    borderRadius: 12,
+    height: 40,
+  },
+
+  buttonmediumtext: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "grey",
+  },
+
   buttonsmall: {
     marginBottom: "3%",
   },
