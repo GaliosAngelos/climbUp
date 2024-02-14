@@ -42,12 +42,12 @@ function DashboardTabs() {
 
           if (route.name == "Dashboard") {
             iconName = focused
-              ? "clipboard"
-              : "clipboard-outline";
+              ? "trophy"
+              : "trophy-outline";
           } else if (route.name === "Klettern") {
             iconName = focused
-              ? "flame"
-              : "flame-outline";
+              ? "body"
+              : "body-outline";
           } else if (route.name === "Settings") {
             iconName = focused
               ? "cog"
@@ -58,18 +58,20 @@ function DashboardTabs() {
           //     : "ios-information-circle-outline";
           }
 
-          return <Ionicons name={iconName} size={40} color={color} />;
+          return <Ionicons name={iconName} size={30} color={color} />;
         },
         tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
         tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
         tabBarStyle: {
           position: "absolute",
-          bottom: 0, // Positionierung am unteren Rand des Bildschirms
-          left: 0,
-          right: 0,
+          bottom: -20, // Positionierung am unteren Rand des Bildschirms
+          left: "15%",
+          right: "15%",
           height: 100, // Erhöhen Sie die Höhe der Navigationsleiste
           backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
-          borderRadius: 40, // Abrunden aller Ecken
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          
           // Schatteneigenschaften für iOS
           shadowColor: "#000",
           shadowOffset: {

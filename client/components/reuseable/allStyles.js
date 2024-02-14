@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
     padding: 20,
-
   },
 
   borderBoxExtended: {

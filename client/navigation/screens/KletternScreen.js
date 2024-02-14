@@ -3,10 +3,12 @@ import { View, Button, ScrollableView } from "react-native";
 import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox";
 import hallen from "../../_mock/hallen.js";
 import HeadText from "../../components/reuseable/HeadText";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function KletternScreen({ navigation }) {
   return (
     <>
+    <View style={styles.container}>
     <HeadText content="My favourite climbing gym." />
     <Button
         title="Go to RoutenScreen"
@@ -21,6 +23,7 @@ export default function KletternScreen({ navigation }) {
           city={item.city}
         />
       ))}
+    </View>
     </View>
 
   </>

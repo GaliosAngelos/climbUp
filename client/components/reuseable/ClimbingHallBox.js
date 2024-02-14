@@ -7,12 +7,10 @@ export default function ClimbingHallBox({ key, hall_name, street_address, city }
     <>
 
     <TouchableOpacity>
-    <View style={styles.container}>
     <View key={key} style={styles.borderBox}>
       <Text style={styles.h3}>{hall_name}</Text>
       <Text style={styles.text}>{street_address}</Text>
       <Text style={styles.text}>{city}</Text>
-    </View>
     </View>
     </TouchableOpacity>
     </>
