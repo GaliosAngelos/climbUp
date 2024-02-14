@@ -25,7 +25,6 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <>
-    <View style={styles.container}>
       <HeadText content="Welcome back, climber!" />
       <CustTextInput
         text={"Username or E-Mail"}
@@ -48,7 +47,6 @@ export default function LoginScreen({ navigation }) {
         text="Not signed in yet?"
         onPress={() => navigation.replace("Registration")}
       />
-      </View>
     </>
   );
 }

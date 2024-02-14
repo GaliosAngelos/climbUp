@@ -5,9 +5,15 @@ import styles from "../../components/reuseable/allStyles.js";
 export default function ButtonMedium({ text, onPress }) {
   return (
     <>
-        <TouchableOpacity style={styles.buttonmedium} onPress={onPress}>
-          <Text style={styles.buttonmediumtext}>{text}</Text>
-        </TouchableOpacity>
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ flex: 1 }} />
+        <View style={styles.buttonmedium}>
+          <TouchableOpacity onPress={onPress}>
+            <Text style={styles.buttonmediumtext}>{text}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flex: 1 }} />
+      </View>
     </>
   );
 }

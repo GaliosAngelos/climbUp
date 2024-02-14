@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: "4%",
-  },
-
   h1: {
     fontSize: 30,
     fontWeight: "bold",
@@ -91,25 +87,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     marginVertical: 10,
     borderRadius: 12,
+    justifyContent: "center",
   },
 
   buttonlargetext: {
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    justifyContent: "center",
+
   },
 
   buttonmedium:{
-    borderRadius: 12,
     height: 40,
+    justifyContent: "center",
   },
 
   buttonmediumtext: {
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    color: "grey",
+    padding: "2%",
+    color: "white",
+
   },
 
   buttonsmall: {
@@ -122,7 +121,43 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
     color: "grey",
-  }
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "black",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 18,
+  },
+  counterText: {
+    margin: 20,
+    fontSize: 24,
+  },
 });
 
 export default styles;

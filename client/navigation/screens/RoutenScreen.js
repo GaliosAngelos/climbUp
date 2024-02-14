@@ -9,7 +9,6 @@ export default function RoutenScreen({ navigation, route }) {
   console.log("hall_name :>> ", hall_name);
   return (
     <>
-    <View style={styles.container}>
     <HeadText content={hall_name}/>
       <Button
         title="Go to Kletterhalle/Zurück"
@@ -29,7 +28,6 @@ export default function RoutenScreen({ navigation, route }) {
         color="blue"
         linenumber="151"
       />
-      </View>
       </>
   );
 }
