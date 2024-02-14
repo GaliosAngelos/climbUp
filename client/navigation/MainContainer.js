@@ -20,9 +20,9 @@ export default function MainContainer() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
+        {/* <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} /> */}
         {/* Weiter unten findest du die DashboardTabs! */}
         <Stack.Screen name="Dashboard" component={DashboardTabs} />
       </Stack.Navigator>
@@ -49,15 +49,15 @@ function DashboardTabs() {
             iconName = "settings-outline";
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={40} color={color} />;
         },
         tabBarStyle: {
           position: "absolute",
-          bottom: 10, // Abstand nach unten
-          left: 70, // Abstand nach links
-          right: 70, // Abstand nach rechts
-          height: 50, // Höhe der Bar
-          borderRadius: 25, // Abrunden aller Ecken
+          bottom: 60, // Abstand nach unten
+          left: "20%", // Abstand nach links
+          right: "20%", // Abstand nach rechts
+          height: 60, // Höhe der Bar
+          borderRadius: 40, // Abrunden aller Ecken
           // Schatteneigenschaften für iOS
           shadowColor: "#000",
           shadowOffset: {

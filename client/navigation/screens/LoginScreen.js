@@ -5,8 +5,8 @@ import HeadText from "../../components/reuseable/HeadText";
 import CustTextInput from "../../components/reuseable/CustTextInput";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import ButtonSmall from "../../components/reuseable/ButtonSmall";
-
-// ---------------------------------------------------------------------------------
+import Button from "../../components/reuseable/Button";
+import styles from "../../components/reuseable/allStyles.js";
 
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState("");
@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
         password={password}
         setPassword={setPassword}
       />
-      <ButtonSmall text="Log in" onPress={handleLogin} />
+      <Button text="Log in" onPress={handleLogin} />
       <ButtonSmall
         text="Forgot your password?"
         onPress={() => navigation.replace("ForgotPassword")}
