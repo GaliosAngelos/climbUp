@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-// Components
+import { View } from "react-native";
 import HeadText from "../../components/reuseable/HeadText";
 import CustTextInput from "../../components/reuseable/CustTextInput";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import ButtonSmall from "../../components/reuseable/ButtonSmall";
 import Button from "../../components/reuseable/Button";
+import styles from "../../components/reuseable/allStyles.js";
+
 
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState("ag");
@@ -23,6 +25,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <>
+    <View style={styles.section}>
       <HeadText content="Welcome back, climber!" />
       <CustTextInput
         text={"Username or E-Mail"}
@@ -45,6 +48,7 @@ export default function LoginScreen({ navigation }) {
         text="Not signed in yet?"
         onPress={() => navigation.replace("Registration")}
       />
+      </View>
     </>
   );
 }

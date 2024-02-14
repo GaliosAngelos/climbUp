@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: "4%",
+  },
+
   h1: {
     fontSize: 30,
     fontWeight: "bold",
@@ -47,10 +51,13 @@ const styles = StyleSheet.create({
   },
 
   borderBox: {
-    backgroundColor: "#E9E9E9",
-    borderColor: "#E9E9E9",
+    backgroundColor: "lightgrey",
+    borderColor: "lightgrey",
     borderWidth: 4,
     borderRadius: 20,
+    marginBottom: 20,
+    padding: 20,
+
   },
 
   borderBoxExtended: {
