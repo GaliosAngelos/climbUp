@@ -6,7 +6,7 @@ export default function RoutenScreen({ navigation, route }) {
   const { hall_name } = route.params;
   console.log("hall_name :>> ", hall_name);
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <>
       <Text
         onPress={() => navigation.navigate("Login")}
         style={{ fontSize: 26, fontWeight: "bold" }}
@@ -25,6 +25,6 @@ export default function RoutenScreen({ navigation, route }) {
         color="blue"
         linenumber="151"
       />
-    </View>
+    </>
   );
 }
