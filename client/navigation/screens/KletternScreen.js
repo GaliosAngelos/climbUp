@@ -10,6 +10,7 @@ import styles from "../../components/reuseable/allStyles.js";
 export default function KletternScreen({ navigation }) {
   return (
     <>
+    
       <HeadText content="My favourite climbing gym." />
       <View>
         {hallen.map((item, index) => (
