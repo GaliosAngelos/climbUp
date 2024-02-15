@@ -1,4 +1,5 @@
 import React from "react";
+import { Platform } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import MainContainer from "./navigation/MainContainer";
 import { StatusBar } from "react-native";

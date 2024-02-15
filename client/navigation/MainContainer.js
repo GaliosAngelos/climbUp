@@ -1,11 +1,8 @@
 import React from "react";
-import { Platform } from "react-native";
-// installed Components
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
-// Components
 import LoginScreen from "./screens/LoginScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -40,15 +37,25 @@ function DashboardTabs() {
     <Tab.Navigator
       initialRouteName="DashboardTabs"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color }) => {
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
           if (route.name == "Dashboard") {
-            iconName = focused ? "trophy" : "trophy-outline";
+            iconName = focused
+              ? "trophy"
+              : "trophy-outline";
           } else if (route.name === "Klettern") {
-            iconName = focused ? "body" : "body-outline";
+            iconName = focused
+              ? "body"
+              : "body-outline";
           } else if (route.name === "Settings") {
-            iconName = focused ? "cog" : "cog-outline";
+            iconName = focused
+              ? "cog"
+              : "cog-outline";
+          // } else if (route.name === "Profile") {
+          //   iconName = focused
+          //     ? "ios-information-circle"
+          //     : "ios-information-circle-outline";
           }
 
           return <Ionicons name={iconName} size={30} color={color} />;
@@ -57,13 +64,14 @@ function DashboardTabs() {
         tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
         tabBarStyle: {
           position: "absolute",
-          bottom: Platform.select({ ios: -20, android: 0 }), // Diese Eigenschaft auf 0 setzen, um die Leiste am unteren Rand zu halten
+          bottom: -20, // Positionierung am unteren Rand des Bildschirms
           left: "15%",
           right: "15%",
-          height: Platform.select({ ios: 100, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
+          height: 100, // Erhöhen Sie die Höhe der Navigationsleiste
+          backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-
+          
           // Schatteneigenschaften für iOS
           shadowColor: "#000",
           shadowOffset: {
