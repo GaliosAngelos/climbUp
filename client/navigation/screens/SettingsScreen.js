@@ -5,6 +5,7 @@ import ButtonSettings from "../../components/reuseable/ButtonSettings";
 const nav = [
   { name: "Profile", toScreen: "Profile" },
   { name: "Support", toScreen: "Support" },
+  { name: "Login", toScreen: "Login" },
 ];
 
 export default function SettingsScreen({ navigation }) {
@@ -19,15 +20,6 @@ export default function SettingsScreen({ navigation }) {
           navigation={navigation}
         />
       ))}
-      {/* <Button
-        title="Go to Support Page"
-        onPress={() => navigation.navigate("Profile")}
-      />
-
-      <Button
-        title="Go to Themewechseln Page"
-        onPress={() => navigation.navigate("Profile")}
-      />  */}
     </View>
   );
 }
