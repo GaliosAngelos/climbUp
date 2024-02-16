@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button, ScrollableView } from "react-native";
+import { View, Button, ScrollView } from "react-native";
 import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox";
 import hallen from "../../_mock/hallen.js";
 import HeadText from "../../components/reuseable/HeadText";
@@ -10,7 +10,7 @@ import styles from "../../components/reuseable/allStyles.js";
 export default function KletternScreen({ navigation }) {
   return (
     <>
-    
+     <ScrollView showsVerticalScrollIndicator={false}>
       <HeadText content="My favourite climbing gym." />
       <View>
         {hallen.map((item, index) => (
@@ -23,6 +23,7 @@ export default function KletternScreen({ navigation }) {
           />
         ))}
       </View>
+      </ScrollView>
     </>
   );
 }

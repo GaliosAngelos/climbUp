@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   head: {
-    height: 250,
+    height: 200,
     justifyContent: "center",
   },
 
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderEndWidth: 4,
     borderStartWidth: 4,
     borderBottomWidth: 4,
-    height: 100,
+    height: 200,
     marginBottom: 20,
   },
 
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     padding: "2%",
-    color: "white",
 
   },
 
@@ -133,30 +132,10 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
     elevation: 5,
-  },
-  button: {
-    padding: 10,
-    elevation: 2,
-  },
-  textStyle: {
-    color: "black",
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 18,
-  },
-  counterText: {
-    margin: 20,
-    fontSize: 24,
+    height: 300,
   },
 });
 

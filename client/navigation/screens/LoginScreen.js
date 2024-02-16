@@ -39,6 +39,7 @@ export default function LoginScreen({ navigation }) {
         setPassword={setPassword}
       />
       <Button text="Log in" onPress={handleLogin} />
+      <View style={{marginBottom: 20}}/>
       <ButtonSmall
         text="Forgot your password?"
         onPress={() => navigation.replace("ForgotPassword")}
