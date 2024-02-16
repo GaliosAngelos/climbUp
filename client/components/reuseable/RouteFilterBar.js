@@ -28,10 +28,11 @@ export default function ClimbingHallBar() {
           <CustTextInput text={"Level"} keyboardType={"number-pad"} />
         </View>
 
-        <View style={{ flex: 1}} />
+        <View style={{ flex: 1, marginTop: 6}}>
         <TouchableOpacity onPress={toggleIcon}>
           <Ionicons name={iconName} size={30} color="purple" />
         </TouchableOpacity>
+        </View>
       </View>
     </>
   );

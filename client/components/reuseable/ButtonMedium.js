@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
-export default function ButtonMedium({ text, onPress }) {
+export default function ButtonMedium({ text, onPress, col }) {
   return (
     <>
       <View style={{ flexDirection: "row" }}>
