@@ -14,18 +14,12 @@ const styles = StyleSheet.create({
   h3: {
     fontSize: 19,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 3,
   },
 
   text: {
     fontSize: 17,
     fontWeight: "medium",
-  },
-
-  numberbig: {
-    fontSize: 50,
-    fontWeight: "bold",
-
   },
 
   icon: {
@@ -43,7 +37,7 @@ const styles = StyleSheet.create({
   textinput: {
     borderColor: "grey",
     borderWidth: 3,
-    borderRadius: 18,
+    borderRadius: 13,
     padding: 8,
     marginBottom: 20,
   },

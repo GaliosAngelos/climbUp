@@ -3,10 +3,11 @@ import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
 export default function ClimbingHallBox({
-  key,
+  index,
   hall_name,
   street_address,
   city,
+  postal_code,
   navigation,
 }) {
   const openHallWithRoutes = () => {
@@ -16,10 +17,10 @@ export default function ClimbingHallBox({
   
   return (  
   <TouchableOpacity onPress={openHallWithRoutes}>
-    <View key={key} style={styles.borderBox}>
+    <View key={index} style={styles.borderBox}>
       <Text style={styles.h3}>{hall_name}</Text>
       <Text style={styles.text}>{street_address}</Text>
-      <Text style={styles.text}>{city}</Text>
+      <Text style={styles.text}>{city} {postal_code}</Text>
     </View>
     </TouchableOpacity>
   );

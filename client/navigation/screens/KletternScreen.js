@@ -19,10 +19,13 @@ export default function KletternScreen({ navigation }) {
             hall_name={item.hall_name}
             street_address={item.street_address}
             city={item.city}
+            postal_code={item.postal_code}
+
             navigation={navigation}
           />
         ))}
       </View>
+      <View style={{marginBottom: 100}}/>
       </ScrollView>
     </>
   );
