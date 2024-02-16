@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -34,17 +34,23 @@ export default function MainContainer() {
 }
 
 function DashboardTabs() {
+  const [activeTab, setActiveTab] = useState("Dashboard"); // Initialer Tab
+
   return (
     <Tab.Navigator
       initialRouteName="DashboardTabs"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, color }) => {
           let iconName;
 
           if (route.name == "Dashboard") {
             iconName = focused ? "trophy" : "trophy-outline";
           } else if (route.name === "Klettern") {
             iconName = focused ? "body" : "body-outline";
+            if (activeTab === "Routen") {
+              iconName = "body";
+              color = "green";
+            }
           } else if (route.name === "Settings") {
             iconName = focused ? "cog" : "cog-outline";
           }
@@ -82,16 +88,25 @@ function DashboardTabs() {
         name="Dashboard"
         component={DashboardScreen}
         options={{ tabBarShowLabel: false, headerShown: false }}
+        listeners={{
+          focus: () => setActiveTab("Dashboard"),
+        }}
       />
       <Tab.Screen
         name="Klettern"
         component={KletternScreen}
         options={{ tabBarShowLabel: false, headerShown: false }}
+        listeners={{
+          focus: () => setActiveTab("Klettern"),
+        }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{ tabBarShowLabel: false, headerShown: false }}
+        listeners={{
+          focus: () => setActiveTab("Settings"),
+        }}
       />
       <Tab.Screen
         name="Profile"
@@ -100,6 +115,9 @@ function DashboardTabs() {
           tabBarShowLabel: false,
           headerShown: false,
           tabBarButton: () => "",
+        }}
+        listeners={{
+          focus: () => setActiveTab("Profile"),
         }}
       />
       <Tab.Screen
@@ -110,6 +128,9 @@ function DashboardTabs() {
           headerShown: false,
           tabBarButton: () => "",
         }}
+        listeners={{
+          focus: () => setActiveTab("RoutenView"),
+        }}
       />
       <Tab.Screen
         name="Routen"
@@ -118,6 +139,9 @@ function DashboardTabs() {
           tabBarShowLabel: false,
           headerShown: false,
           tabBarButton: () => "",
+        }}
+        listeners={{
+          focus: () => setActiveTab("Routen"),
         }}
       />
     </Tab.Navigator>
