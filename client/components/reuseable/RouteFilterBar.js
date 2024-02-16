@@ -19,13 +19,13 @@ export default function ClimbingHallBar() {
     <>
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 4, marginRight: 5 }}>
-          <CustTextInput text={"Route"} keyboardType={"default"} />
+          <CustTextInput text={"Route"}/>
         </View>
         <View style={{ flex: 2, marginRight: 5 }}>
-          <CustTextInput text={"Sektor"} keyboardType={"default"} />
+          <CustTextInput text={"Sektor"}/>
         </View>
         <View style={{ flex: 2, marginRight: 5 }}>
-          <CustTextInput text={"Level"} keyboardType={"number-pad"} />
+          <CustTextInput text={"Level"} />
         </View>
 
         <View style={{ flex: 1, marginTop: 6}}>
