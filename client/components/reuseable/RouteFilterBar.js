@@ -4,6 +4,8 @@ import CustTextInput from "../../components/reuseable/CustTextInput.js";
 import styles from "../../components/reuseable/allStyles.js";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+// ClimbingHallBar component, likely used for filtering or searching climbing routes
+
 export default function ClimbingHallBar() {
   const [iconName, setIconName] = useState("sparkles-outline");
 

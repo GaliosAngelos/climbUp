@@ -3,6 +3,8 @@ import { TextInput, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import styles from "../../components/reuseable/allStyles.js";
 
+// same like the CustTextInput especially for passwords
+
 export default function CustTextInputPassword({ text, password, setPassword }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -32,7 +34,7 @@ export default function CustTextInputPassword({ text, password, setPassword }) {
           marginLeft: 6,
           marginVertical: -2,
         }}
-        onPress={toggleShowPassword}
+        onPress={toggleShowPassword} //click on the icon -> hide shows password
       />
     </View>
   );

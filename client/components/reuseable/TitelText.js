@@ -4,8 +4,8 @@ import styles from "../../components/reuseable/allStyles.js";
 
 export default function HeadText({ content }) {
   return (
-    <SafeAreaView>
+    <View>
       <Text style={styles.h3}>{content}</Text>
-    </SafeAreaView>
+    </View>
   );
 }

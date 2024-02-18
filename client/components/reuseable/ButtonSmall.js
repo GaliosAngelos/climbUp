@@ -2,6 +2,8 @@ import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
+// small Buttons that will appear directly on the main canvas, for actions with a lower frequency than the large Buttons (for side-actions)
+
 export default function ButtonSmall({ text, onPress }) {
   return (
     <>

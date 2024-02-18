@@ -2,6 +2,8 @@ import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
+// medium sized Buttons that will appear in RouteBox etc.
+
 export default function ButtonMedium({ text, onPress, col }) {
   return (
     <>

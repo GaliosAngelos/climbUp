@@ -1,3 +1,4 @@
+// the Route information from the Database for the User-Selected Climbinghall based on the following Array, currently HardCode
 const routes = [
     {
         routeName: "Shadowcrack",

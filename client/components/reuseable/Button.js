@@ -2,6 +2,8 @@ import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
+//large Buttons that will appear directly on the main canvas (not in RouteBox etc.)
+
 export default function Button({ text, onPress }) {
   return (
     <>

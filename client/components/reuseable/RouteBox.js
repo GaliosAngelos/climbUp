@@ -1,3 +1,4 @@
+// Importing necessary components and libraries
 import React, { useState } from "react";
 import {
   TouchableWithoutFeedback,
@@ -11,6 +12,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import ButtonMedium from "../../components/reuseable/ButtonMedium";
 import Button from "../../components/reuseable/Button";
 
+// Route component representing a climbing route in a climbing hall.
+// It allows users to track their progress on the route (success, failure, number of attempts).
+
 export default function Route({
   routeName,
   Sector,
@@ -18,12 +22,16 @@ export default function Route({
   color,
   lineNumber,
 }) {
+  // State hooks for expanding the view and tracking attempts count
   const [expanded, setExpanded] = useState(false);
   const [count, setCount] = useState(0);
+
   return (
     <>
+      {/* Touchable component to expand or collapse route details */}
       <TouchableWithoutFeedback onPress={() => setExpanded(!expanded)}>
         <View style={expanded ? styles.borderBoxExtended : styles.borderBox}>
+          {/* Route information display */}
           <View style={{ flexDirection: "row" }}>
             <View style={{ flex: 3, justifyContent: "center" }}>
               <Text style={styles.h3}>{routeName}</Text>
@@ -32,6 +40,7 @@ export default function Route({
               </Text>
             </View>
 
+            {/* Display of route's difficulty level */}
             <View style={{ flex: 1 }}>
               <Text
                 style={[
@@ -51,8 +60,10 @@ export default function Route({
         </View>
       </TouchableWithoutFeedback>
 
+      {/* Expanded view to track route completion and attempts */}
       {expanded && (
         <View style={styles.routeExtension}>
+          {/* Buttons for marking the route as 'made' or 'failed' */}
           <View style={{ flexDirection: "row" }}>
             <View style={[{ flex: 1 }]}>
               <ButtonMedium text={"Made it."} />
@@ -61,6 +72,8 @@ export default function Route({
               <ButtonMedium text={"Failed."} />
             </View>
           </View>
+
+          {/* Counter for tracking the number of attempts */}
           <View
             style={{
               flexDirection: "row",
@@ -84,8 +97,10 @@ export default function Route({
               <Text style={styles.h1}>+</Text>
             </TouchableOpacity>
           </View>
+
+          {/* Button to commit the tracked data */}
           <View style={{ justifyContent: "center" }}>
-            <ButtonMedium style={styles.buttonlarge} text="Commit" />
+            <ButtonMedium onPress={sendData()} style={styles.buttonlarge} text="Commit" />
           </View>
         </View>
       )}
