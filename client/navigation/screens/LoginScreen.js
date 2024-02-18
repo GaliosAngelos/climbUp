@@ -5,8 +5,6 @@ import CustTextInput from "../../components/reuseable/CustTextInput";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import ButtonSmall from "../../components/reuseable/ButtonSmall";
 import Button from "../../components/reuseable/Button";
-import styles from "../../components/reuseable/allStyles.js";
-
 
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState("ag");
@@ -39,7 +37,7 @@ export default function LoginScreen({ navigation }) {
         setPassword={setPassword}
       />
       <Button text="Log in" onPress={handleLogin} />
-      <View style={{marginBottom: 20}}/>
+      <View style={{ marginBottom: 20 }} />
       <ButtonSmall
         text="Forgot your password?"
         onPress={() => navigation.replace("ForgotPassword")}

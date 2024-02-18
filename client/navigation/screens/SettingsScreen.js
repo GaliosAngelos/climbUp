@@ -20,13 +20,36 @@ export default function SettingsScreen({ navigation }) {
   return (
     <View>
       <HeadText content="Change your Login." />
-      <Text style={[styles.text, { marginBottom: "5px" }]}>
-        Username: 'USERNAME'
+      <Text
+        style={[
+          styles.text,
+          {
+            fontSize: 16, // Größere Schriftgröße
+            fontWeight: "bold", // Dickerer Text
+            // backgroundColor: "rgba(255, 255, 255, 0.5)", // Subtiler Hintergrund
+            padding: 10, // Etwas Padding für bessere Lesbarkeit
+            borderRadius: 5,
+          },
+        ]}
+      >
+        Username: 'auxTeam69'
       </Text>
-      <Text style={[styles.text, { marginBottom: "5px" }]}>
-        Email: 'email@probe.de'
+      <Text
+        style={[
+          styles.text,
+          {
+            marginBottom: 25,
+            fontSize: 16, // Größere Schriftgröße
+            fontWeight: "bold", // Dickerer Text
+            // backgroundColor: "rgba(255, 255, 255, 0.5)", // Subtiler Hintergrund
+            padding: 10, // Etwas Padding für bessere Lesbarkeit
+            borderRadius: 5,
+          },
+        ]}
+      >
+        Email: '123456@via.dk'
       </Text>
-      <TitelText content="Change your Passwort" />
+      <TitelText content="Change your Passwort" style={{ marginTop: "5px" }} />
       <CustTextInputPassword
         secureTextEntry={true}
         text="Actual Password"
@@ -60,7 +83,18 @@ export default function SettingsScreen({ navigation }) {
         onPress={() => navigation.navigate("Login")}
       />
       <TitelText content="Contact us !" />
-      <Text style={{ color: "#007bff", fontSize: 16 }}>team@climbup.com</Text>
+      <Text
+        style={{
+          color: "#007bff",
+          fontSize: 16,
+          color: "#007bff", // Blaue Textfarbe
+          fontSize: 16, // Größere Schriftgröße für Kontaktinformationen
+          fontWeight: "bold", // Dickerer Text
+          textDecorationLine: "underline",
+        }}
+      >
+        team@climbup.com
+      </Text>
     </View>
   );
 }
