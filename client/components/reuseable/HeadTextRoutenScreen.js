@@ -3,6 +3,8 @@ import { SafeAreaView, Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./allStyles.js";
 
+// a Textbox at the Top especially for the Route-Screen, contains more (Like-Function and Back-to-ClimbingHalls-Button) than the HeadText
+
 export default function HeadTextRoutenScreen({ content }) {
     const [filled, setFilled] = useState(false);
     const handlePress = () => {
@@ -15,7 +17,7 @@ export default function HeadTextRoutenScreen({ content }) {
 
     return (
       <>
-      <SafeAreaView style={styles.head}>
+      <View style={styles.head}>
         <Text style={styles.h1}>{content}</Text>
         <TouchableOpacity onPress={handlePress}>
           <Ionicons
@@ -25,7 +27,7 @@ export default function HeadTextRoutenScreen({ content }) {
           />
         </TouchableOpacity>
 
-      </SafeAreaView>
+      </View>
       
 </>
     );

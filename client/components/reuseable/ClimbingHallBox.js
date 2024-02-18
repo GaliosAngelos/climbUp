@@ -2,6 +2,8 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
+// the display for a ClimbingHall, that display for the user necessary data of a climbing hall
+
 export default function ClimbingHallBox({
   index,
   hall_name,
@@ -12,7 +14,7 @@ export default function ClimbingHallBox({
 }) {
   const openHallWithRoutes = () => {
     navigation.navigate("Routen", { hall_name: hall_name });
-  };
+  }; //navigation after the selection of a climbing hall to the RoutenScreen, that contain the routes for this selected hall
 
   
   return (  
