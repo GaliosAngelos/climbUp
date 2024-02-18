@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+// Styles for all components
 const styles = StyleSheet.create({
   h1: {
     fontSize: 30,
@@ -22,8 +23,7 @@ const styles = StyleSheet.create({
     fontWeight: "medium",
   },
 
-  icon: {
-  },
+  icon: {},
 
   image: {
     resizeMode: "auto",
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     padding: 10,
     paddingLeft: 20,
-
   },
 
   routeExtension: {
@@ -88,10 +87,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-
   },
 
-  buttonmedium:{
+  buttonmedium: {
     height: 40,
     justifyContent: "center",
   },
@@ -101,7 +99,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     padding: "2%",
-
   },
 
   buttonsmall: {

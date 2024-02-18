@@ -1,6 +1,10 @@
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+// Components
+import { Text, View } from "react-native";
+// Styles
 import styles from "../../components/reuseable/allStyles.js";
+
+// ---------------------------------------------------------------
 
 export default function HeadText({ content }) {
   return (

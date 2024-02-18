@@ -1,5 +1,8 @@
 import React from "react";
+// Components
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+
+// --------------------------------------------------------------------------
 
 export default function ButtonSettings({ key, name, toScreen, navigation }) {
   return (

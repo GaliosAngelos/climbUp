@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { View } from "react-native";
+// Components
 import HeadText from "../../components/reuseable/HeadText";
 import CustTextInput from "../../components/reuseable/CustTextInput";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import ButtonSmall from "../../components/reuseable/ButtonSmall";
 import Button from "../../components/reuseable/Button";
 
+// --------------------------------------------------------------------
+
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState("ag");
   const [password, setPassword] = useState("123");
 
-  // Momentan nur Abfrage um reinzukommen
-  // Später Abfrage von Backend
+  // Request on backend -> Login
   const handleLogin = () => {
     if (user === "ag" && password === "123") {
       console.log("user, password :>> ", user, password);

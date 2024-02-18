@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+// Components
 import { TextInput, View } from "react-native";
+// Icons
 import Ionicons from "react-native-vector-icons/Ionicons";
+// Styles
 import styles from "../../components/reuseable/allStyles.js";
 
-// same like the CustTextInput especially for passwords
+// ------------------------------------------------------------------
 
+// same like the CustTextInput especially for passwords
 export default function CustTextInputPassword({ text, password, setPassword }) {
   const [showPassword, setShowPassword] = useState(false);
 
