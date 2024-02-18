@@ -1,5 +1,8 @@
 import React from "react";
+// Components
 import { View, Text, Button } from "react-native";
+
+// ---------------------------------------------------------
 
 export default function SupportScreen({ navigation }) {
   return (

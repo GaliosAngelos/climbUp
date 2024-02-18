@@ -1,16 +1,23 @@
 import React, { useState } from "react";
+// Components
 import { Text, View } from "react-native";
 import HeadText from "../../components/reuseable/HeadText";
 import TitelText from "../../components/reuseable/TitelText";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import Button from "../../components/reuseable/Button";
+// Style
 import styles from "../../components/reuseable/allStyles.js";
 
+// --------------------------------------------------------------
+
+// Bottom Bar Navigation
 const nav = [
   { name: "Profile", toScreen: "Profile" },
   { name: "Support", toScreen: "Support" },
   { name: "Login", toScreen: "Login" },
 ];
+
+// --------------------------------------------------------------
 
 export default function SettingsScreen({ navigation }) {
   const [actualPassword, setActualPassword] = useState("");

@@ -1,6 +1,8 @@
 import React from "react";
+// Components
 import { View, Text, Button } from "react-native";
-import styles from "../../components/reuseable/allStyles.js";
+
+// --------------------------------------------------------------
 
 export default function DashboardScreen({ navigation }) {
   return (

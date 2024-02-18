@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Platform } from "react-native";
+// Navigation + Icons
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
+// Components
 import LoginScreen from "./screens/LoginScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -15,8 +17,12 @@ import RoutenScreen from "./screens/RoutenScreen";
 import RoutenViewScreen from "./screens/RoutenViewScreen";
 import SupportScreen from "./screens/SupportScreen";
 
+// ---------------------------------------------------------
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+// ---------------------------------------------------------
 
 export default function MainContainer() {
   return (
@@ -59,30 +65,34 @@ function DashboardTabs() {
         },
         tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
         tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
-        tabBarStyle: {
-          position: "absolute",
-          bottom: Platform.select({ ios: -20, android: 0 }), // Positionierung am unteren Rand des Bildschirms
-          left: "15%",
-          right: "15%",
-          height: Platform.select({ ios: 100, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
-          backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
+        // keyboardHidesTabBar: true,
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: [
+          {
+            position: "absolute",
+            bottom: Platform.select({ ios: -20, android: 0 }), // Positionierung am unteren Rand des Bildschirms
+            left: "15%",
+            right: "15%",
+            height: Platform.select({ ios: 100, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
+            backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
 
-          // Schatteneigenschaften für iOS
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0, // Zentrieren des Schattens horizontal
-            height: 0, // Zentrieren des Schattens vertikal
+            // Schatteneigenschaften für iOS
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0, // Zentrieren des Schattens horizontal
+              height: 0, // Zentrieren des Schattens vertikal
+            },
+            shadowOpacity: 0.25, // Transparenz des Schattens
+            shadowRadius: 5, // Weichheit des Schattens
+            elevation: 10, // Schatteneigenschaften für Android
           },
-          shadowOpacity: 0.25, // Transparenz des Schattens
-          shadowRadius: 5, // Weichheit des Schattens
-          elevation: 10, // Schatteneigenschaften für Android
-        },
+          {
+            display: "flex",
+          },
+        ],
       })}
-      tabBarOptions={{
-        keyboardHidesTabBar: true,
-      }}
     >
       <Tab.Screen
         name="Dashboard"
