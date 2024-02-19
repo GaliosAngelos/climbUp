@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   textinput: {
     borderColor: "#B9B9B9",
     borderWidth: 3,
-    borderRadius: 13,
+    borderRadius: 16,
     padding: 9,
     marginBottom: 20,
   },
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderRadius: 20,
     marginBottom: 20,
-    padding: 10,
-    paddingLeft: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
   },
 
   borderBoxExtended: {

@@ -1,19 +1,19 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import LoginScreen from "./screens/LoginScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SettingsScreen from "./screens/SettingsScreen";
-import KletternScreen from "./screens/KletternScreen";
+import KletternScreen from "./screens/ClimbingHallScreen";
 import RegistrationScreen from "./screens/RegistrationScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import RoutenScreen from "./screens/RoutenScreen";
 import RoutenViewScreen from "./screens/RoutenViewScreen";
 import SupportScreen from "./screens/SupportScreen";
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,27 +41,30 @@ function DashboardTabs() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name == "Dashboard") {
-            iconName = focused ? "trophy" : "trophy-outline";
-          } else if (route.name === "Klettern") {
-            iconName = focused ? "body" : "body-outline";
+          if (route.name === "Dashboard") {
+            iconName = focused ? require('../assets/home-black.png') : require('../assets/home-grey.png');
+          } else if (route.name === "ClimbingHall") {
+            iconName = focused ? require('../assets/shoe-black.png') : require('../assets/shoe-grey.png');
           } else if (route.name === "Settings") {
-            iconName = focused ? "cog" : "cog-outline";
+            iconName = focused ? require('../assets/menu-black.png') : require('../assets/menu-grey.png');
           }
 
-          return <Ionicons name={iconName} size={30} color={color} />;
+          return <Image source={iconName} style={{width: 40, height: 40}} resizeMode="contain" />;
         },
         tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
         tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
         tabBarStyle: {
           position: "absolute",
-          bottom: Platform.select({ ios: -20, android: 0 }), // Positionierung am unteren Rand des Bildschirms
+          bottom: Platform.select({ ios: 40, android: 0 }), // Positionierung am unteren Rand des Bildschirms
           left: "15%",
           right: "15%",
-          height: Platform.select({ ios: 100, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
+          height: Platform.select({ ios: 70, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
           backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
+          paddingTop: 28,
 
           // Schatteneigenschaften für iOS
           shadowColor: "#000",
@@ -69,8 +72,8 @@ function DashboardTabs() {
             width: 0, // Zentrieren des Schattens horizontal
             height: 0, // Zentrieren des Schattens vertikal
           },
-          shadowOpacity: 0.25, // Transparenz des Schattens
-          shadowRadius: 5, // Weichheit des Schattens
+          shadowOpacity: 0.30, // Transparenz des Schattens
+          shadowRadius: 7, // Weichheit des Schattens
           elevation: 10, // Schatteneigenschaften für Android
         },
       })}
@@ -84,7 +87,7 @@ function DashboardTabs() {
         options={{ tabBarShowLabel: false, headerShown: false }}
       />
       <Tab.Screen
-        name="Klettern"
+        name="ClimbingHall"
         component={KletternScreen}
         options={{ tabBarShowLabel: false, headerShown: false }}
       />

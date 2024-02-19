@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Image } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
 
 export default function DashboardScreen({ navigation }) {
@@ -16,6 +16,7 @@ export default function DashboardScreen({ navigation }) {
         title="Go to Routenübersicht Page"
         onPress={() => navigation.navigate("RoutenView")}
       />
+
     </View>
   );
 }

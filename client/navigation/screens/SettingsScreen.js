@@ -19,11 +19,11 @@ export default function SettingsScreen({ navigation }) {
 
   return (
     <View>
-      <HeadText content="Change your Login." />
-      <Text style={[styles.text, { marginBottom: "5px" }]}>
+      <HeadText content="This is your data." />
+      <Text style={styles.h3}>
         Username: 'USERNAME'
       </Text>
-      <Text style={[styles.text, { marginBottom: "5px" }]}>
+      <Text style={styles.h3}>
         Email: 'email@probe.de'
       </Text>
       <TitelText content="Change your Passwort" />
