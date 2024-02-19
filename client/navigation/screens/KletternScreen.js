@@ -1,31 +1,30 @@
 import React from "react";
-import { View, Button, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox";
 import hallen from "../../_mock/hallen.js";
 import HeadText from "../../components/reuseable/HeadText";
-import RouteFilterBar from "../../components/reuseable/RouteFilterBar";
-import RouteBox from "../../components/reuseable/RouteBox";
-import styles from "../../components/reuseable/allStyles.js";
+import CustTextInput from "../../components/reuseable/CustTextInput.js";
 
 export default function KletternScreen({ navigation }) {
   return (
     <>
-     <ScrollView showsVerticalScrollIndicator={false}>
-      <HeadText content="My favourite climbing gym." />
-      <View>
-        {hallen.map((item, index) => (
-          <ClimbingHallBox
-            key={index}
-            hall_name={item.hall_name}
-            street_address={item.street_address}
-            city={item.city}
-            postal_code={item.postal_code}
+      <HeadText content="Where every climb feels like home." />
 
-            navigation={navigation}
-          />
-        ))}
-      </View>
-      <View style={{marginBottom: 100}}/>
+      <CustTextInput text={"Name, City"} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          {hallen.map((item, index) => (
+            <ClimbingHallBox
+              key={index}
+              hall_name={item.hall_name}
+              street_address={item.street_address}
+              city={item.city}
+              postal_code={item.postal_code}
+              navigation={navigation}
+            />
+          ))}
+        </View>
+        <View style={{ marginBottom: 100 }} />
       </ScrollView>
     </>
   );

@@ -5,12 +5,9 @@ import {
   TouchableOpacity,
   View,
   Text,
-  Modal,
 } from "react-native";
 import styles from "../../components/reuseable/allStyles.js";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import ButtonMedium from "../../components/reuseable/ButtonMedium";
-import Button from "../../components/reuseable/Button";
 
 // Route component representing a climbing route in a climbing hall.
 // It allows users to track their progress on the route (success, failure, number of attempts).
@@ -100,7 +97,9 @@ export default function Route({
 
           {/* Button to commit the tracked data */}
           <View style={{ justifyContent: "center" }}>
-            <ButtonMedium onPress={sendData()} style={styles.buttonlarge} text="Commit" />
+            <ButtonMedium 
+            // onPress={sendData()}
+            style={styles.buttonlarge} text="Commit" />
           </View>
         </View>
       )}
