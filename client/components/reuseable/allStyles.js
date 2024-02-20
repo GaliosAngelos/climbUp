@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 
   head: {
-    height: 150,
+    height: 130,
     justifyContent: "center",
     marginTop: 20,
   },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderEndWidth: 4,
     borderStartWidth: 4,
     borderBottomWidth: 4,
-    height: 200,
+    height: 180,
     marginBottom: 20,
   },
 
@@ -107,6 +107,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
     color: "grey",
+  },
+
+  selectedButton: {
+    backgroundColor: 'grey',
   },
 
   centeredView: {

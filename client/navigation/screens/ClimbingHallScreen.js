@@ -27,7 +27,7 @@ export default function ClimbingHallScreen({ navigation }) {
             />
           ))}
         </View>
-        <View style={{ marginBottom: 100 }} />
+        <View style={{ marginBottom: 130 }} />
       </ScrollView>
     </>
   );
