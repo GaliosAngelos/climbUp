@@ -16,18 +16,16 @@ export default function RouteFilter() {
 
   const [iconName, setIconName] = useState("sparkles-outline");
 
-  const toggleIcon = () => {
-    if (iconName === "sparkles-outline") {
-      setIconName("sparkles");
-    } else {
-      setIconName("sparkles-outline");
-    }
-  };
+  const [isMagic, setIsMagic] = useState(false);
+  
+    const toggleMagic = () => {
+      setIsMagic(!isMagic);
+    };
 
   return (
     <>
       <View style={{ flexDirection: "row" }}>
-        <View style={{ flex: 7, marginRight: 5 }}>
+        <View style={{ flex: 6, marginRight: 5 }}>
           <CustTextInput text={"Route"} />
         </View>
         <View style={{ flex: 4, marginRight: 5 }}>
@@ -36,11 +34,13 @@ export default function RouteFilter() {
         <View style={{ flex: 3, marginRight: 5 }}>
           <CustTextInput text={"Level"} />
         </View>
-        <View
-          style={{ flex: 2, justiftyContent: "center", alignItems: "center" }}
-        >
-          <TouchableOpacity onPress={toggleIcon}>
-            <Ionicons name={iconName} size={36} color="purple" />
+        <View style={{margin: 4}}>
+          <TouchableOpacity onPress={toggleMagic}>
+          <Ionicons
+                  name={isMagic ? 'sparkles' : 'sparkles-outline'}
+                  size={36}
+                  color={isMagic ? 'purple' : 'black'}
+                />
           </TouchableOpacity>
         </View>
       </View>
