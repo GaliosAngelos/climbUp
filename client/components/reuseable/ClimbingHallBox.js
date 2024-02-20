@@ -23,9 +23,8 @@ export default function ClimbingHallBox({
     <TouchableOpacity onPress={openHallWithRoutes}>
       <View key={index} style={styles.borderBox}>
         <Text style={styles.h3}>{hall_name}</Text>
-        <Text style={styles.text}>{street_address}</Text>
         <Text style={styles.text}>
-          {city} {postal_code}
+          {street_address}, {postal_code} {city}
         </Text>
       </View>
     </TouchableOpacity>

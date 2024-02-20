@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 
-// Styles for all components
 const styles = StyleSheet.create({
   h1: {
     fontSize: 30,
     fontWeight: "bold",
+    textAlign: "left",
   },
 
   h2: {
@@ -23,22 +23,16 @@ const styles = StyleSheet.create({
     fontWeight: "medium",
   },
 
-  icon: {},
-
-  image: {
-    resizeMode: "auto",
-  },
-
   head: {
-    height: 200,
+    height: 150,
     justifyContent: "center",
   },
 
   textinput: {
-    borderColor: "grey",
+    borderColor: "#B9B9B9",
     borderWidth: 3,
-    borderRadius: 13,
-    padding: 8,
+    borderRadius: 16,
+    padding: 9,
     marginBottom: 20,
   },
 
@@ -48,8 +42,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderRadius: 20,
     marginBottom: 20,
-    padding: 10,
-    paddingLeft: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
   },
 
   borderBoxExtended: {
@@ -76,8 +70,8 @@ const styles = StyleSheet.create({
 
   buttonlarge: {
     backgroundColor: "lightgrey",
-    paddingVertical: "2%",
-    paddingHorizontal: "5%",
+    paddingVertical: 9,
+    paddingHorizontal: 20,
     marginVertical: 10,
     borderRadius: 12,
     justifyContent: "center",

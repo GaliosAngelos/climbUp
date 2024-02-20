@@ -11,7 +11,12 @@ export default function HeadText({ content }) {
   return (
     <>
       <View style={styles.head}>
-        <Text style={styles.h1}>{content}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ flex: 4 }}>
+            <Text style={styles.h1}>{content}</Text>
+          </View>
+          <View style={{ flex: 1 }} />
+        </View>
       </View>
     </>
   );

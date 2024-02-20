@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 // Components
-import { View, TouchableOpacity } from "react-native";
-import CustTextInput from "../../components/reuseable/CustTextInput.js";
+import { TouchableOpacity, View } from "react-native";
+import CustTextInput from "./CustTextInput.js";
 // Icons
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // ------------------------------------------------------------------
 
 // ClimbingHallBar component, likely used for filtering or searching climbing routes
-export default function ClimbingHallBar() {
+export default function RouteFilter() {
+  const [filled, setFilled] = useState(false);
+  const handlePress = () => {
+    setFilled(!filled);
+  };
+
   const [iconName, setIconName] = useState("sparkles-outline");
 
   const toggleIcon = () => {
@@ -18,22 +23,24 @@ export default function ClimbingHallBar() {
       setIconName("sparkles-outline");
     }
   };
+
   return (
     <>
       <View style={{ flexDirection: "row" }}>
-        <View style={{ flex: 4, marginRight: 5 }}>
+        <View style={{ flex: 7, marginRight: 5 }}>
           <CustTextInput text={"Route"} />
         </View>
-        <View style={{ flex: 2, marginRight: 5 }}>
+        <View style={{ flex: 4, marginRight: 5 }}>
           <CustTextInput text={"Sektor"} />
         </View>
-        <View style={{ flex: 2, marginRight: 5 }}>
+        <View style={{ flex: 3, marginRight: 5 }}>
           <CustTextInput text={"Level"} />
         </View>
-
-        <View style={{ flex: 1, marginTop: 6 }}>
+        <View
+          style={{ flex: 2, justiftyContent: "center", alignItems: "center" }}
+        >
           <TouchableOpacity onPress={toggleIcon}>
-            <Ionicons name={iconName} size={30} color="purple" />
+            <Ionicons name={iconName} size={36} color="purple" />
           </TouchableOpacity>
         </View>
       </View>

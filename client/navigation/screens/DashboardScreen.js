@@ -14,10 +14,6 @@ export default function DashboardScreen({ navigation }) {
         {" "}
         Dashboard
       </Text>
-      <Button
-        title="Go to Routenübersicht Page"
-        onPress={() => navigation.navigate("RoutenView")}
-      />
     </View>
   );
 }

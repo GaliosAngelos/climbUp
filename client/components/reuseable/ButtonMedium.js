@@ -7,7 +7,7 @@ import styles from "../../components/reuseable/allStyles.js";
 // ---------------------------------------------------------------
 
 // medium sized Buttons that will appear in RouteBox etc.
-export default function ButtonMedium({ text, onPress, col }) {
+export default function ButtonMedium({ text, onPress }) {
   return (
     <>
       <View style={{ flexDirection: "row" }}>

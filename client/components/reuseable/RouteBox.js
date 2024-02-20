@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
   Text,
-  Modal,
 } from "react-native";
 import ButtonMedium from "../../components/reuseable/ButtonMedium";
 // Style
@@ -103,7 +102,7 @@ export default function Route({
           {/* Button to commit the tracked data */}
           <View style={{ justifyContent: "center" }}>
             <ButtonMedium
-              onPress={sendData()}
+              // onPress={sendData()}
               style={styles.buttonlarge}
               text="Commit"
             />

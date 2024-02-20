@@ -1,17 +1,20 @@
 import React from "react";
 // Components
 import { View, ScrollView } from "react-native";
-import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox";
+import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox.js";
 import hallen from "../../_mock/hallen.js";
-import HeadText from "../../components/reuseable/HeadText";
+import HeadText from "../../components/reuseable/HeadText.js";
+
+import CustTextInput from "../../components/reuseable/CustTextInput.js";
 
 // ------------------------------------------------------------
 
-export default function KletternScreen({ navigation }) {
+export default function ClimbingHallScreen({ navigation }) {
   return (
     <>
+      <HeadText content="Where every climb feels like home." />
+      <CustTextInput text={"Name, City"} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <HeadText content="My favourite climbing gym." />
         <View>
           {hallen.map((item, index) => (
             <ClimbingHallBox

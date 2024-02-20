@@ -2,20 +2,21 @@ import React from "react";
 // Components
 import { View, ScrollView } from "react-native";
 import RouteBox from "../../components/reuseable/RouteBox";
-import RouteFilterBar from "../../components/reuseable/RouteFilterBar.js";
-import HeadTextRoutenScreen from "../../components/reuseable/HeadTextRoutenScreen.js";
 import routes from "../../_mock/routes.js";
+import HeadText from "../../components/reuseable/HeadText.js";
+import RouteFilter from "../../components/reuseable/RouteFilter.js";
 
 // --------------------------------------------------------------------
-
 export default function RoutenScreen({ navigation, route }) {
   const { hall_name } = route.params;
+  console.log("hall_name :>> ", hall_name);
 
   return (
     <>
+      <HeadText content={hall_name} />
+
+      <RouteFilter />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <HeadTextRoutenScreen content={hall_name} />
-        <RouteFilterBar />
         <View>
           {routes.map((item, index) => (
             <RouteBox
