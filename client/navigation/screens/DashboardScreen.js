@@ -7,12 +7,12 @@ import Button from "../../components/reuseable/Button";
 import RouteLogFilterButtons from "../../components/reuseable/RouteLogFilterButtons.js";
 import routes from "../../_mock/routes.js";
 import RouteLogBox from "../../components/reuseable/RouteLogBox.js";
-
-
-
+import { sendQuery } from "../../components/reuseable/generalRequest";
 // --------------------------------------------------------------
 
 export default function DashboardScreen({ navigation }) {
+  sendQuery("getHalls")
+    .then((data) => console.log(data.data));
   return (
     <>
       <HeadText content="Elevate your progress!" />
