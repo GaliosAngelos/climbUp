@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // Safearea
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 // Components
