@@ -56,7 +56,7 @@ export default function RoutenScreen({ navigation, route }) {
             />
           ))}
         </View>
-        <View style={{ marginBottom: 100 }} />
+        <View style={{ marginBottom: 130 }} />
       </ScrollView>
     </>
   );
