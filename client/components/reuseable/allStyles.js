@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 
   h2: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: "semibold",
   },
 
   h3: {
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   head: {
     height: 130,
     justifyContent: "center",
-    marginTop: 20,
   },
 
   textinput: {
@@ -43,9 +42,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderRadius: 20,
     marginBottom: 20,
-    paddingLeft: 20,
-    paddingVertical: 10,
-    height: 90,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
   },
 
   borderBoxExtended: {
@@ -54,8 +52,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    padding: 10,
     paddingLeft: 20,
-    paddingVertical: 10,
   },
 
   routeExtension: {
