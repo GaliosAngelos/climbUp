@@ -42,15 +42,16 @@ export default function Route({
             </View>
 
             {/* Display of route's difficulty level */}
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 , justifyContent: "center"}}>
               <Text
                 style={[
                   {
                     color: color,
                     textAlign: "left",
-                    fontSize: 50,
+                    fontSize: 47,
                     fontWeight: "bold",
                     paddingLeft: 10,
+                    marginVertical: -10,
                   },
                 ]}
               >

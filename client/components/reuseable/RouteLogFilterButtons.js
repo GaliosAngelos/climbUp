@@ -25,7 +25,7 @@ export default function RouteLogFilterButtons() {
             ]}
             onPress={() => handleButtonPress(1)}
           >
-            <Text style={styles.buttonlargetext}>last Day</Text>
+            <Text style={[styles.buttonlargetext, selectedButton === 1 ? {color: "white"} : {color: "black"}]}>last Day</Text>
           </TouchableOpacity>
         </View>
 
@@ -38,7 +38,7 @@ export default function RouteLogFilterButtons() {
             ]}
             onPress={() => handleButtonPress(2)}
           >
-            <Text style={styles.buttonlargetext}>last Week</Text>
+            <Text style={[styles.buttonlargetext, selectedButton === 2 ? {color: "white"} : {color: "black"}]}>last Week</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -52,7 +52,7 @@ export default function RouteLogFilterButtons() {
             ]}
             onPress={() => handleButtonPress(3)}
           >
-            <Text style={styles.buttonlargetext}>last Month</Text>
+            <Text style={[styles.buttonlargetext, selectedButton === 3 ? {color: "white"} : {color: "black"}]}>last Month</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flex: 1, alignItems: "center" }}>
@@ -64,7 +64,7 @@ export default function RouteLogFilterButtons() {
             ]}
             onPress={() => handleButtonPress(4)}
           >
-            <Text style={styles.buttonlargetext}>last Year</Text>
+            <Text style={[styles.buttonlargetext, selectedButton === 4 ? {color: "white"} : {color: "black"}]}>last Year</Text>
           </TouchableOpacity>
         </View>
       </View>

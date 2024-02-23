@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // Components
 import { Text, View } from "react-native";
 import HeadText from "../../components/reuseable/HeadText";
-import TitelText from "../../components/reuseable/TitelText";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import Button from "../../components/reuseable/Button";
 // Style
@@ -26,61 +25,35 @@ export default function SettingsScreen({ navigation }) {
 
   return (
     <View>
-      <HeadText content="Change your Login." />
-      <Text
-        style={[
-          styles.text,
-          {
-            fontSize: 16, // Größere Schriftgröße
-            fontWeight: "bold", // Dickerer Text
-            // backgroundColor: "rgba(255, 255, 255, 0.5)", // Subtiler Hintergrund
-            padding: 10, // Etwas Padding für bessere Lesbarkeit
-            borderRadius: 5,
-          },
-        ]}
-      >
-        Username: 'auxTeam69'
-      </Text>
-      <Text
-        style={[
-          styles.text,
-          {
-            marginBottom: 25,
-            fontSize: 16, // Größere Schriftgröße
-            fontWeight: "bold", // Dickerer Text
-            // backgroundColor: "rgba(255, 255, 255, 0.5)", // Subtiler Hintergrund
-            padding: 10, // Etwas Padding für bessere Lesbarkeit
-            borderRadius: 5,
-          },
-        ]}
-      >
-        Email: '123456@via.dk'
-      </Text>
-      <TitelText content="Change your Passwort" style={{ marginTop: "5px" }} />
+      <HeadText content="Make the change!" />
+      <View style={styles.borderBox}>
+        <Text style={styles.h3}>Username: auxTeam69</Text>
+        <Text style={styles.h3}>Email: 123456@via.dk</Text>
+      </View>
+      <Text style={styles.h2}>Change your password.</Text>
       <CustTextInputPassword
         secureTextEntry={true}
         text="Actual Password"
         password={actualPassword}
         setPassword={setActualPassword}
       />
-      {actualPassword ? (
-        <>
-          <CustTextInputPassword
-            secureTextEntry={true}
-            text="New Password"
-            // Assuming you have state hooks for these as well
-            // password={newPassword}
-            // setPassword={setNewPassword}
-          />
-          <CustTextInputPassword
-            secureTextEntry={true}
-            text="Confirm New Password"
-            // Assuming you have state hooks for these as well
-            // password={confirmNewPassword}
-            // setPassword={setConfirmNewPassword}
-          />
-        </>
-      ) : null}
+
+      <>
+        <CustTextInputPassword
+          secureTextEntry={true}
+          text="New Password"
+          // Assuming you have state hooks for these as well
+          // password={newPassword}
+          // setPassword={setNewPassword}
+        />
+        <CustTextInputPassword
+          secureTextEntry={true}
+          text="Confirm New Password"
+          // Assuming you have state hooks for these as well
+          // password={confirmNewPassword}
+          // setPassword={setConfirmNewPassword}
+        />
+      </>
       <Button
         text="Update Password"
         onPress={() => navigation.navigate("Login")}
@@ -89,16 +62,16 @@ export default function SettingsScreen({ navigation }) {
         text="Go to Login Page"
         onPress={() => navigation.navigate("Login")}
       />
-      <TitelText content="Contact us !" />
+
+      <Text style={styles.h2}>Contact us.</Text>
       <Text
-        style={{
-          color: "#007bff",
-          fontSize: 16,
-          color: "#007bff", // Blaue Textfarbe
-          fontSize: 16, // Größere Schriftgröße für Kontaktinformationen
-          fontWeight: "bold", // Dickerer Text
-          textDecorationLine: "underline",
-        }}
+        style={[
+          styles.h3,
+          {
+            color: "blue",
+            textDecorationLine: "underline",
+          },
+        ]}
       >
         team@climbup.com
       </Text>
