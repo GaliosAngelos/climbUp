@@ -14,7 +14,8 @@ export default function RoutenScreen({ navigation, route }) {
   const { hall_name } = route.params;
   const [routes, setRoutes] = useState([]); // Verwenden von useState für den Zustand
   const [isLiked, setIsLiked] = useState(false);
-  
+   // Filterzustände
+
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
@@ -24,16 +25,19 @@ export default function RoutenScreen({ navigation, route }) {
   const handlePressRoute = (routeId) => {
     setExpandedRoute(expandedRoute === routeId ? null : routeId);
   };
-  
-  // console.log("hall_name :>> ", hall_name);
 
-  useEffect (() => {
-    query(Climber.get_routes_by_hall_name.call, [hall_name])
-      .then(response => {
-        setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
-      })
-      .catch(err => alert("Error: " + err));
-  }, []);
+
+  useEffect(() => {
+    if (routes) {
+      query(Climber.get_routes_by_hall_name.call, [hall_name])
+        .then(response => {
+          setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
+        })
+        .catch(err => alert("Error: " + err));
+    }
+  }, [hall_name]); // Reagiert auf Änderungen von hall_name oder routes
+
+
   return (
     <>
         <ButtonBack onPress={() => navigation.navigate("ClimbingHall")}/>
@@ -56,7 +60,9 @@ export default function RoutenScreen({ navigation, route }) {
         </View>
       </View>
 
-      <RouteFilter />
+      <RouteFilter 
+        setRoutes={setRoutes}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
         {routes && routes.map((item, index) => ( // Überprüfen, ob 'routes' definiert ist

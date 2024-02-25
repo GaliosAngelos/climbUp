@@ -93,15 +93,15 @@ export const Climber = Object.freeze({
         value: ['testhall2'],
     },
     get_routes_by_route_name: {
-        call: `CALL climbup.get_route_details_by_name($1, $2)`,
+        call: `SELECT * FROM climbup.get_route_details_by_name2($1, $2)`,
         values: ['hall_name', 'route_name'],
     },
     get_routes_by_sector: {
-        call: `CALL climbup.get_routes_details_by_sector($1, $2)`,
+        call: `SELECT * FROM climbup.get_routes_details_by_sector2($1, $2)`,
         values: ['hall_name', 'sector_label'],
     },
     get_routes_by_difficulty: {
-        call: `CALL climbup.get_routes_details_by_difficulty($1, $2)`,
+        call: `SELECT * FROM climbup.get_routes_details_by_difficulty2($1, $2)`,
         value: ['hall_name', 'difficulty_5.10a'],
     },
     get_climbing_halls_list: {
