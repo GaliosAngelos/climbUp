@@ -114,6 +114,10 @@ export const Climber = Object.freeze({
     get_halls_test: {
         call:`SELECT * from climbup.climbing_halls`,
     },
+    get_routes_test_2: {
+        call: `SELECT * FROM climbup.get_routes_details_by_hallname2($1)`,
+        value: ['testhall2'],
+    }
 });
 
 // module.exports = { Hall_Owner, Climber };

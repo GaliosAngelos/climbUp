@@ -21,6 +21,11 @@ export default function LoginScreen({ navigation }) {
         if (response.status === 200 || response.status === 409) {
           // Erfolgreiche Authentifizierung
           console.log(response.data);
+          /*Das muss hier raus. Vermischung von Domain and Implementation logic.
+           *Der Handler (handleLogin) ist Teil des Controllers. Dieser frägt die Daten im Model ab 
+           *(Server mit dessen Schnittstellen (Requests) welche die View un den Controller nicht kennen)
+           * und 
+          */
           navigation.replace("DashboardTabs");
         } else if (response.status === 400) {
           // Behandlung von spezifischen Fehlermeldungen vom Server
