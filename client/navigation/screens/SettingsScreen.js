@@ -30,7 +30,7 @@ export default function SettingsScreen({ navigation }) {
         <Text style={styles.h3}>Username: auxTeam69</Text>
         <Text style={styles.h3}>Email: 123456@via.dk</Text>
       </View>
-      <Text style={styles.h2}>Change your password.</Text>
+      <Text style={[styles.h2, {marginBottom: 20}]}>Change your password.</Text>
       <CustTextInputPassword
         secureTextEntry={true}
         text="Actual Password"
