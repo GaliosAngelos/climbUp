@@ -39,7 +39,7 @@ export default function RouteFilter() {
           <Ionicons
                   name={isMagic ? 'sparkles' : 'sparkles-outline'}
                   size={36}
-                  color={isMagic ? 'purple' : 'black'}
+                  color={isMagic ? '#B000B1' : '#B167B1'}
                 />
           </TouchableOpacity>
         </View>

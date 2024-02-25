@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 24,
     fontWeight: "bold",
+
   },
 
   h3: {
     fontSize: 19,
     fontWeight: "bold",
-    marginBottom: 3,
   },
 
   text: {
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
     paddingLeft: 20,
-    paddingVertical: 10,
-    height: 90,
+    paddingVertical: 15,
+    
   },
 
   borderBoxExtended: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingLeft: 20,
-    paddingVertical: 10,
+    paddingVertical: 15,
   },
 
   routeExtension: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
 
   selectedButton: {
-    backgroundColor: 'grey',
+    backgroundColor: '#646464',
   },
 
   centeredView: {

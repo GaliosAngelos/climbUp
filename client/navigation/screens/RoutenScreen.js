@@ -22,7 +22,7 @@ export default function RoutenScreen({ navigation, route }) {
 
   return (
     <>
-        <ButtonBack/>
+        <ButtonBack onPress={() => navigation.navigate("ClimbingHall")}/>
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
@@ -33,9 +33,9 @@ export default function RoutenScreen({ navigation, route }) {
             onPress={toggleLike}
           >
             <Ionicons
-              name={isLiked ? "heart" : "heart-outline"}
+              name={isLiked ? "checkmark-circle" : "add-circle-outline"}
               size={36}
-              color={isLiked ? "red" : "black"}
+              color={isLiked ? "green" : "black"}
             />
           </TouchableOpacity>
         </View>
