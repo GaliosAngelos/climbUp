@@ -16,7 +16,7 @@ export default function ClimbingHallScreen({ navigation }) {
 
   useEffect(() => {
     // Laden der Daten beim Initialisieren der Komponente
-    query(Climber.get_halls_test.call)
+    query(Climber.get_climbing_halls_list.call)
       .then(response => {
         setHalls(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
       })

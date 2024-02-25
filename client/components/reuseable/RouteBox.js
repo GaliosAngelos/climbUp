@@ -20,11 +20,12 @@ import styles from "../../components/reuseable/allStyles.js";
 // It allows users to track their progress on the route (success, failure, number of attempts).
 
 export default function Route({
+  color,
+  levelOfDificulty,
+  lineNumber,
   routeName,
   Sector,
-  levelOfDificulty,
-  color,
-  lineNumber,
+  Tilt,
   expanded,
   setExpanded,
 }) {
@@ -48,7 +49,8 @@ export default function Route({
             <View style={{ flex: 3, justifyContent: "center" }}>
               <Text style={styles.h3}>{routeName}</Text>
               <Text style={styles.text}>
-                Sektor {Sector}, Line {lineNumber}
+                {/* tried this @nico  */}
+                Sektor {Sector}, Line {lineNumber}, Tilt: {Tilt == true ? "yes" : "no"}
               </Text>
             </View>
 

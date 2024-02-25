@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 // Components
 import { View, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import RouteBox from "../../components/reuseable/RouteBox";
-// import routes from "../../_mock/routes.js";
 import HeadText from "../../components/reuseable/HeadText.js";
 import RouteFilter from "../../components/reuseable/RouteFilter.js";
 import ButtonBack from "../../components/reuseable/ButtonBack.js";
@@ -26,32 +25,15 @@ export default function RoutenScreen({ navigation, route }) {
     setExpandedRoute(expandedRoute === routeId ? null : routeId);
   };
   
-  console.log("hall_name :>> ", hall_name);
+  // console.log("hall_name :>> ", hall_name);
 
   useEffect (() => {
-    //  query(`SELECT * from climbup.get_routes_details_by_hall_name2(${hall_name})`)
-    // Hall_Owner.insert_route
-    // await query(`INSERT INTO climbup.climbing_halls (hall_name, street_address, city, postal_code) VALUES ('testhall3', 'asdf1243','ok','12345')`);
-    // let text = `INSERT INTO climbup.climbing_halls.testhall3 (route_name, sector, level_of_difficulty, color, line_number, tilt) VALUES ('Route1', 'A', '3', 'Red', '1', TRUE)`;
-      // const values = [`Route ${i}`, 'Sector A', '5.10a', 'Red', 1, false];
-    // await query(text);
-
-    test = 'testhall2';
-    query(Climber.get_routes_test_2.call, test)
+    query(Climber.get_routes_by_hall_name.call, [hall_name])
       .then(response => {
-        console.log(hall_name);
-        // setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
-        console.log(response.data);
+        setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
       })
       .catch(err => alert("Error: " + err));
   }, []);
-    // for(let i = 0; i < 10; i++){
-      
-  // }
-// let text = "SELECT * from climbup.climbing_hall";
-    // query(text);
-  // }, []);
-// }, []);
   return (
     <>
         <ButtonBack onPress={() => navigation.navigate("ClimbingHall")}/>
@@ -76,21 +58,22 @@ export default function RoutenScreen({ navigation, route }) {
 
       <RouteFilter />
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View>
-        {routes && routes.map((item, index) => ( // Überprüfen, ob 'halls' definiert ist
+        <View>
+        {routes && routes.map((item, index) => ( // Überprüfen, ob 'routes' definiert ist
             <RouteBox
     key={index}
     expanded={expandedRoute === index}
     setExpanded={() => handlePressRoute(index)}
+              color={item.color}
+              levelOfDificulty={item.level_of_difficulty}
+              lineNumber={item.line_number}
               routeName={item.route_name}
               Sector={item.sector}
-              levelOfDificulty={item.level_of_difficulty}
-              color={item.color}
-              lineNumber={item.line_number}
+              Tilt={item.tilt}
               navigation={navigation}
             />
           ))}
-        </View> */}
+        </View>
         <View style={{ marginBottom: 130 }} />
       </ScrollView>
     </>

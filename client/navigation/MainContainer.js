@@ -25,10 +25,10 @@ export default function MainContainer() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-        <Stack.Screen name="Support" component={SupportScreen} /> */}
+        <Stack.Screen name="Support" component={SupportScreen} />
         {/* Weiter unten findest du die DashboardTabs! */}
         <Stack.Screen name="DashboardTabs" component={DashboardTabs} />
       </Stack.Navigator>

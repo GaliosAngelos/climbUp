@@ -13,8 +13,8 @@ import { sendQuery } from "../../components/reuseable/generalRequest";
 // --------------------------------------------------------------
 
 export default function DashboardScreen({ navigation }) {
-  sendQuery("getHalls")
-    .then((data) => console.log(data.data));
+  // sendQuery("getHalls")
+  //   .then((data) => console.log(data.data));
   return (
     <>
       <HeadText content="Elevate your progress!" />

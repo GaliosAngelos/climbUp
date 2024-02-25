@@ -31,10 +31,6 @@ export const Hall_Owner  = Object.freeze({
         call: `CALL climbup.change_hallowner_password($1)`,
         values: ['new_password'],
     },
-    // }, insert_route: {
-    //     call: `CALL climbup.insert_route($1, $2, $3, $4, $5, $6)`,
-    //     values: ['Route 1', 'Sector A', '5.10a', 'Red', '1', 'tilt_FALSE_TRUE'],
-    // },
     update_route: {
         call: `CALL climbup.update_route($1, $2, $3, $4, $5, $6)`,
         values: ['Route 1', 'sektor A', '5.11b', 'Blau', '2', 'tilt_FALSE_TRUE'], 
@@ -44,7 +40,7 @@ export const Hall_Owner  = Object.freeze({
         values: ['route_name_to_be_deleted'],
     },
     get_climbing_halls_list: {
-        call: `CALL climbup.get_climbing_halls_list();`,
+        call: `SELECT * FROM climbup.get_climbing_halls_list2()`,
     },
     insert_route: {
         call: `CALL climbup.insert_route($1, $2, $3, $4, $5, $6)`,
@@ -93,8 +89,8 @@ export const Climber = Object.freeze({
         values: [ 'hall_name', 'route', 'time_stamp_2024-02-16 14:00:00'],
     },
     get_routes_by_hall_name: {
-        call: `CALL climbup.get_routes_details_by_hall_name($1)`,
-        values: ['hall_name'],
+        call: `SELECT * FROM climbup.get_routes_details_by_hall_name2($1)`,
+        value: ['testhall2'],
     },
     get_routes_by_route_name: {
         call: `CALL climbup.get_route_details_by_name($1, $2)`,
@@ -109,15 +105,8 @@ export const Climber = Object.freeze({
         value: ['hall_name', 'difficulty_5.10a'],
     },
     get_climbing_halls_list: {
-        call: `CALL climbup.get_climbing_halls_list();`,
+        call: `SELECT * FROM climbup.get_climbing_halls_list2()`,
     },//#endregion
-    get_halls_test: {
-        call:`SELECT * from climbup.climbing_halls`,
-    },
-    get_routes_test_2: {
-        call: `SELECT * FROM climbup.get_routes_details_by_hallname2($1)`,
-        value: ['testhall2'],
-    }
 });
 
 // module.exports = { Hall_Owner, Climber };
