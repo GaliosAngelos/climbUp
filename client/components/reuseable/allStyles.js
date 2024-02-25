@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderEndWidth: 4,
     borderStartWidth: 4,
     borderBottomWidth: 4,
-    height: 180,
+    height: 188,
     marginBottom: 20,
   },
 
@@ -86,15 +86,7 @@ const styles = StyleSheet.create({
   },
 
   buttonmedium: {
-    height: 40,
-    justifyContent: "center",
-  },
-
-  buttonmediumtext: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    padding: "2%",
+    
   },
 
   buttonsmall: {
@@ -110,7 +102,7 @@ const styles = StyleSheet.create({
   },
 
   selectedButton: {
-    backgroundColor: '#646464',
+    backgroundColor: '#484848',
   },
 
   centeredView: {

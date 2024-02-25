@@ -63,7 +63,6 @@ export default function SettingsScreen({ navigation }) {
         text="Go to Login Page"
         onPress={() => navigation.navigate("Login")}
       />
-<<<<<<< HEAD
       <Button
         text="Logout"
         onPress={() => logout()
@@ -89,11 +88,7 @@ export default function SettingsScreen({ navigation }) {
           })
         }
       />
-      <TitelText content="Contact us !" />
-=======
-
       <Text style={styles.h2}>Contact us.</Text>
->>>>>>> origin/nico
       <Text
         style={[
           styles.h3,
@@ -108,3 +103,4 @@ export default function SettingsScreen({ navigation }) {
     </View>
   );
 }
+

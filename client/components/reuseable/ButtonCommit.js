@@ -7,7 +7,9 @@ import styles from "../../components/reuseable/allStyles.js";
 // ---------------------------------------------------------------
 
 // medium sized Buttons that will appear in RouteBox etc.
-export default function ButtonMedium({ text, onPress, color, selected }) {
+export default function ButtonCommit({onPress, selected, hasSelection}) {
+
+  const isDisabled = !hasSelection;
   
   return (
     <>
@@ -16,13 +18,14 @@ export default function ButtonMedium({ text, onPress, color, selected }) {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: selected ? "#484848" : "transparent",
+        backgroundColor: isDisabled ? "transparent" : "#ABABAB",
         padding: 5,
         marginHorizontal: 10,
         borderRadius: 12,
+        opacity: isDisabled ? 0.3 : 1,
        
       }}
-
+      disabled={isDisabled} 
     >
       <Text
         style={{
@@ -34,7 +37,7 @@ export default function ButtonMedium({ text, onPress, color, selected }) {
         }}
         
       >
-        {text}
+        Commit
       </Text>
     </TouchableOpacity>
     </>

@@ -19,6 +19,12 @@ export default function RoutenScreen({ navigation, route }) {
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
+
+  const [expandedRoute, setExpandedRoute] = useState(null);
+
+  const handlePressRoute = (routeId) => {
+    setExpandedRoute(expandedRoute === routeId ? null : routeId);
+  };
   
   console.log("hall_name :>> ", hall_name);
 
@@ -55,13 +61,14 @@ export default function RoutenScreen({ navigation, route }) {
             <Text style={styles.h1}>{hall_name}</Text>
           </View>
           <TouchableOpacity
-            style={{ justifyContent: "center", margin: 6}}
-            onPress={toggleLike}
+            style={{marginRight: 7, justifyContent: "center"}}
+            
           >
             <Ionicons
               name={isLiked ? "checkmark-circle" : "add-circle-outline"}
               size={36}
               color={isLiked ? "green" : "black"}
+              onPress={toggleLike}
             />
           </TouchableOpacity>
         </View>
@@ -72,7 +79,9 @@ export default function RoutenScreen({ navigation, route }) {
         {/* <View>
         {routes && routes.map((item, index) => ( // Überprüfen, ob 'halls' definiert ist
             <RouteBox
-              key={index}
+    key={index}
+    expanded={expandedRoute === index}
+    setExpanded={() => handlePressRoute(index)}
               routeName={item.route_name}
               Sector={item.sector}
               levelOfDificulty={item.level_of_difficulty}

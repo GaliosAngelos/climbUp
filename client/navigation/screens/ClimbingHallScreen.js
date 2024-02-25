@@ -3,6 +3,8 @@ import React from "react";
 import { View, ScrollView } from "react-native";
 import ClimbingHallBox from "../../components/reuseable/ClimbingHallBox.js";
 import hallen from "../../_mock/hallen.js";
+import hallenFavourite from "../../_mock/hallenFavourite.js";
+
 import HeadText from "../../components/reuseable/HeadText.js";
 import {Hall_Owner, Climber } from "../../components/reuseable/Procedures.js"
 import CustTextInput from "../../components/reuseable/CustTextInput.js";
