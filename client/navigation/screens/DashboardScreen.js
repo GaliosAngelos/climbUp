@@ -12,7 +12,11 @@ import { sendQuery } from "../../components/reuseable/generalRequest";
 
 export default function DashboardScreen({ navigation }) {
   // sendQuery("getHalls")
+<<<<<<< HEAD
     // .then((data) => console.log(data.data));
+=======
+  //   .then((data) => console.log(data.data));
+>>>>>>> origin/nico
   return (
     <>
       <HeadText content="Elevate your progress!" />
@@ -26,10 +30,23 @@ export default function DashboardScreen({ navigation }) {
           <Text style={styles.h3}>best Level</Text>
         </View>
       </View>
-      <RouteLogFilterButtons/>
+      
 
       <ScrollView showsVerticalScrollIndicator={false}>
 
+      <RouteLogFilterButtons/>
+
+      <View style={{flexDirection: "row", paddingHorizontal: 12, paddingTop: 20}}>
+        <View style={{flex: 12}}>
+        <Text style={styles.h3}>Route</Text>
+        </View>
+        <View style={{flex: 2, alignItems: "center"}}>
+        <Text style={styles.h3}>LVL</Text>
+        </View>
+        <View style={{flex: 2, alignItems: "center"}}>
+        <Text style={styles.h3}>P</Text>
+        </View>
+        </View>
 
       <View>
       {routes.map((item, index) => (
@@ -37,6 +54,8 @@ export default function DashboardScreen({ navigation }) {
               key={index}
               routeName={item.routeName}
               levelOfDificulty={item.LevelOfDifficulty}
+              numberOfAttempts={item.numberOfAttempts}
+              madeIt={item.madeIt}
             />
           ))}
         </View>
