@@ -14,21 +14,38 @@ import styles from "../../components/reuseable/allStyles.js";
 // --------------------------------------------------------------------
 
 export default function RouteLogBox(
-  routeName,
-  levelOfDificulty,
-  numberOfAttempts,
-  madeIt
+  {route_name,
+  level_of_difficulty,
+  paused,
+  success}
 ) {
   return (
     <>
       <View
         style={{
-          height: 45,
-          backgroundColor: "lightgrey",
-          marginTop: 20,
+          backgroundColor: success ? "#8FD78F" : "#F5BBBA",
+          marginTop: 15,
           borderRadius: 14,
+          padding: 12,
         }}
-      ></View>
+      >
+
+<View style={{flexDirection: "row"}}>
+        <View style={{flex: 12}}>
+        <Text style={styles.h3}>{route_name}</Text>
+        </View>
+        <View style={{flex: 2, alignItems: "center"}}>
+        <Text style={styles.h3}>{level_of_difficulty}</Text>
+        </View>
+        <View style={{flex: 2, alignItems: "center"}}>
+        <Text style={styles.h3}>{paused}</Text>
+        </View>
+
+        
+        </View>
+
+      </View>
     </>
   );
 }
+

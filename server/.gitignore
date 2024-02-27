@@ -1,0 +1,37 @@
+#node modules 
+node_modules/
+
+#build directories
+dist/
+build/
+out/
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# Windows
+Thumbs.db 
+desktop.ini 
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+#log data
+.log
+npm-debug.log
+yarn-error.log
+
+#temporary data
+.tmp
+*.tmp
+*.bak
+*.swp

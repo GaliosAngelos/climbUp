@@ -6,133 +6,149 @@ const routes = [
         Sector: "B",
         LevelOfDifficulty: "7+",
         color: "darkorange",
-        lineNumber: "17",
-        },
-        
-        {
+        lineNumber: 17,
+        numberOfAttempts: 3,
+        madeIt: true,
+    },
+    {
         routeName: "Misty Ledge",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "C",
         LevelOfDifficulty: "6-",
         color: "mediumorchid",
-        lineNumber: "29",
-        },
-        
-        {
+        lineNumber: 29,
+        numberOfAttempts: 3,
+        madeIt: false,
+    },
+    {
         routeName: "Twilight Twist",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "D",
         LevelOfDifficulty: "7",
         color: "teal",
-        lineNumber: "38",
-        },
-        
-        {
+        lineNumber: 38,
+        numberOfAttempts: 2,
+        madeIt: false,
+    },
+    {
         routeName: "Moonbeam",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "E",
         LevelOfDifficulty: "5+",
         color: "sienna",
-        lineNumber: "50",
-        },
-        
-        {
+        lineNumber: 50,
+        numberOfAttempts: 1,
+        madeIt: true,
+    },
+    {
         routeName: "Whispering Wind",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "F",
         LevelOfDifficulty: "7",
         color: "indigo",
-        lineNumber: "65",
-        },
-        
-        {
+        lineNumber: 65,
+        numberOfAttempts: 0,
+        madeIt: true,
+    },
+    {
         routeName: "Duskfall",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "G",
         LevelOfDifficulty: "6-",
         color: "goldenrod",
-        lineNumber: "71",
-        },
-        
-        {
+        lineNumber: 71,
+        numberOfAttempts: 0,
+        madeIt: false,
+    },
+    {
         routeName: "Sundown Symphony",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "H",
         LevelOfDifficulty: "7-",
         color: "firebrick",
-        lineNumber: "82",
-        },
-        
-        {
+        lineNumber: 82,
+        numberOfAttempts: 2,
+        madeIt: true,
+    },
+    {
         routeName: "Nightshade",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "I",
         LevelOfDifficulty: "5",
         color: "darkcyan",
-        lineNumber: "94",
-        },
-        
-        {
+        lineNumber: 94,
+        numberOfAttempts: 0,
+        madeIt: true,
+    },
+    {
         routeName: "Gloaming Glow",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "J",
         LevelOfDifficulty: "7",
         color: "maroon",
-        lineNumber: "103",
-        },
-        
-        {
+        lineNumber: 103,
+        numberOfAttempts: 4,
+        madeIt: true,
+    },
+    {
         routeName: "Starlight Serenade",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "K",
         LevelOfDifficulty: "6+",
         color: "slateblue",
-        lineNumber: "111",
-        },
-        
-        {
+        lineNumber: 111,
+        numberOfAttempts: 2,
+        madeIt: false,
+    },
+    {
         routeName: "Evening Ember",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "L",
         LevelOfDifficulty: "7+",
         color: "darkgoldenrod",
-        lineNumber: "124",
-        },
-        
-        {
+        lineNumber: 124,
+        numberOfAttempts: 0,
+        madeIt: true,
+    },
+    {
         routeName: "Dawnbreak",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "M",
         LevelOfDifficulty: "6-",
         color: "darkmagenta",
-        lineNumber: "135",
-        },
-        
-        {
+        lineNumber: 135,
+        numberOfAttempts: 0,
+        madeIt: true,
+    },
+    {
         routeName: "Sunset Silhouette",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "N",
         LevelOfDifficulty: "7",
         color: "crimson",
-        lineNumber: "143",
-        },
-        
-        {
+        lineNumber: 143,
+        numberOfAttempts: 0,
+        madeIt: false,
+    },
+    {
         routeName: "Daydream Delight",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "O",
         LevelOfDifficulty: "6+",
         color: "mediumslateblue",
-        lineNumber: "156",
-        },
-        
-        {
+        lineNumber: 156,
+        numberOfAttempts: 0,
+        madeIt: false,
+    },
+    {
         routeName: "Moonlit Madness",
         climbingHallName: "DAV Kletterzentrum Augbsurg",
         Sector: "P",
         LevelOfDifficulty: "7",
         color: "darkolivegreen",
-        lineNumber: "162",
-        }
+        lineNumber: 162,
+        numberOfAttempts: 0,
+        madeIt: true,
+    }
 ];
 export default routes;

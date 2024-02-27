@@ -6,7 +6,7 @@ import CustTextInput from "../../components/reuseable/CustTextInput";
 import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
 import ButtonSmall from "../../components/reuseable/ButtonSmall";
 import Button from "../../components/reuseable/Button";
-import { sendLogin } from "../../components/reuseable/loginRequest";
+import { login } from "../../components/reuseable/loginLogoutRequest";
 // --------------------------------------------------------------------
 
 export default function LoginScreen({ navigation }) {
@@ -15,12 +15,17 @@ export default function LoginScreen({ navigation }) {
 
   // Request on backend -> Login
   const handleLogin = () => {
-    sendLogin({"user": user, "password": password})
+    login({"user": user, "password": password})
       .then((response) => {
         // Überprüfen Sie den Status der Antwort
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 409) {
           // Erfolgreiche Authentifizierung
-          // console.log("Login erfolgreich", response.data);
+          console.log(response.data);
+          /*Das muss hier raus. Vermischung von Domain and Implementation logic.
+           *Der Handler (handleLogin) ist Teil des Controllers. Dieser frägt die Daten im Model ab 
+           *(Server mit dessen Schnittstellen (Requests) welche die View un den Controller nicht kennen)
+           * und 
+          */
           navigation.replace("DashboardTabs");
         } else if (response.status === 400) {
           // Behandlung von spezifischen Fehlermeldungen vom Server

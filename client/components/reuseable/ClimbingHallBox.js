@@ -14,6 +14,7 @@ export default function ClimbingHallBox({
   city,
   postal_code,
   navigation,
+  favourite,
 }) {
   const openHallWithRoutes = () => {
     navigation.navigate("Routen", { hall_name: hall_name });
@@ -21,7 +22,7 @@ export default function ClimbingHallBox({
 
   return (
     <TouchableOpacity onPress={openHallWithRoutes}>
-      <View key={index} style={[styles.borderBox, {paddingVertical: 17}]}>
+      <View key={index} style={[styles.borderBox, {borderColor: favourite ? "green" : "lightgrey"}]}>
         <Text style={styles.h3}>{hall_name}</Text>
         <Text style={styles.text}>
           {street_address}, {postal_code} {city}
