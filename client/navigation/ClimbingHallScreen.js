@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Components
 import { View, ScrollView } from "react-native";
 import ClimbingHallBox from "../components/sections/dashboard/climbing/ClimbingHallBox.js";

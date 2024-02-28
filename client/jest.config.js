@@ -7,4 +7,7 @@ module.exports = {
         '^.+\\.(js|jsx)$': 'babel-jest',
         '\\.(ts|tsx)$': 'ts-jest',
     },
+    transformIgnorePatterns: [
+        'node_modules/(?!(@react-native|react-native|react-native-vector-icons)/)',
+    ],
 };
