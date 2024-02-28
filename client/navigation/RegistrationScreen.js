@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 // Components
 import { View } from "react-native";
-import HeadText from "../../components/reuseable/HeadText";
-import CustTextInput from "../../components/reuseable/CustTextInput";
-import CustTextInputPassword from "../../components/reuseable/CustTextInputPassword";
-import ButtonSmall from "../../components/reuseable/ButtonSmall";
-import Button from "../../components/reuseable/Button";
+import HeadText from "../components/text/HeadText";
+import CustTextInput from "../components/input/CustTextInput";
+import CustTextInputPassword from "../components/input/CustTextInputPassword";
+import ButtonSmall from "../components/buttons/ButtonSmall";
+import Button from "../components/buttons/Button";
 
 // -----------------------------------------------------------
 

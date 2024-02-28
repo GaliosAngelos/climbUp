@@ -2,7 +2,7 @@ import React from "react";
 // Components
 import { TouchableOpacity, View, Text } from "react-native";
 // Styles
-import styles from "../../components/reuseable/allStyles.js";
+import styles from "../../components/styles/allStyles";
 
 // -----------------------------------------------------------------------
 

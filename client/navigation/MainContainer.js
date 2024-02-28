@@ -5,14 +5,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 // Components
-import LoginScreen from "./screens/LoginScreen";
-import DashboardScreen from "./screens/DashboardScreen";
-import SettingsScreen from "./screens/SettingsScreen";
-import ClimbingHallScreen from "./screens/ClimbingHallScreen";
-import RegistrationScreen from "./screens/RegistrationScreen";
-import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
-import RoutenScreen from "./screens/RoutenScreen";
-import SupportScreen from "./screens/SupportScreen";
+import LoginScreen from "./LoginScreen";
+import DashboardScreen from "./DashboardScreen";
+import SettingsScreen from "./SettingsScreen";
+import ClimbingHallScreen from "./ClimbingHallScreen";
+import RegistrationScreen from "./RegistrationScreen";
+import ForgotPasswordScreen from "./ForgotPasswordScreen";
+import RoutenScreen from "./RoutenScreen";
 
 // ---------------------------------------------------------
 
@@ -28,7 +27,6 @@ export default function MainContainer() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-        <Stack.Screen name="Support" component={SupportScreen} />
         {/* Weiter unten findest du die DashboardTabs! */}
         <Stack.Screen name="DashboardTabs" component={DashboardTabs} />
       </Stack.Navigator>
@@ -79,7 +77,6 @@ function DashboardTabs() {
           borderBottomLeftRadius: 30,
           borderBottomRightRadius: 30,
           paddingTop: Platform.select({ ios: 28, android: 0 }),
-
           // Schatteneigenschaften für iOS
           shadowColor: "#000",
           shadowOffset: {
@@ -90,10 +87,8 @@ function DashboardTabs() {
           shadowRadius: 7, // Weichheit des Schattens
           elevation: 10, // Schatteneigenschaften für Android
         },
+        tabBarHideOnKeyboard: true, // Ersetzt keyboardHidesTabBar für neuere Versionen
       })}
-      tabBarOptions={{
-        keyboardHidesTabBar: true,
-      }}
     >
       <Tab.Screen
         name="Dashboard"

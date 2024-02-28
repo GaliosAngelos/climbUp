@@ -2,7 +2,7 @@ import React from "react";
 // Components
 import { Text, View } from "react-native";
 // Styles
-import styles from "../../components/reuseable/allStyles.js";
+import styles from "../styles/allStyles";
 
 // -------------------------------------------------
 

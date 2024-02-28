@@ -4,7 +4,7 @@ import { TextInput, View } from "react-native";
 // Icons
 import Ionicons from "react-native-vector-icons/Ionicons";
 // Styles
-import styles from "../../components/reuseable/allStyles.js";
+import styles from "../styles/allStyles";
 
 // ------------------------------------------------------------------
 

@@ -2,7 +2,7 @@ import React from "react";
 // Components
 import { Text, TouchableOpacity, View } from "react-native";
 // Styles
-import styles from "../../components/reuseable/allStyles.js";
+import styles from "../../../styles/allStyles";
 
 // ----------------------------------------------------------------
 
@@ -22,7 +22,13 @@ export default function ClimbingHallBox({
 
   return (
     <TouchableOpacity onPress={openHallWithRoutes}>
-      <View key={index} style={[styles.borderBox, {borderColor: favourite ? "green" : "lightgrey"}]}>
+      <View
+        key={index}
+        style={[
+          styles.borderBox,
+          { borderColor: favourite ? "green" : "lightgrey" },
+        ]}
+      >
         <Text style={styles.h3}>{hall_name}</Text>
         <Text style={styles.text}>
           {street_address}, {postal_code} {city}
