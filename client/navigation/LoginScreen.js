@@ -7,7 +7,7 @@ import CustTextInputPassword from "../components/input/CustTextInputPassword";
 import ButtonSmall from "../components/buttons/ButtonSmall";
 import Button from "../components/buttons/Button";
 // Query
-import { login } from "../components/request/loginLogoutRequest";
+import { loginClimber } from "../Controller/loginHander";
 // --------------------------------------------------------------------
 
 export default function LoginScreen({ navigation }) {
@@ -16,28 +16,18 @@ export default function LoginScreen({ navigation }) {
 
   // Request on backend -> Login
   const handleLogin = () => {
-    login({ user: user, password: password })
-      .then((response) => {
-        // Überprüfen Sie den Status der Antwort
-        if (response.status === 200 || response.status === 409) {
-          // Erfolgreiche Authentifizierung
-          console.log(response.data);
-          /*Das muss hier raus. Vermischung von Domain and Implementation logic.
-           *Der Handler (handleLogin) ist Teil des Controllers. Dieser frägt die Daten im Model ab
-           *(Server mit dessen Schnittstellen (Requests) welche die View un den Controller nicht kennen)
-           * und
-           */
+    loginClimber([user, password])
+      .then((res) => {
+        if (res.status === 200 || res.status === 409) {
           navigation.replace("DashboardTabs");
-        } else if (response.status === 400) {
-          // Behandlung von spezifischen Fehlermeldungen vom Server
-          alert("Anmeldefehler: " + JSON.stringify(response.data));
+        } else if (res.status === 400) {
+          alert("Anmeldefehler: " + JSON.stringify(res.data));
         } else {
-          // Behandlung anderer Fehler
           alert("Ein unbekannter Fehler ist aufgetreten.");
         }
       })
-      .catch((error) => {
-        console.log("Fehler beim Login-Versuch", error);
+      .catch((err) => {
+        console.log("Fehler beim Login-Versuch", err);
         alert("Login-Versuch fehlgeschlagen.");
       });
   };

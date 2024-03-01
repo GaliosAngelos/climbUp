@@ -4,10 +4,8 @@ import { View, Text, ScrollView } from "react-native";
 import HeadText from "../components/text/HeadText.js";
 import styles from "../components/styles/allStyles.js";
 import RouteLogFilterButtons from "../components/buttons/RouteLogFilterButtons.js";
-// Query
-import { sendQuery } from "../components/request/generalRequest.js";
 import RoutenViewList from "../components/lists/RoutenViewList.js";
-
+import { query } from "../Controller/requestHandler.js";
 // --------------------------------------------------------------
 
 export default function DashboardScreen() {
