@@ -33,11 +33,14 @@ export default function MainContainer() {
         {/* Weiter unten findest du die DashboardTabs! */}
         {/* {userType === "hallOwner" ? (
           <> */}
-        <Stack.Screen name="DashboardTabs" component={HallDashboardTabs} />
+        <Stack.Screen name="HallDashboardTabs" component={HallDashboardTabs} />
         {/* </>
         ) : (
           <> */}
-        {/* <Stack.Screen name="DashboardTabs" component={ClimberDashboardTabs} /> */}
+        <Stack.Screen
+          name="ClimberDashboardTabs"
+          component={ClimberDashboardTabs}
+        />
         {/* </>
         )} */}
       </Stack.Navigator>
