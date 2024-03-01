@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text, Switch } from "react-native";
 // Components
 import HeadText from "../components/text/HeadText";
 import CustTextInput from "../components/input/CustTextInput";
@@ -13,6 +13,7 @@ import { login } from "../components/request/loginLogoutRequest";
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState("dbadmin");
   const [password, setPassword] = useState("dbadmin");
+  const [isHallOwner, setIsHallOwner] = useState(false);
 
   // Request on backend -> Login
   const handleLogin = () => {
@@ -44,6 +45,23 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          marginVertical: 20,
+        }}
+      >
+        <Text>Climber</Text>
+        <Switch
+          value={isHallOwner}
+          onValueChange={() =>
+            setIsHallOwner((previousState) => !previousState)
+          }
+        />
+        <Text>Hallowner</Text>
+      </View>
       <HeadText content="Welcome back, climber!" />
       <CustTextInput
         text={"Username or E-Mail"}
