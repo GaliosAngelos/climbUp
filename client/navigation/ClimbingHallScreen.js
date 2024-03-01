@@ -5,12 +5,10 @@ import ClimbingHallBox from "../components/sections/dashboard/climbing/ClimbingH
 import HeadText from "../components/text/HeadText.js";
 import CustTextInput from "../components/input/CustTextInput.js";
 import ClimbingHallList from "../components/lists/ClimbingHallList.js";
-// Query
-import { query } from "../components/request/generalRequest.js";
-import { Climber } from "../components/request/Procedures.js";
-// Mock
+//Mock
 import hallenFavourite from "../_mock/hallenFavourite.js";
-
+import { Climber } from "../Controller/Procedures.js";
+import { query } from "../Controller/requestHandler.js";
 // ------------------------------------------------------------
 
 export default function ClimbingHallScreen({ navigation }) {

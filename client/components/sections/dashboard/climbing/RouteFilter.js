@@ -4,9 +4,8 @@ import { TouchableOpacity, View } from "react-native";
 import CustTextInput from "./../../../input/CustTextInput.js";
 // Icons
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Climber } from "../../../request/Procedures.js";
-import { query } from "../../../request/generalRequest.js";
-
+import { Climber } from "../../../../Controller/Procedures.js";
+import { query } from "../../../../Controller/requestHandler.js";
 // ------------------------------------------------------------------
 
 // ClimbingHallBar component, likely used for filtering or searching climbing routes

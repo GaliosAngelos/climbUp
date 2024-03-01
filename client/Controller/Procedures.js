@@ -50,7 +50,7 @@ export const Hall_Owner  = Object.freeze({
 
 export const Climber = Object.freeze({
     register_climber: {
-        call: `SELECT climbup.register_climber_user($1, $2, $3)`,
+        call: "SELECT climbup.register_climber_user($1, $2, $3)",
         values: [ 'new_username', 'new_pw', 'email' ],
     },
     change_climber_pw: {

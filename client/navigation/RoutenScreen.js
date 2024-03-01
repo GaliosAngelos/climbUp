@@ -6,9 +6,9 @@ import ButtonBack from "../components/buttons/ButtonBack.js";
 import styles from "../components/styles/allStyles.js";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // Query
-import { Climber } from "../components/request/Procedures.js";
-import { query } from "../components/request/generalRequest.js";
 import RoutenList from "../components/lists/RoutenList.js";
+import { Climber } from "../Controller/Procedures.js";
+import { query } from "../Controller/requestHandler.js";
 
 // --------------------------------------------------------------------
 export default function RoutenScreen({ navigation, route }) {
@@ -29,7 +29,7 @@ export default function RoutenScreen({ navigation, route }) {
         })
         .catch((err) => alert("Error: " + err));
     }
-  }, [hall_name]); // Reagiert auf Änderungen von hall_name oder routes
+  }, [hall_name, routes]); // Reagiert auf Änderungen von hall_name oder routes
 
   return (
     <>

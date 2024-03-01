@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import HeadText from "../components/text/HeadText.js";
 import CustTextInputPassword from "../components/input/CustTextInputPassword.js";
-import { logout } from "../components/request/loginLogoutRequest.js";
 import Button from "../components/buttons/Button.js";
 // Style
 import styles from "../components/styles/allStyles.js";
+import { logout } from "../Controller/logoutHandler.js";
 
 // --------------------------------------------------------------
 
