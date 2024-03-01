@@ -7,7 +7,7 @@ import styles from "../styles/allStyles";
 // -----------------------------------------------------------------------
 
 export default function RouteLogFilterButtons() {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(2);
 
   const handleButtonPress = (buttonId) => {
     setSelectedButton(buttonId);
