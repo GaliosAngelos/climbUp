@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import RouteBox from "../sections/dashboard/climbing/RouteBox";
 
-export default function RoutenList({ routes }) {
+export default function RoutenList({ routes, expand }) {
   const [expandedRoute, setExpandedRoute] = useState(null);
 
   const handlePressRoute = (routeId) => {
@@ -12,15 +12,18 @@ export default function RoutenList({ routes }) {
   return (
     <View>
       {routes &&
-        routes.map(
-          (
-            item,
-            index // Überprüfen, ob 'routes' definiert ist
-          ) => (
+        routes.map((item, index) => {
+          const conditionalProps = expand
+            ? {
+                expanded: expandedRoute === index,
+                setExpanded: () => handlePressRoute(index),
+              }
+            : {};
+
+          return (
             <RouteBox
               key={index}
-              expanded={expandedRoute === index}
-              setExpanded={() => handlePressRoute(index)}
+              {...conditionalProps}
               color={item.color}
               levelOfDificulty={item.level_of_difficulty}
               lineNumber={item.line_number}
@@ -28,8 +31,8 @@ export default function RoutenList({ routes }) {
               Sector={item.sector}
               Tilt={item.tilt}
             />
-          )
-        )}
+          );
+        })}
     </View>
   );
 }

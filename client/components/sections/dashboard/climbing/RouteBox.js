@@ -6,6 +6,7 @@ import ButtonMedium from "../../../buttons/ButtonMedium";
 import ButtonCommit from "../../../buttons/ButtonCommit";
 // Style
 import styles from "../../../styles/allStyles";
+import { useNavigation } from "@react-navigation/native";
 
 // --------------------------------------------------------------------
 
@@ -25,16 +26,31 @@ export default function Route({
   // State hooks for expanding the view and tracking attempts count
   const [count, setCount] = useState(0);
   const [selectedButton, setSelectedButton] = useState(null);
+  const navigation = useNavigation();
 
   const handleButtonPress = (buttonId) => {
     setSelectedButton(buttonId);
   };
   const isSelectionMade = selectedButton !== null;
 
+  const handlePress = () => {
+    if (setExpanded) {
+      setExpanded();
+    } else {
+      navigation.navigate("ModifyRoute", {
+        color: color,
+        levelOfDificulty: levelOfDificulty,
+        lineNumber: lineNumber,
+        routeName: routeName,
+        Sector: Sector,
+        Tilt: Tilt,
+      });
+    }
+  };
   return (
     <>
       {/* Touchable component to expand or collapse route details */}
-      <TouchableWithoutFeedback onPress={setExpanded}>
+      <TouchableWithoutFeedback onPress={handlePress}>
         <View style={expanded ? styles.borderBoxExtended : styles.borderBox}>
           {/* Route information display */}
           <View style={{ flexDirection: "row" }}>

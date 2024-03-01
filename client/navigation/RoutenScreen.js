@@ -54,7 +54,7 @@ export default function RoutenScreen({ navigation, route }) {
 
       <RouteFilter setRoutes={setRoutes} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <RoutenList routes={routes} />
+        <RoutenList routes={routes} expand={true} />
         <View style={{ marginBottom: 130 }} />
       </ScrollView>
     </>

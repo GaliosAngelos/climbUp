@@ -17,7 +17,6 @@ export default function RouteFilter({ setRoutes }) {
   const [route_name, setRouteName] = useState("");
   const [sector, setSector] = useState("");
   const [level, setLevel] = useState("");
-  const [iconName, setIconName] = useState("sparkles-outline");
 
   const [isMagic, setIsMagic] = useState(false);
 
