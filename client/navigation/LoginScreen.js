@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 // Components
 import HeadText from "../components/text/HeadText";
@@ -13,9 +13,21 @@ import styles from "../components/styles/allStyles";
 // --------------------------------------------------------------------
 
 export default function LoginScreen({ navigation }) {
-  const [user, setUser] = useState("dbadmin");
-  const [password, setPassword] = useState("dbadmin");
+  const [user, setUser] = useState();
+  const [password, setPassword] = useState();
   const [selectedButton, setSelectedButton] = useState(1);
+
+  useEffect(() => {
+    if (selectedButton === 1) {
+      // Climber
+      setUser("angelos");
+      setPassword("angelos");
+    } else {
+      // Hallowner
+      setUser("dav_kletterzentrum_augsburg");
+      setPassword("1e0a1aed7e");
+    }
+  }, [selectedButton]);
 
   const handleButtonPress = (buttonId) => {
     setSelectedButton(buttonId);
