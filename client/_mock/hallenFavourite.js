@@ -5,14 +5,19 @@ const hallenFavourite = [
     street_address: "Berggipfelstraße 7",
     city: "Augsburg",
     postal_code: "86159",
-},
-{
+  },
+  {
     hall_name: "Felsenfest Augsburg",
     street_address: "Kletterweg 12",
     city: "Augsburg",
     postal_code: "86163",
-},
-
+  },
+  {
+    hall_name: "Angelo_Aux_Test",
+    street_address: "Ahhaaaa 12",
+    city: "Augsburg",
+    postal_code: "86163",
+  },
 ];
 
 export default hallenFavourite;
