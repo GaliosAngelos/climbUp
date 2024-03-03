@@ -23,6 +23,10 @@ export default function ClimbingHallScreen({ navigation }) {
       .catch((err) => alert("Error: " + err));
   }, []);
 
+  const replaceUnderscoresWithSpaces = (text) => {
+    return text.replace(/_/g, " ");
+  };
+
   return (
     <>
       <HeadText content="Where every climb feels like home." />
@@ -32,7 +36,7 @@ export default function ClimbingHallScreen({ navigation }) {
           {hallenFavourite.map((item, index) => (
             <ClimbingHallBox
               key={index}
-              hall_name={item.hall_name}
+              hall_name={replaceUnderscoresWithSpaces(item.hall_name)}
               street_address={item.street_address}
               city={item.city}
               postal_code={item.postal_code}

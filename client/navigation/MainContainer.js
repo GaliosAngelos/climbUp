@@ -1,5 +1,5 @@
-import React from "react";
-import { Platform, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Platform, Image, Keyboard } from "react-native";
 // Navigation + Icons
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -30,78 +30,44 @@ export default function MainContainer() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-        {/* Weiter unten findest du die DashboardTabs! */}
-        {/* {userType === "hallOwner" ? (
-          <> */}
         <Stack.Screen name="HallDashboardTabs" component={HallDashboardTabs} />
-        {/* </>
-        ) : (
-          <> */}
         <Stack.Screen
           name="ClimberDashboardTabs"
           component={ClimberDashboardTabs}
         />
-        {/* </>
-        )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
 function ClimberDashboardTabs() {
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardVisible(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="ClimberDashboardTabs"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused }) => {
-          let iconName;
-
-          if (route.name === "Dashboard") {
-            iconName = focused
-              ? require("../assets/home-black.png")
-              : require("../assets/home-grey.png");
-          } else if (route.name === "ClimbingHall") {
-            iconName = focused
-              ? require("../assets/shoe-black.png")
-              : require("../assets/shoe-grey.png");
-          } else if (route.name === "Settings") {
-            iconName = focused
-              ? require("../assets/menu-black.png")
-              : require("../assets/menu-grey.png");
-          }
-
-          return (
-            <Image
-              source={iconName}
-              style={{ width: 40, height: 40 }}
-              resizeMode="contain"
-            />
-          );
-        },
-        tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
-        tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
-        tabBarStyle: {
-          position: "absolute",
-          bottom: Platform.select({ ios: 40, android: 20 }), // Positionierung am unteren Rand des Bildschirms
-          left: "15%",
-          right: "15%",
-          height: Platform.select({ ios: 70, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
-          backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          borderBottomLeftRadius: 30,
-          borderBottomRightRadius: 30,
-          paddingTop: Platform.select({ ios: 28, android: 0 }),
-          // Schatteneigenschaften für iOS
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0, // Zentrieren des Schattens horizontal
-            height: 0, // Zentrieren des Schattens vertikal
-          },
-          shadowOpacity: 0.3, // Transparenz des Schattens
-          shadowRadius: 7, // Weichheit des Schattens
-          elevation: 10, // Schatteneigenschaften für Android
-        },
-        tabBarHideOnKeyboard: true, // Ersetzt keyboardHidesTabBar für neuere Versionen
+        tabBarIcon: ({ focused }) => tabBarIconSelector(route, focused),
+        tabBarActiveTintColor: "green",
+        tabBarInactiveTintColor: "grey",
+        tabBarStyle: keyboardVisible
+          ? { display: "none" }
+          : tabBarStyleSelector(),
+        tabBarHideOnKeyboard: true,
       })}
     >
       <Tab.Screen
@@ -125,7 +91,7 @@ function ClimberDashboardTabs() {
         options={{
           tabBarShowLabel: false,
           headerShown: false,
-          tabBarButton: () => "",
+          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>
@@ -133,60 +99,34 @@ function ClimberDashboardTabs() {
 }
 
 function HallDashboardTabs() {
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardVisible(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="HallDashboardTabs"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === "HallDashboard") {
-            iconName = focused
-              ? require("../assets/home-black.png")
-              : require("../assets/home-grey.png");
-          } else if (route.name === "HallAllRoutes") {
-            iconName = focused
-              ? require("../assets/shoe-black.png")
-              : require("../assets/shoe-grey.png");
-          } else if (route.name === "Settings") {
-            iconName = focused
-              ? require("../assets/menu-black.png")
-              : require("../assets/menu-grey.png");
-          }
-
-          return (
-            <Image
-              source={iconName}
-              style={{ width: 40, height: 40 }}
-              resizeMode="contain"
-            />
-          );
-        },
-        tabBarActiveTintColor: "green", // Farbe Icon wenn Aktiv
-        tabBarInactiveTintColor: "grey", // Farbe Icon wenn Inaktiv
-        tabBarStyle: {
-          position: "absolute",
-          bottom: Platform.select({ ios: 40, android: 20 }), // Positionierung am unteren Rand des Bildschirms
-          left: "15%",
-          right: "15%",
-          height: Platform.select({ ios: 70, android: 70 }), // Erhöhen Sie die Höhe der Navigationsleiste
-          backgroundColor: "white", // Hintergrundfarbe hinzufügen, um die Navigationsleiste zu visualisieren
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          borderBottomLeftRadius: 30,
-          borderBottomRightRadius: 30,
-          paddingTop: Platform.select({ ios: 28, android: 0 }),
-          // Schatteneigenschaften für iOS
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0, // Zentrieren des Schattens horizontal
-            height: 0, // Zentrieren des Schattens vertikal
-          },
-          shadowOpacity: 0.3, // Transparenz des Schattens
-          shadowRadius: 7, // Weichheit des Schattens
-          elevation: 10, // Schatteneigenschaften für Android
-        },
-        tabBarHideOnKeyboard: true, // Ersetzt keyboardHidesTabBar für neuere Versionen
+        tabBarIcon: ({ focused, color, size }) =>
+          tabBarIconSelector(route, focused),
+        tabBarActiveTintColor: "green",
+        tabBarInactiveTintColor: "grey",
+        tabBarStyle: keyboardVisible
+          ? { display: "none" }
+          : tabBarStyleSelector(),
+        tabBarHideOnKeyboard: true,
       })}
     >
       <Tab.Screen
@@ -210,9 +150,54 @@ function HallDashboardTabs() {
         options={{
           tabBarShowLabel: false,
           headerShown: false,
-          tabBarButton: () => "",
+          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>
   );
+}
+
+function tabBarIconSelector(route, focused) {
+  let iconName;
+  if (route.name === "Dashboard") {
+    iconName = focused
+      ? require("../assets/home-black.png")
+      : require("../assets/home-grey.png");
+  } else if (route.name === "ClimbingHall") {
+    iconName = focused
+      ? require("../assets/shoe-black.png")
+      : require("../assets/shoe-grey.png");
+  } else if (route.name === "Settings") {
+    iconName = focused
+      ? require("../assets/menu-black.png")
+      : require("../assets/menu-grey.png");
+  }
+  return (
+    <Image
+      source={iconName}
+      style={{ width: 40, height: 40 }}
+      resizeMode="contain"
+    />
+  );
+}
+
+function tabBarStyleSelector() {
+  return {
+    position: "absolute",
+    bottom: Platform.select({ ios: 40, android: 20 }),
+    left: "15%",
+    right: "15%",
+    height: Platform.select({ ios: 70, android: 70 }),
+    backgroundColor: "white",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    paddingTop: Platform.select({ ios: 28, android: 0 }),
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
+    elevation: 10,
+  };
 }

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "ClimbUp",
+    "slug": "ClimbUp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appicon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -19,19 +19,20 @@
       "bundleIdentifier": "com.ange1308.client"
     },
     "android": {
+      "package": "com.ange1308.client",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.ange1308.client"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "83417f01-080b-46d6-801f-b842848b37e2"
+        "projectId": "ada8e948-f8d8-487c-83af-2921c8afba32"
       }
-    }
+    },
+    "owner": "ange1308"
   }
 }
