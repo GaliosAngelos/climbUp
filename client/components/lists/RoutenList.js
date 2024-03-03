@@ -1,43 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import RouteBox from "../sections/dashboard/climbing/RouteBox";
 
 export default function RoutenList({ routes, expand, hall_name }) {
-  const [expandedRoute, setExpandedRoute] = useState(null);
-
-  const handlePressRoute = (routeId) => {
-    setExpandedRoute(expandedRoute === routeId ? null : routeId);
-  };
-
-  // Verwenden Sie den Null-Prüfung-Operator (?.) und den Nullish-Coalescing-Operator (??),
-  // um sicherzustellen, dass "routes" ein Array ist oder einen leeren Array als Fallback-Wert verwendet
-  const routeArray = routes?.length ? routes : [];
-
   return (
     <View>
-      {routeArray.map((item, index) => {
-        const isExpanded = expandedRoute === item.id; // Angenommen, jedes item hat eine eindeutige ID
-        const conditionalProps = expand
-          ? {
-              expanded: isExpanded,
-              setExpanded: () => handlePressRoute(item.id), // Verwende item.id anstelle von index
-            }
-          : {};
-
-        return (
-          <RouteBox
-            key={item.id || index} // Verwende item.id als Schlüssel, fallback zu index
-            {...conditionalProps}
-            color={item.color}
-            levelOfDifficulty={item.level_of_difficulty} // CamelCase-Umwandlung
-            lineNumber={item.line_number}
-            routeName={item.route_name}
-            sector={item.sector} // Kleinbuchstaben, um Konsistenz mit anderen Props zu wahren
-            tilt={item.tilt} // Kleinbuchstaben
-            hallname={hall_name}
-          />
-        );
-      })}
+      {routes.map((item, index) => (
+        <RouteItem
+          key={item.id || index}
+          item={item}
+          expand={expand}
+          hall_name={hall_name}
+        />
+      ))}
     </View>
+  );
+}
+
+function RouteItem({ item, expand, hall_name }) {
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handlePressRoute = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <RouteBox
+      color={item.color}
+      levelOfDifficulty={item.level_of_difficulty}
+      lineNumber={item.line_number}
+      routeName={item.route_name}
+      sector={item.sector}
+      tilt={item.tilt}
+      hallname={hall_name}
+      expanded={expanded}
+      setExpanded={handlePressRoute}
+    />
   );
 }
