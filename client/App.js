@@ -4,7 +4,9 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 // Components
 import { Platform, StatusBar } from "react-native";
 import MainContainer from "./navigation/MainContainer";
-
+// Android Screens - VERY IMPORTANT
+import { enableScreens } from "react-native-screens";
+enableScreens();
 // ----------------------------------------------------
 
 export default function App() {

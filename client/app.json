@@ -1,9 +1,10 @@
 {
   "expo": {
     "name": "ClimbUp",
-    "slug": "ClimbUp",
+    "slug": "climbup",
     "version": "1.0.0",
     "orientation": "portrait",
+    "platforms":["ios", "android"],
     "icon": "./assets/appicon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -16,12 +17,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ange1308.client"
+      "bundleIdentifier": "com.ange1308.climbup"
     },
     "android": {
-      "package": "com.ange1308.client",
+      "package": "com.ange1308.climbup",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/appicon.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -30,7 +31,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ada8e948-f8d8-487c-83af-2921c8afba32"
+        "projectId": "7bee9ce1-6879-4ed8-afcd-4f14b4e6e703"
       }
     },
     "owner": "ange1308"

@@ -29,10 +29,10 @@ export default function RoutenList({ routes, expand }) {
             key={item.id || index} // Verwende item.id als Schlüssel, fallback zu index
             {...conditionalProps}
             color={item.color}
-            levelOfDifficulty={item.level_of_difficulty} // CamelCase-Umwandlung
+            levelOfDificulty={item.level_of_difficulty} // CamelCase-Umwandlung
             lineNumber={item.line_number}
             routeName={item.route_name}
-            sector={item.sector} // Kleinbuchstaben, um Konsistenz mit anderen Props zu wahren
+            Sector={item.sector} // Kleinbuchstaben, um Konsistenz mit anderen Props zu wahren
             tilt={item.tilt} // Kleinbuchstaben
           />
         );
