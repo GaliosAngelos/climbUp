@@ -1,5 +1,5 @@
 // Importing necessary components and libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Components
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 import ButtonMedium from "../../../buttons/ButtonMedium";
@@ -7,13 +7,15 @@ import ButtonCommit from "../../../buttons/ButtonCommit";
 // Style
 import styles from "../../../styles/allStyles";
 import { useNavigation } from "@react-navigation/native";
-
+import { Climber } from "../../../../Controller/Procedures";
+import { query } from "../../../../Controller/requestHandler";
 // --------------------------------------------------------------------
 
 // Route component representing a climbing route in a climbing hall.
 // It allows users to track their progress on the route (success, failure, number of attempts).
 
 export default function Route({
+  hallname,
   color,
   levelOfDificulty,
   lineNumber,
@@ -24,14 +26,36 @@ export default function Route({
   setExpanded,
 }) {
   // State hooks for expanding the view and tracking attempts count
-  const [count, setCount] = useState(0);
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [rest, setRest] = useState(0);
+  const [reachedTop, setReachedTop] = useState(null);
   const navigation = useNavigation();
 
   const handleButtonPress = (buttonId) => {
-    setSelectedButton(buttonId);
+    setReachedTop(buttonId);
   };
-  const isSelectionMade = selectedButton !== null;
+  const isSelectionMade = reachedTop !== null;
+
+    useEffect(() => {
+      // insert Route into statistic table
+        query(Climber.insert_user_statistic.call, [hallname, reachedTop, levelOfDificulty, rest, (reachedTop ? true : false)])
+        .then((res) => {
+          if (res.status === 400) {
+            alert("Error setting route progress. Query missing: " + JSON.stringify(res.data));
+          } else if (res.status === 401) {
+            alert("Not logged in : " + JSON.stringify(res.data));
+          } else  if (res.status === 500) {
+            alert("Error setting route progress: " + JSON.stringify(res.data));
+          } else {
+            confirm("Route progress saved. Awesome!");
+            setExpanded(false);
+          }
+        })
+      .catch((err) => {
+        console.log("An unknwon error occured. ", err);
+        alert("Saving route progress failed. ");
+      });
+
+  }, [reachedTop]);
 
   const handlePress = () => {
     if (setExpanded) {
@@ -47,6 +71,7 @@ export default function Route({
       });
     }
   };
+
   return (
     <>
       {/* Touchable component to expand or collapse route details */}
@@ -95,7 +120,7 @@ export default function Route({
                 text={"Completed!"}
                 color={"#8FD78F"}
                 onPress={() => handleButtonPress(1)}
-                selected={selectedButton === 1}
+                selected={reachedTop === true}
               />
             </View>
             <View style={{ flex: 1 }}>
@@ -103,7 +128,7 @@ export default function Route({
                 text={"Next Time!"}
                 color={"#F5BBBA"}
                 onPress={() => handleButtonPress(2)}
-                selected={selectedButton === 2}
+                selected={reachedTop === false}
               />
             </View>
           </View>
@@ -117,15 +142,15 @@ export default function Route({
             }}
           >
             <ButtonMedium
-              onPress={() => count > 0 && setCount((c) => c - 1)}
+              onPress={() => rest > 0 && setRest((c) => c - 1)}
               text={"-"}
             />
             <View style={{ justifyContent: "center", width: 60 }}>
-              <Text style={[styles.h1, { textAlign: "center" }]}>{count}</Text>
+              <Text style={[styles.h1, { textAlign: "center" }]}>{rest}</Text>
             </View>
 
             <ButtonMedium
-              onPress={() => count < 100 && setCount((c) => c + 1)}
+              onPress={() => rest < 100 && setRest((c) => c + 1)}
               text={"+"}
             />
           </View>

@@ -20,8 +20,8 @@ export default function LoginScreen({ navigation }) {
   useEffect(() => {
     if (selectedButton === 1) {
       // Climber
-      setUser("angelos");
-      setPassword("angelos");
+      setUser("dbadmin");
+      setPassword("dbadmin");
     } else {
       // Hallowner
       setUser("dav_kletterzentrum_augsburg");
@@ -46,6 +46,7 @@ export default function LoginScreen({ navigation }) {
             alert("Ein unbekannter Fehler ist aufgetreten.");
           }
         })
+
         .catch((err) => {
           console.log("Fehler beim Login-Versuch", err);
           alert("Login-Versuch fehlgeschlagen.");
@@ -130,7 +131,10 @@ export default function LoginScreen({ navigation }) {
         password={password}
         setPassword={setPassword}
       />
-      <Button text="Log in" onPress={handleLogin} />
+      <Button
+        text="Log in"
+        onPress={handleLogin}
+      />
       <View style={{ marginBottom: 20 }} />
       <ButtonSmall
         text="Forgot your password?"

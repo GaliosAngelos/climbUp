@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import RouteBox from "../sections/dashboard/climbing/RouteBox";
 
-export default function RoutenList({ routes, expand }) {
+export default function RoutenList({ routes, expand, hall_name }) {
   const [expandedRoute, setExpandedRoute] = useState(null);
 
   const handlePressRoute = (routeId) => {
@@ -34,6 +34,7 @@ export default function RoutenList({ routes, expand }) {
             routeName={item.route_name}
             sector={item.sector} // Kleinbuchstaben, um Konsistenz mit anderen Props zu wahren
             tilt={item.tilt} // Kleinbuchstaben
+            hallname={hall_name}
           />
         );
       })}

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 // Components
 import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import RouteFilter from "../components/sections/dashboard/climbing/RouteFilter.js";
@@ -17,10 +18,6 @@ export default function RoutenScreen({ navigation, route }) {
   const [isLiked, setIsLiked] = useState(false);
   // Filterzustände
 
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
-  };
-
   useEffect(() => {
     if (routes) {
       query(Climber.get_routes_by_hall_name.call, [hall_name])
@@ -31,6 +28,9 @@ export default function RoutenScreen({ navigation, route }) {
     }
   }, [hall_name, routes]); // Reagiert auf Änderungen von hall_name oder routes
 
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
   return (
     <>
       <ButtonBack onPress={() => navigation.navigate("ClimbingHall")} />
@@ -54,7 +54,7 @@ export default function RoutenScreen({ navigation, route }) {
 
       <RouteFilter setRoutes={setRoutes} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <RoutenList routes={routes} expand={true} />
+        <RoutenList routes={routes} expand={true} hall_name={hall_name} />
         <View style={{ marginBottom: 130 }} />
       </ScrollView>
     </>

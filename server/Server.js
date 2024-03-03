@@ -77,7 +77,7 @@ function addClient(client, username, password){
             keepAlive: 'false',
         });
         hallownerClients.set(username, hallownerClient);
-        return true;
+        return hallownerClients.get(username);
         } else {
          return false;
       }
@@ -165,7 +165,7 @@ app.post('/login_climber', async (req, res) => {
         if (client == undefined) {
           console.log("in undefined");
           const newClient = addClient("climber", user, password);
-          newClient.connect();
+          await newClient.connect();
           dbClient = newClient;
             // return res.status(403).send({ message: 'No matching credentials found' });
         } else {
@@ -186,25 +186,33 @@ app.post('/login_climber', async (req, res) => {
 });
 
 app.post('/login_hallowner', async (req, res) => {
-    const { user, password } = req.body;
+    const { params } = req.body;
+    const user = params[0];
+    const password = params[1];
     if (!user || !password) {
         return res.status(400).send({ message: 'Missing login credentials' });
     }
     try {
+        console.log("tries hallowner login");
         let client = hallownerClients.get(user);
         if (client === undefined) {
-            return res.status(403).send({ message: 'No matching credentials found' });
-        } else if (client.connected === false){
-            client.connect();
+            console.log("in undefined");
+            const hallowner = addClient("hallowner", user, password);
+            await hallowner.connect();
+            dbClient = hallowner;
+            // return res.status(403).send({ message: 'No matching credentials found' });
+        } else {
+            // client.connect();
             dbClient = client;
-            return res.status(200).send({ message: 'Login successful' });
-        } else if (client?.connected === true){
-            return res.status(200).send({ message: 'Already logged in' });
+            // } else if (client?.connected === true){
+                // return res.status(200).send({ message: 'Already logged in' });
         }
-    }catch (err) {
-        console.error('Error occured during login process: ', err);
-        await endClient();
-        return res.status(500).send({ message: 'Login error. Please try again later.' });
+        console.log("successful login");
+        return res.status(200).send({ message: 'Login successful' });
+        } catch (err) {
+            console.error('Error occured during login process: ', err);
+            await endClient();
+            return res.status(500).send({ message: 'Login error. Please try again later.' });
     }
 });
 
