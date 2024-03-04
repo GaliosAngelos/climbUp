@@ -34,7 +34,7 @@ export default function RoutenScreen({ navigation, route }) {
   };
   return (
     <>
-      <ButtonBack onPress={() => navigation.navigate("ClimbingHallScreen")} />
+      <ButtonBack onPress={() => navigation.navigate("ClimbingHall")} />
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
