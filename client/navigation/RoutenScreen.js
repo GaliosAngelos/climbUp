@@ -12,18 +12,18 @@ import { Climber } from "../Controller/Procedures.js";
 import { query } from "../Controller/requestHandler.js";
 
 export default function RoutenScreen({ navigation, route }) {
-  const { hall_name } = route.params;
+  const { hall_name, favourite } = route.params;
   const [allRoutes, setAllRoutes] = useState([]); // Zustand für alle geladenen Routen
   const [routes, setRoutes] = useState([]); // Zustand für die aktuell angezeigten (gefilterten) Routen
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(favourite);
 
   // Lade alle Routen, wenn hall_name vorhanden ist
   useEffect(() => {
     if (hall_name) {
       query(Climber.get_routes_by_hall_name.call, [hall_name])
         .then((res) => {
-          if (res.data) { // Stelle sicher, dass Daten vorhanden sind
-            console.log("response: ", res.data);
+          if (res.data) {
+            // Stelle sicher, dass Daten vorhanden sind
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
 
             setAllRoutes(newRoutes); // Speichere alle Routen
@@ -34,11 +34,34 @@ export default function RoutenScreen({ navigation, route }) {
     }
   }, [hall_name]);
 
+  useEffect(() => {
+    if (isLiked) {
+      query(Climber.add_favorite.call, [hall_name])
+        .then((res) => {
+          if (res.data) {
+            // Stelle sicher, dass Daten vorhanden sind
+            console.log("response: ", res);
+          }
+        })
+        .catch((err) => alert("Error: ", err));
+    } else if (!isLiked) {
+      query(Climber.remove_favorite.call, [hall_name])
+        .then((res) => {
+          if (res.data) {
+            // Stelle sicher, dass Daten vorhanden sind
+            console.log("response: ", res);
+          }
+        })
+        .catch((err) => alert("Error: ", err));
+    }
+  }, [isLiked]);
+
   // Filterfunktion, die die Routenliste im Frontend aktualisiert
   const handleFilterChange = (routeName, sector, level) => {
-    const filteredRoutes = allRoutes.filter(route => {
+    const filteredRoutes = allRoutes.filter((route) => {
       return (
-        (!routeName || route.route_name.toLowerCase().includes(routeName.toLowerCase())) &&
+        (!routeName ||
+          route.route_name.toLowerCase().includes(routeName.toLowerCase())) &&
         (!sector || route.sector.toLowerCase() === sector.toLowerCase()) &&
         (!level || route.level_of_difficulty === level)
       );
@@ -53,7 +76,7 @@ export default function RoutenScreen({ navigation, route }) {
 
   return (
     <>
-      <ButtonBack onPress={() => navigation.goBack()} />
+      <ButtonBack onPress={() => navigation.navigate("ClimbingHall")} />
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
@@ -80,8 +103,6 @@ export default function RoutenScreen({ navigation, route }) {
     </>
   );
 }
-
-
 
 // import React from "react";
 // import { useState, useEffect } from "react";
