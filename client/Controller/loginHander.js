@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
-const climberUrl = 'http://localhost:3000/login_climber';
-const hallownerUrl = 'http://localhost:3000/login_hallowner';
+const climberUrl = 'http://35.193.105.8:3000/login_climber'; // Ändere die IP-Adresse und den Port entsprechend
+const hallownerUrl = 'http://35.193.105.8:3000/login_hallowner'; // Ändere die IP-Adresse und den Port entsprechend
 
 async function loginClimber (params) {
     try {
@@ -12,7 +12,7 @@ async function loginClimber (params) {
             status: err.response ? err.response.status : 500,
             data: { message: err.message },
         };
-    }
+ git    }
 }
 
 async function loginHallowner (params) {

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ClimbUp",
-    "slug": "ClimbUp",
+    "slug": "climbup",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/appicon.png",
@@ -30,7 +30,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ada8e948-f8d8-487c-83af-2921c8afba32"
+        "projectId": "7bee9ce1-6879-4ed8-afcd-4f14b4e6e703"
       }
     },
     "owner": "ange1308"
