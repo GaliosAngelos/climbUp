@@ -15,9 +15,30 @@ const sshConfig = {
     privateKey: fs.readFileSync('id_rsa'),
 };
 
-const climberClients = new Map();
-const hallownerClients = new Map();
+let climberClients = new Map();
+let hallownerClients = new Map();
+let sshClientGlobal = null; // Globale Variable für den SSH-Client
+let localServer = null; // Globale Variable für den lokalen Server
 
+function startSSHTunnelAndForwarding() {
+    const sshClient = new SSHClient();
+    sshClient.on('ready', () => {
+        console.log('SSH Client Ready');
+        sshClient.forwardOut('127.0.0.1', localPort, '127.0.0.1', 5432, (err, stream) => {
+            if (err) {
+                console.log("Fehler beim Forwarding: " + err);
+            }
+        
+            localServer = net.createServer(sock => sock.pipe(stream).pipe(sock));
+            localServer.listen(localPort, '127.0.0.1', () => {
+                console.log(`Local server listening on port ${localPort} for DB traffic forwarding`);
+            });
+        });
+    }).on('error', (err) => {
+        console.error('SSH Client Error:', err);
+    }).connect(sshConfig);
+    sshClientGlobal = sshClient; // Aktualisieren der globalen Variable mit dem aktuellen SSH-Client
+}
 // const dbadmin = new Pool({
 //     user: 'dbadmin',
 //     password: 'dbadmin',
@@ -30,41 +51,39 @@ const hallownerClients = new Map();
 // !climberClients.has(dbadmin.user) ?  climberClients.set(dbadmin.user, dbadmin) : null ;
 let dbClient = null; // Gloabl Datenbankclient, initial null
 // climberClients.set("dbadmin", dbadmin);
+async function endClientAndRestartSSHTunnel(restart) {
+    // Beenden des PostgreSQL-Clients, falls vorhanden
+    if (dbClient) {
+        await dbClient.end();
+        dbClient = null;
+        climberClients = new Map();
+        hallownerClients = new Map(); 
+        console.log("PostgreSQL client closed.");
+    }
 
-function startSSHTunnelAndForwarding() {
-    const sshClient = new SSHClient();
-        sshClient.on('ready', () => {
-            console.log('SSH Client Ready');
-            sshClient.forwardOut('127.0.0.1', localPort, '127.0.0.1', 5432, (err, stream) => {
-                if (err) {
-                    console.log("Fehler beim Forwarding: " + err);
-                }
-
-                const server = net.createServer(sock => sock.pipe(stream).pipe(sock));
-                server.listen(localPort, '127.0.0.1', () => {
-                    console.log(`Local server listening on port ${localPort} for DB traffic forwarding`);
-                });
+    // Beenden des SSH-Clients und Neustarten des Tunnels
+    if (sshClientGlobal) {
+        // Schließen des lokalen Servers, falls vorhanden
+        if (localServer) {
+            localServer.close(() => {
+                console.log("Local server closed.");
             });
-        }).on('error', (err) => {
-            console.error('SSH Client Error:', err);
-        }).connect(sshConfig);
+        }
+    
+        sshClientGlobal.end(); // Beenden des aktuellen SSH-Clients
+        console.log("SSH client closed.");
+        sshClientGlobal = null; // Zurücksetzen der globalen Variable
+    
+        if(restart){
+            // Kurze Verzögerung, um sicherzustellen, dass der SSH-Client vollständig beendet wurde
+            setTimeout(() => {
+                startSSHTunnelAndForwarding(); // Neustart des SSH-Tunnels
+                console.log("SSH tunnel restarted.");
+            }, 100); // Verzögerung von 200 Millisekunden
+        }
+    }
 }
 
-async function endClient(){
-  // if(dbClient?.connected  === true){
-  //   return dbClient.end().then(() => {
-  //     dbClient = null
-  //   }).catch((err) => {
-  //     console.error('Error occured during clientShutdown');
-  //   });
-  // } else {
-  //   dbClient = null;
-  //   return Promise.resolve('Client has been disconnected');
-  // }
-  await dbClient.end();
-//   await climberClients.get(dbClient.name).end();
-  dbClient = null;
-}
 function addClient(client, username, password){
     if(client === "hallowner"){
       if(!hallownerClients.has(username)){
@@ -77,7 +96,7 @@ function addClient(client, username, password){
             keepAlive: 'false',
         });
         hallownerClients.set(username, hallownerClient);
-        return true;
+        return hallownerClients.get(username);
         } else {
          return false;
       }
@@ -123,7 +142,7 @@ app.post('/register_climber' , async (req, res) => {
         }
     } catch (err) {
         console.error('Error during registry request: ', err);
-        await endClient();
+        await endClientAndRestartSSHTunnel(true);
         climberClients.delete(user);
         return res.status(500).send({ message: 'Registration Error. Please try again later.' });
     }
@@ -156,21 +175,16 @@ app.post('/login_climber', async (req, res) => {
         return res.status(400).send({ message: 'Missing login credentials' });
     }
     try {
-      console.log("tries");
-    //   let clients = climberClients.forEach((value, key) => { console.log(value, key);});
-    //   for (let [key, values] of clients) {
-    //     console.log(`Key: ${key}, Value: ${values.}`);
-    // }
         let client = climberClients.get(user);
         if (client == undefined) {
           console.log("in undefined");
           const newClient = addClient("climber", user, password);
-          newClient.connect();
+          await newClient.connect();
           dbClient = newClient;
             // return res.status(403).send({ message: 'No matching credentials found' });
         } else {
         //   console.log("in not connected");
-            // client.connect();
+            client.connect();
             dbClient = client;
         // } else if (client?.connected === true){
           // console.log("in is connected");
@@ -180,31 +194,39 @@ app.post('/login_climber', async (req, res) => {
         return res.status(200).send({ message: 'Login successful' });
     }catch (err) {
         console.error('Error occured during login process: ', err);
-        await endClient();
+        await endClientAndRestartSSHTunnel(true);
         return res.status(500).send({ message: 'Login error. Please try again later.' });
     }
 });
 
 app.post('/login_hallowner', async (req, res) => {
-    const { user, password } = req.body;
+    const { params } = req.body;
+    const user = params[0];
+    const password = params[1];
     if (!user || !password) {
         return res.status(400).send({ message: 'Missing login credentials' });
     }
     try {
+        console.log("tries hallowner login");
         let client = hallownerClients.get(user);
         if (client === undefined) {
-            return res.status(403).send({ message: 'No matching credentials found' });
-        } else if (client.connected === false){
-            client.connect();
+            console.log("in undefined");
+            const hallowner = addClient("hallowner", user, password);
+            await hallowner.connect();
+            dbClient = hallowner;
+            // return res.status(403).send({ message: 'No matching credentials found' });
+        } else {
+            // client.connect();
             dbClient = client;
-            return res.status(200).send({ message: 'Login successful' });
-        } else if (client?.connected === true){
-            return res.status(200).send({ message: 'Already logged in' });
+            // } else if (client?.connected === true){
+                // return res.status(200).send({ message: 'Already logged in' });
         }
-    }catch (err) {
-        console.error('Error occured during login process: ', err);
-        await endClient();
-        return res.status(500).send({ message: 'Login error. Please try again later.' });
+        console.log("successful login");
+        return res.status(200).send({ message: 'Login successful' });
+        } catch (err) {
+            console.error('Error occured during login process: ', err);
+            await endClientAndRestartSSHTunnel(true);
+            return res.status(500).send({ message: 'Login error. Please try again later.' });
     }
 });
 
@@ -214,14 +236,18 @@ app.post('/query', async (req, res) => {
     }
     try {
         const { query, params } = req.body;
-        // console.log(query, params);
+        console.log(query, params);
         if (!query) {
             return res.status(400).send({ message: 'Query is missing.' });
         }
         const result = params 
             ? await dbClient.query(query, params) // Für parameterisierte Anfragen
             : await dbClient.query(query); // Für Anfragen ohne Parameter
-        res.json(result.rows);
+            
+            res.status(200).send({
+                message: 'Query executed successfully.',
+                data: result.rows
+            });
     } catch (err) {
         console.error('Error during database request: ', err);
         res.status(500).send({ message: 'Error during  database request. Please try again later.' });
@@ -229,18 +255,12 @@ app.post('/query', async (req, res) => {
 });
 
 app.post('/logout', async (req, res) => {
-    if (!dbClient) {
-        return res.status(401).send({ message: 'Not logged in.' });
-    }
     try {
-        await endClient();
-        return res.status(200).send({ message: 'Database connection successfully closed.' });
+        await endClientAndRestartSSHTunnel(true);
+        return res.status(200).send({ message: 'Logout successful. Database and SSH connections have been reset.' });
     } catch (err) {
-        console.error('Error occured while closing database connection: ', err);
-        return res.status(500).send({ message: 'Error while closing database connection' });
-    } finally {
-        
-        console.log("client ended");
+        console.error('Error occurred while processing logout:', err);
+        return res.status(500).send({ message: 'An error occurred during logout. Please try again.' });
     }
 });
 
@@ -249,7 +269,7 @@ app.listen(port, () => {
 });
 
 process.on('SIGINT', () => {
-    endClient().then(() => {
+    endClientAndRestartSSHTunnel(false).then(() => {
         console.log('Server shutting down.');
         process.exit();
     });

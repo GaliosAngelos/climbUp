@@ -10,11 +10,13 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.22.3",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/stack": "^6.3.21",
     "axios": "^1.6.7",
     "child_process": "^1.0.2",
+    "date-fns": "^3.3.1",
     "expo": "~50.0.6",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",

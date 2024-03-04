@@ -46,6 +46,7 @@ export default function LoginScreen({ navigation }) {
             alert("Ein unbekannter Fehler ist aufgetreten.");
           }
         })
+
         .catch((err) => {
           console.log("Fehler beim Login-Versuch", err);
           alert("Login-Versuch fehlgeschlagen.");
