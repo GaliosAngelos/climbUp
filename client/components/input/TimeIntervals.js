@@ -1,24 +1,42 @@
-export default function calculateTimeStamps() {
-    const now = new Date();
-    const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-    const oneWeekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
-    const oneMonthAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000)); // Vereinfachte Annahme
-    const oneYearAgo = new Date(now.getTime() - (365 * 24 * 60 * 60 * 1000)); // Vereinfachte Annahme
+export default function calculateTimeStamps(date) {
+  const now = new Date();
+  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000); // +1 Tag
 
-    // Hilfsfunktion zur Formatierung des Datums
-    const formatDate = (date) => {
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1; // Monate beginnen bei 0
-        const day = date.getDate();
-        // Führende Nullen hinzufügen und formatieren
-        return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    };
+  // Hilfsfunktion zur Formatierung des Datums
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Monate beginnen bei 0
+    const day = date.getDate();
+    return `${year}-${month.toString().padStart(2, "0")}-${day
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
-    return {
-        now: formatDate(now),
-        oneDayAgo: formatDate(oneDayAgo),
-        oneWeekAgo: formatDate(oneWeekAgo),
-        oneMonthAgo: formatDate(oneMonthAgo),
-        oneYearAgo: formatDate(oneYearAgo),
-    };
+  switch (date) {
+    case "lastDay":
+      return {
+        past: formatDate(new Date(now.getTime() - 24 * 60 * 60 * 1000)),
+        now: formatDate(tomorrow),
+      };
+    case "lastWeek":
+      return {
+        past: formatDate(new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)),
+        now: formatDate(tomorrow),
+      };
+    case "lastMonth":
+      return {
+        past: formatDate(new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)),
+        now: formatDate(tomorrow),
+      };
+    case "lastYear":
+      return {
+        past: formatDate(new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000)),
+        now: formatDate(tomorrow),
+      };
+    default:
+      return {
+        past: formatDate(new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)),
+        now: formatDate(tomorrow),
+      };
+  }
 }

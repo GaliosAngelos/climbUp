@@ -13,18 +13,12 @@ export default function DashboardScreen() {
   const [selectedTimeframe, setSelectedTimeframe] = useState();
   const [statistics, setStatistics] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Zustand für den Ladevorgang
+  const interval = calculateTimeStamps(selectedTimeframe);
 
-  const dayone = '2024-01-01';
-  const today = '2024-04-16';
-
-  // Callback-Funktion, die von RouteLogFilterButtons aufgerufen wird
-  const handleTimeframeChange = (buttonId) => {
-    setSelectedTimeframe(buttonId);
-    // Zusätzlich können Sie hier die Logik implementieren, um die Routen basierend auf dem neuen Timeframe zu aktualisieren.
-  };
+  console.log("interval :>> ", interval);
 
   useEffect(() => {
-    query(Climber.get_user_statistics.call, [dayone, today])
+    query(Climber.get_user_statistics.call, [interval.past, interval.now])
       .then((res) => {
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
         console.log(newStatistics);
@@ -35,7 +29,7 @@ export default function DashboardScreen() {
         alert("Error: " + err);
         setIsLoading(false);
       });
-  }, []); // Leeres Abhängigkeitsarray, damit der Effekt nur beim Mounten der Komponente ausgeführt wird
+  }, [selectedTimeframe]); // Leeres Abhängigkeitsarray, damit der Effekt nur beim Mounten der Komponente ausgeführt wird
 
   return (
     <>
@@ -59,7 +53,9 @@ export default function DashboardScreen() {
             </View>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <RouteLogFilterButtons onSelectedButtonChange={handleTimeframeChange} />
+            <RouteLogFilterButtons
+              setSelectedTimeframe={setSelectedTimeframe}
+            />
             <View
               style={{
                 flexDirection: "row",
@@ -77,7 +73,7 @@ export default function DashboardScreen() {
                 <Text style={styles.h3}>P</Text>
               </View>
             </View>
-            <RoutenViewList />
+            <RoutenViewList interval={interval} />
             <View style={{ marginBottom: 150 }} />
           </ScrollView>
         </>

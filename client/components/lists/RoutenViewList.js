@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import RouteLogBox from "../sections/dashboard/RouteLogBox";
 // import statistic from "../../_mock/statistic";
@@ -6,22 +6,28 @@ import { Climber } from "../../Controller/Procedures";
 import { query } from "../../Controller/requestHandler";
 import calculateTimeStamps from "../input/TimeIntervals";
 
-export default function RoutenViewList() {
+export default function RoutenViewList({ interval }) {
   const [statistics, setStatistics] = useState([]);
   const dateStamps = calculateTimeStamps();
-  const dayone = '2024-01-01';
-  const today = '2024-04-16';
+
+  const dayone = interval.past;
+  const today = interval.now;
+
   useEffect(() => {
     query(Climber.get_user_climbed_routes.call, [dayone, today])
-    // query(Climber.get_routes_by_hall_name.call, ['testhall2'])
-    .then((res) => {
-      const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
-      console.log(newStatistics);
-      setStatistics(newStatistics);
-    }).catch((err) => {alert("Error: "+ err)
+      // query(Climber.get_routes_by_hall_name.call, ['testhall2'])
+      .then((res) => {
+        console.log("interval Viewlist :>> ", interval);
+        console.log("res :>> ", res.data.data);
+        const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
+        console.log("new statistics :>>", newStatistics);
+        setStatistics(newStatistics);
+      })
+      .catch((err) => {
+        alert("Error: " + err);
       });
-      //how to update?
-  },[]);
+    //how to update?
+  }, [interval]);
 
   return (
     <View>

@@ -4,32 +4,33 @@ import { TouchableOpacity, View, Text } from "react-native";
 // Styles
 import styles from "../styles/allStyles";
 
-export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
+export default function RouteLogFilterButtons({ setSelectedTimeframe }) {
   const [selectedButton, setSelectedButton] = useState();
   const handleButtonPress = (buttonId) => {
-    setSelectedButton(buttonId)
-    if (onSelectedButtonChange){
-      onSelectedButtonChange(buttonId);
+    setSelectedButton(buttonId);
+    if (setSelectedTimeframe) {
+      setSelectedTimeframe(buttonId);
     }
   };
-  
+
   return (
     <>
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
-            onPress={() => handleButtonPress(1)}
+            onPress={() => handleButtonPress("lastDay")}
             style={[
               styles.buttonlarge,
-              selectedButton === 1 && styles.selectedButton,
+              selectedButton === "lastDay" && styles.selectedButton,
               { width: 140 },
             ]}
-            
           >
             <Text
               style={[
                 styles.buttonlargetext,
-                selectedButton === 1 ? { color: "white" } : { color: "black" },
+                selectedButton === "lastDay"
+                  ? { color: "white" }
+                  : { color: "black" },
               ]}
             >
               last Day
@@ -39,17 +40,19 @@ export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
 
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
-            onPress={() => handleButtonPress(2)}
+            onPress={() => handleButtonPress("lastWeek")}
             style={[
               styles.buttonlarge,
-              selectedButton === 2 && styles.selectedButton,
+              selectedButton === "lastWeek" && styles.selectedButton,
               { width: 140 },
             ]}
           >
             <Text
               style={[
                 styles.buttonlargetext,
-                selectedButton === 2 ? { color: "white" } : { color: "black" },
+                selectedButton === "lastWeek"
+                  ? { color: "white" }
+                  : { color: "black" },
               ]}
             >
               last Week
@@ -60,17 +63,19 @@ export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
-            onPress={() => handleButtonPress(3)}
+            onPress={() => handleButtonPress("lastMonth")}
             style={[
               styles.buttonlarge,
-              selectedButton === 3 && styles.selectedButton,
+              selectedButton === "lastMonth" && styles.selectedButton,
               { width: 140 },
             ]}
           >
             <Text
               style={[
                 styles.buttonlargetext,
-                selectedButton === 3 ? { color: "white" } : { color: "black" },
+                selectedButton === "lastMonth"
+                  ? { color: "white" }
+                  : { color: "black" },
               ]}
             >
               last Month
@@ -79,17 +84,19 @@ export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
         </View>
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
-            onPress={() => handleButtonPress(4)}
+            onPress={() => handleButtonPress("lastYear")}
             style={[
               styles.buttonlarge,
-              selectedButton === 4 && styles.selectedButton,
+              selectedButton === "lastYear" && styles.selectedButton,
               { width: 140 },
             ]}
           >
             <Text
               style={[
                 styles.buttonlargetext,
-                selectedButton === 4 ? { color: "white" } : { color: "black" },
+                selectedButton === "lastYear"
+                  ? { color: "white" }
+                  : { color: "black" },
               ]}
             >
               last Year
@@ -99,4 +106,4 @@ export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
       </View>
     </>
   );
-};
+}
