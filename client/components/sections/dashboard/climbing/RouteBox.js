@@ -1,21 +1,18 @@
-// Importing necessary components and libraries
 import React, { useState } from "react";
-// Components
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 import ButtonMedium from "../../../buttons/ButtonMedium";
 import ButtonCommit from "../../../buttons/ButtonCommit";
-// Style
 import styles from "../../../styles/allStyles";
 import { useNavigation } from "@react-navigation/native";
-
-// --------------------------------------------------------------------
-
-// Route component representing a climbing route in a climbing hall.
-// It allows users to track their progress on the route (success, failure, number of attempts).
+import { Climber } from "../../../../Controller/Procedures";
+import { query } from "../../../../Controller/requestHandler";
+import { Alert } from "react-native";
+import getColor from "../../../input/Colors";
 
 export default function Route({
+  hallname,
   color,
-  levelOfDificulty,
+  levelOfDifficulty,
   lineNumber,
   routeName,
   Sector,
@@ -23,23 +20,41 @@ export default function Route({
   expanded,
   setExpanded,
 }) {
-  // State hooks for expanding the view and tracking attempts count
-  const [count, setCount] = useState(0);
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [rest, setRest] = useState(0);
+  const [reachedTop, setReachedTop] = useState(null);
   const navigation = useNavigation();
 
-  const handleButtonPress = (buttonId) => {
-    setSelectedButton(buttonId);
+  const commitProgress = () => {
+    query(Climber.insert_user_statistic.call, [
+      hallname,
+      routeName,
+      levelOfDifficulty,
+      rest,
+      reachedTop,
+    ])
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          Alert.alert("Success", "Route progress saved. Awesome! ");
+          setExpanded(false);
+          setRest(0); // Zurücksetzen des Zustands für Pausen
+          setReachedTop(null); // Zurücksetzen der Auswahl
+        } else {
+          alert("Error setting route progress: " + JSON.stringify(res.data));
+        }
+      })
+      .catch((err) => {
+        console.log("An unknown error occurred. ", err);
+        alert("Saving route progress failed.");
+      });
   };
-  const isSelectionMade = selectedButton !== null;
 
   const handlePress = () => {
     if (setExpanded) {
-      setExpanded();
+      setExpanded(!expanded);
     } else {
       navigation.navigate("ModifyRoute", {
         color: color,
-        levelOfDificulty: levelOfDificulty,
+        levelOfDifficulty: levelOfDifficulty,
         lineNumber: lineNumber,
         routeName: routeName,
         Sector: Sector,
@@ -47,68 +62,56 @@ export default function Route({
       });
     }
   };
+
   return (
     <>
-      {/* Touchable component to expand or collapse route details */}
       <TouchableWithoutFeedback onPress={handlePress}>
         <View style={expanded ? styles.borderBoxExtended : styles.borderBox}>
-          {/* Route information display */}
           <View style={{ flexDirection: "row" }}>
             <View style={{ flex: 3, justifyContent: "center" }}>
               <Text style={styles.h3}>{routeName}</Text>
               <Text style={styles.text}>
-                {/* tried this @nico  */}
-                Sektor {Sector}, Line {lineNumber}, Tilt:{" "}
-                {Tilt == true ? "yes" : "no"}
+                Sektor {Sector}, Line {lineNumber}, Tilt: {Tilt ? "yes" : "no"}
               </Text>
             </View>
-
-            {/* Display of route's difficulty level */}
             <View style={{ flex: 1, justifyContent: "center" }}>
               <Text
                 style={[
+                  { color: getColor(color) },
+                  styles.text,
                   {
-                    color: color,
                     textAlign: "left",
-                    fontSize: 47,
+                    fontSize: 32,
                     fontWeight: "bold",
                     paddingLeft: 10,
                     marginVertical: -10,
                   },
                 ]}
               >
-                {levelOfDificulty}
+                {levelOfDifficulty}
               </Text>
             </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
-
-      {/* Expanded view to track route completion and attempts */}
       {expanded && (
         <View style={styles.routeExtension}>
-          {/* Buttons for marking the route as 'made' or 'failed' */}
-
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ flex: 1 }}>
-              <ButtonMedium
-                text={"Completed!"}
-                color={"#8FD78F"}
-                onPress={() => handleButtonPress(1)}
-                selected={selectedButton === 1}
-              />
-            </View>
-            <View style={{ flex: 1 }}>
-              <ButtonMedium
-                text={"Next Time!"}
-                color={"#F5BBBA"}
-                onPress={() => handleButtonPress(2)}
-                selected={selectedButton === 2}
-              />
-            </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <ButtonMedium
+              text={"Completed!"}
+              color={"#8FD78F"}
+              onPress={() => setReachedTop(true)}
+              selected={reachedTop === true}
+            />
+            <ButtonMedium
+              text={"Next Time!"}
+              color={"#F5BBBA"}
+              onPress={() => setReachedTop(false)}
+              selected={reachedTop === false}
+            />
           </View>
-
-          {/* Counter for tracking the number of attempts */}
           <View
             style={{
               flexDirection: "row",
@@ -117,21 +120,22 @@ export default function Route({
             }}
           >
             <ButtonMedium
-              onPress={() => count > 0 && setCount((c) => c - 1)}
+              onPress={() => rest > 0 && setRest((c) => c - 1)}
               text={"-"}
             />
             <View style={{ justifyContent: "center", width: 60 }}>
-              <Text style={[styles.h1, { textAlign: "center" }]}>{count}</Text>
+              <Text style={[styles.h1, { textAlign: "center" }]}>{rest}</Text>
             </View>
-
             <ButtonMedium
-              onPress={() => count < 100 && setCount((c) => c + 1)}
+              onPress={() => rest < 100 && setRest((c) => c + 1)}
               text={"+"}
             />
           </View>
-
-          {/* Button to commit the tracked data */}
-          <ButtonCommit text="Commit" hasSelection={isSelectionMade} />
+          <ButtonCommit
+            text="Commit"
+            onPress={commitProgress}
+            hasSelection={reachedTop !== null}
+          />
         </View>
       )}
     </>

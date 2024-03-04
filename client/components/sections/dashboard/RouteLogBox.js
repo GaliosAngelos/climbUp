@@ -11,13 +11,13 @@ export default function RouteLogBox({
   route_name,
   level_of_difficulty,
   paused,
-  success,
+  reachedTop,
 }) {
   return (
     <>
       <View
         style={{
-          backgroundColor: success ? "#8FD78F" : "#F5BBBA",
+          backgroundColor: reachedTop ? "#8FD78F" : "#F5BBBA",
           marginTop: 15,
           borderRadius: 14,
           padding: 12,

@@ -1,0 +1,1376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Stream via socket with multiple clients</title>
+<meta property="fb:admins" content="www.facebook.com/profile.php?id=100002019234628" />
+<meta property="fb:appid" content="155935234801928" />
+<meta property="og:site_name" content="Welcome to python-forum.io" />
+<meta property="og:title" content="Stream via socket with multiple clients" />
+<meta property="og:description" content="The code that I have already works. What I do is create two servers and two clients to open two different codes with different ports, because when I use the same port I get an error. But, the problem is the problem is that two windows open and that m..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://python-forum.io/thread-35427.html" />
+<meta property="og:image" content="https://python-forum.io/images/facebook.png" />
+<meta property="og:image" content="https://secure.gravatar.com/avatar/e5e9b9b5e7b992dd7db6843dd6b6a4b7?s=100&d=retro&f=y" />
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="/cdn-cgi/apps/head/iBueSspQFqMkcZ7Yy3hzKXYV4wA.js"></script><link rel="alternate" type="application/rss+xml" title="Latest Threads (RSS 2.0)" href="https://python-forum.io/syndication.php" />
+<link rel="alternate" type="application/atom+xml" title="Latest Threads (Atom 1.0)" href="https://python-forum.io/syndication.php?type=atom1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="description" content="The official dedicated python forum" />
+<meta name="keywords" content="python, forum, IDE, help, homework, beginner, programming, tutorial" />
+<script type="text/javascript" src="https://python-forum.io/jscripts/jquery.js?ver=1824"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/jquery.plugins.min.js?ver=1821"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/general.js?ver=1821"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/syntaxhighlighter.js?date=20210611"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87715851-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<link href="https://codeseven.github.io/toastr/build/toastr.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+<link href="https://python-forum.io/images/at/css/style.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/global.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/modcp.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/css3.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/postbit.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/sceditor.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/alerts.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/theme.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/cache/themes/theme49/custom1.css" />
+<link type="text/css" rel="stylesheet" href="https://python-forum.io/css.php?stylesheet%5B0%5D=234&stylesheet%5B1%5D=235&stylesheet%5B2%5D=278&stylesheet%5B3%5D=297&stylesheet%5B4%5D=304" />
+<script type="text/javascript">
+<!--
+	lang.unknown_error = "An unknown error has occurred.";
+
+	lang.select2_match = "One result is available, press enter to select it.";
+	lang.select2_matches = "{1} results are available, use up and down arrow keys to navigate.";
+	lang.select2_nomatches = "No matches found";
+	lang.select2_inputtooshort_single = "Please enter one or more character";
+	lang.select2_inputtooshort_plural = "Please enter {1} or more characters";
+	lang.select2_inputtoolong_single = "Please delete one character";
+	lang.select2_inputtoolong_plural = "Please delete {1} characters";
+	lang.select2_selectiontoobig_single = "You can only select one item";
+	lang.select2_selectiontoobig_plural = "You can only select {1} items";
+	lang.select2_loadmore = "Loading more results&hellip;";
+	lang.select2_searching = "Searching&hellip;";
+
+	var templates = {
+		modal: '<div class=\"modal fade\">\
+	<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\
+    <div class=\"modal-content\">\
+	<div style=\"overflow-y: auto; max-height: 400px;\">\
+		<table border=\"0\" cellspacing=\"0\" cellpadding=\"5\" class=\"tborder\">\
+			<tr>\
+				<td class=\"thead\" colspan=\"2\"><strong>__message__</strong></td>\
+			</tr>\
+			<tr>\
+				<td colspan=\"2\" class=\"trow1\">\
+				<div style=\"text-align: center\" class=\"modal_buttons\">__buttons__</div></td>\
+			</tr>\
+		</table>\
+	</div>\
+</div>\
+	</div></div>',
+		modal_button: '<input type=\"submit\" class=\"button\" value=\"__title__\"/>&nbsp;'
+	};
+
+	var cookieDomain = ".python-forum.io";
+	var cookiePath = "/";
+	var cookiePrefix = "py";
+	var cookieSecureFlag = "0";
+	var deleteevent_confirm = "Are you sure you want to delete this event?";
+	var removeattach_confirm = "Are you sure you want to remove the selected attachment from this post?";
+	var loading_text = 'Loading. <br />Please Wait&hellip;';
+	var saving_changes = 'Saving changes&hellip;';
+	var use_xmlhttprequest = "1";
+	var my_post_key = "8f97912727031de0b27b6fb27802860a";
+	var rootpath = "https://python-forum.io";
+	var imagepath = "https://python-forum.io/images";
+  	var yes_confirm = "Yes";
+	var no_confirm = "No";
+	var MyBBEditor = null;
+	var spinner_image = "https://python-forum.io/images/spinner.gif";
+	var spinner = "<img src='" + spinner_image +"' alt='' />";
+	var modal_zindex = 9999;
+// -->
+</script>
+<script>
+	jQuery(function($) {
+    $(".clickedbuttons").hide();
+    $(".clickbutton").click(function() {
+        $(".sidebar").animate({height: "hide", opacity: 0}, 250,
+            function() {
+                $(".forums").animate({width: "100%"}, 250);
+            });
+        $(this).hide();
+        $(".clickedbuttons").show();
+        $.cookie("sidebar","collapsed", {expires: 365});
+        return false;
+    });
+    $(".clickedbuttons").click(function() {
+        $(".forums").animate({width: "65%"}, 250,
+            function() {
+                $(".sidebar").animate({height: "show", opacity: 1}, 250);
+            });
+        $(this).hide();
+        $(".clickbutton").show();
+        $.cookie("sidebar","expanded", {expires: 365});
+        return false;
+    });
+    if($.cookie("sidebar") == "collapsed") {
+        $(".clickbutton").hide();
+        $(".clickedbuttons").show();
+        $(".forums").css("width","100%");
+        $(".sidebar").hide();
+    };
+});
+</script><script type="text/javascript" src="https://python-forum.io/jscripts/like_system.min.js"></script><script language="javascript" type="text/javascript" src="https://python-forum.io/jscripts/myadvertisements.js"></script>
+
+<script type="text/javascript">
+<!--
+	var quickdelete_confirm = "Are you sure you want to delete this post?";
+	var quickrestore_confirm = "Are you sure you want to restore this post?";
+	var allowEditReason = "1";
+	lang.save_changes = "Save Changes";
+	lang.cancel_edit = "Cancel Edit";
+	lang.quick_edit_update_error = "There was an error editing your reply:";
+	lang.quick_reply_post_error = "There was an error posting your reply:";
+	lang.quick_delete_error = "There was an error deleting your reply:";
+	lang.quick_delete_success = "The post was deleted successfully.";
+	lang.quick_delete_thread_success = "The thread was deleted successfully.";
+	lang.quick_restore_error = "There was an error restoring your reply:";
+	lang.quick_restore_success = "The post was restored successfully.";
+	lang.editreason = "Edit Reason";
+	lang.post_deleted_error = "You can not perform this action to a deleted post.";
+	lang.softdelete_thread = "Soft Delete Thread";
+	lang.restore_thread = "Restore Thread";
+// -->
+</script>
+
+<script type="text/javascript" src="https://python-forum.io/jscripts/report.js?ver=1820"></script>
+<script src="https://python-forum.io/jscripts/jeditable/jeditable.min.js"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/thread.js?ver=1822"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/notemoderator.js"></script>
+<script type="text/javascript">
+<!--
+	lang.notemoderator_delete_error = "When you delete a note an error occurred:";
+	lang.notemoderator_delete_confirm = "Are you sure you want to delete this note?";
+	lang.notemoderator_has_been_deleted = "Note has been deleted.";
+// -->
+</script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/extendeduseradmininfo.js"></script><meta name="description" content="The code that I have already works. What I do is create two servers and two clients to open two different codes with different ports, because when I use the same port I get an error. But, the problem" />
+<link rel="canonical" href="https://python-forum.io/thread-35427.html" />
+</head>
+<body>
+
+<div class="header-mobile bg-primary header-mobile-fixed">
+<a href="https://python-forum.io/index.php"><img src="/images/tips/snowman_light.png" class="max-h-27px" alt="Python Forum" title="Python Forum" /></a>
+<div class="d-flex align-items-center">
+<button class="btn p-0 burger-icon burger-icon-left ml-4" id="header_mobile_toggle">
+<span></span>
+</button>
+<button class="btn p-0 ml-2" id="header_mobile_topbar_toggle">
+<span class="svg-icon svg-icon-xl">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+<path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+</g>
+</svg>
+</span>
+</button>
+</div>
+</div>
+<div class="d-flex flex-column flex-root">
+<div class="d-flex flex-row flex-column-fluid page">
+<div class="d-flex flex-column flex-row-fluid wrapper">
+<div class="header flex-column header-fixed">
+<div class="header-top">
+<div class="container">
+<div class="d-none d-lg-flex align-items-center mr-3">
+<a href="https://python-forum.io/index.php" class="mr-20"><img src="/images/tips/snowman_light.png" class="max-h-35px" alt="Python Forum" title="Python Forum" /></a>
+</div>
+<div class="topbar bg-primary">
+
+<div class="dropdown">
+<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+<div class="btn btn-icon btn-hover-transparent-white btn-lg btn-dropdown mr-1">
+<span class="svg-icon svg-icon-xl">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+<path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero" />
+</g>
+</svg>
+</span>
+</div>
+</div>
+<div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+<div class="quick-search quick-search-dropdown">
+<form action="https://python-forum.io/search.php" class="quick-search-form">
+<div class="input-group" id="search">
+<div class="input-group-prepend">
+<span class="input-group-text">
+<span class="svg-icon svg-icon-lg">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+<path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero" />
+</g>
+</svg>
+</span>
+</span>
+</div>
+<input name="keywords" type="text" class="form-control" placeholder="Search..." />
+<input type="hidden" name="action" value="do_search" />
+<input type="hidden" name="postthread" value="1" />
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
+<a href="https://python-forum.io/member.php?action=login" class="topbar-item" data-toggle="modal" data-target="#login-modal">
+<div class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1">
+<span class="svg-icon svg-icon-xl">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<rect fill="#000000" opacity="0.3" transform="translate(9.000000, 12.000000) rotate(-270.000000) translate(-9.000000, -12.000000) " x="8" y="6" width="2" height="12" rx="1" />
+<path d="M20,7.00607258 C19.4477153,7.00607258 19,6.55855153 19,6.00650634 C19,5.45446114 19.4477153,5.00694009 20,5.00694009 L21,5.00694009 C23.209139,5.00694009 25,6.7970243 25,9.00520507 L25,15.001735 C25,17.2099158 23.209139,19 21,19 L9,19 C6.790861,19 5,17.2099158 5,15.001735 L5,8.99826498 C5,6.7900842 6.790861,5 9,5 L10.0000048,5 C10.5522896,5 11.0000048,5.44752105 11.0000048,5.99956624 C11.0000048,6.55161144 10.5522896,6.99913249 10.0000048,6.99913249 L9,6.99913249 C7.8954305,6.99913249 7,7.89417459 7,8.99826498 L7,15.001735 C7,16.1058254 7.8954305,17.0008675 9,17.0008675 L21,17.0008675 C22.1045695,17.0008675 23,16.1058254 23,15.001735 L23,9.00520507 C23,7.90111468 22.1045695,7.00607258 21,7.00607258 L20,7.00607258 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(15.000000, 12.000000) rotate(-90.000000) translate(-15.000000, -12.000000) " />
+<path d="M16.7928932,9.79289322 C17.1834175,9.40236893 17.8165825,9.40236893 18.2071068,9.79289322 C18.5976311,10.1834175 18.5976311,10.8165825 18.2071068,11.2071068 L15.2071068,14.2071068 C14.8165825,14.5976311 14.1834175,14.5976311 13.7928932,14.2071068 L10.7928932,11.2071068 C10.4023689,10.8165825 10.4023689,10.1834175 10.7928932,9.79289322 C11.1834175,9.40236893 11.8165825,9.40236893 12.2071068,9.79289322 L14.5,12.0857864 L16.7928932,9.79289322 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.500000, 12.000000) rotate(-90.000000) translate(-14.500000, -12.000000) " />
+</g>
+</svg>
+</span>
+</div>
+</a><a href="https://python-forum.io/member.php?action=register" class="topbar-item">
+<div class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1">
+<span class="svg-icon svg-icon-xl">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+<path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+</g>
+</svg>
+</span>
+</div>
+</a>
+<script type="text/javascript">
+$("#quick_login input[name='url']").val($(location).attr('href'));
+</script>
+<div class="lower">
+<div class="wrapper">
+<ul class="menu user_links">
+<li><a href="https://python-forum.io/activethreads.php">View Active Threads</a></li>
+<li><a href="https://python-forum.io/search.php?action=getdaily">View Today's Posts</a></li> </ul>
+</div>
+<br class="clear" />
+</div>
+
+</div>
+</div>
+</div>
+<div class="header-bottom">
+<div class="container">
+<div class="header-navs header-navs-left" id="header_navs">
+<div class="tab-content">
+<div class="tab-pane py-5 p-lg-0 show active">
+<div id="header_menu" class="header-menu header-menu-mobile header-menu-layout-default header-menu-root-arrow">
+<ul class="menu-nav">
+<li class="menu-item menu-item-active"><a href="https://python-forum.io/index.php" class="menu-link"><span class="menu-text">Home</span></a></li>
+<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+<a href="javascript:;" class="menu-link menu-toggle">
+<span class="menu-text">Forums</span>
+<i class="fas fa-angle-down"></i>
+</a>
+<div class="menu-submenu menu-submenu-classic menu-submenu-left">
+<ul class="menu-subnav">
+<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+<a href="https://python-forum.io/search.php?action=getnew" class="menu-link">
+<span class="svg-icon menu-icon">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<circle fill="#000000" cx="6" cy="18" r="3" />
+<path d="M16.5,21 L13.5,21 C13.5,15.2010101 8.79898987,10.5 3,10.5 L3,7.5 C10.4558441,7.5 16.5,13.5441559 16.5,21 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+<path d="M22.5,21 L19.5,21 C19.5,12.163444 11.836556,4.5 3,4.5 L3,1.5 C13.4934102,1.5 22.5,10.5065898 22.5,21 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+</g>
+</svg>
+</span>
+<span class="menu-text">View New Posts</span>
+</a>
+</li>
+<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+<a href="https://python-forum.io/search.php?action=getdaily" class="menu-link">
+<span class="svg-icon menu-icon">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.98630124,11 4.48466491,11.0516454 4,11.1500272 L4,7 C4,5.8954305 4.8954305,5 6,5 L20,5 C21.1045695,5 22,5.8954305 22,7 L22,16 C22,17.1045695 21.1045695,18 20,18 L12.9835977,18 Z M19.1444251,6.83964668 L13,10.1481833 L6.85557487,6.83964668 C6.4908718,6.6432681 6.03602525,6.77972206 5.83964668,7.14442513 C5.6432681,7.5091282 5.77972206,7.96397475 6.14442513,8.16035332 L12.6444251,11.6603533 C12.8664074,11.7798822 13.1335926,11.7798822 13.3555749,11.6603533 L19.8555749,8.16035332 C20.2202779,7.96397475 20.3567319,7.5091282 20.1603533,7.14442513 C19.9639747,6.77972206 19.5091282,6.6432681 19.1444251,6.83964668 Z" fill="#000000" />
+<path d="M8.4472136,18.1055728 C8.94119209,18.3525621 9.14141644,18.9532351 8.89442719,19.4472136 C8.64743794,19.9411921 8.0467649,20.1414164 7.5527864,19.8944272 L5,18.618034 L5,14.5 C5,13.9477153 5.44771525,13.5 6,13.5 C6.55228475,13.5 7,13.9477153 7,14.5 L7,17.381966 L8.4472136,18.1055728 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+</g>
+</svg>
+</span>
+<span class="menu-text">View Today's Posts</span>
+</a>
+</li>
+<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+<a href="https://python-forum.io/search.php?action=do_search&author=&matchusername=1&showresults=threads&postthread=1" class="menu-link">
+<span class="menu-text">My Discussions</span>
+</a>
+</li>
+<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+<a href="https://python-forum.io/search.php?action=unanswered" class="menu-link">
+<span class="menu-text">Unanswered Posts</span>
+</a>
+</li>
+<li id="unreadCounter" class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+<a href="https://python-forum.io/search.php?action=unreads" class="menu-link">
+<span class="menu-text">Unread Posts </span>
+</a>
+</li>
+<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+<a href="https://python-forum.io/activethreads.php?days=1&hours=0&mins=0&date=Now&order=descending&sort=num_posts&go=Go" class="menu-link">
+<span class="menu-text">Active Threads</span>
+</a>
+</li>
+<div class="separator separator-dashed"></div>
+<li class="menu-item" aria-haspopup="true">
+<a href="misc.php?action=markread&my_post_key=8f97912727031de0b27b6fb27802860a" class="menu-link">
+<span class="svg-icon menu-icon">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3" />
+<path d="M11.1750002,14.75 C10.9354169,14.75 10.6958335,14.6541667 10.5041669,14.4625 L8.58750019,12.5458333 C8.20416686,12.1625 8.20416686,11.5875 8.58750019,11.2041667 C8.97083352,10.8208333 9.59375019,10.8208333 9.92916686,11.2041667 L11.1750002,12.45 L14.3375002,9.2875 C14.7208335,8.90416667 15.2958335,8.90416667 15.6791669,9.2875 C16.0625002,9.67083333 16.0625002,10.2458333 15.6791669,10.6291667 L11.8458335,14.4625 C11.6541669,14.6541667 11.4145835,14.75 11.1750002,14.75 Z" fill="#000000" />
+</g>
+</svg>
+</span>
+<span class="menu-text">Mark all forums read</span>
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="menu-item"><a href="https://python-forum.io/showteam.php" class="menu-link"><span class="menu-text">Staff List</span></a></li>
+<li class="menu-item"><a href="https://python-forum.io/memberlist.php" class="menu-link"><span class="menu-text">Member List</span></a></li>
+<li class="menu-item"><a href="https://python-forum.io/misc.php?action=help" class="menu-link"><span class="menu-text">Help</span></a></li>
+
+<li class="menu-item"><a href="https://python-forum.io/calendar.php" class="menu-link"><span class="menu-text">Calendar</span></a></li>
+
+
+<li class="menu-item"><a href="https://python-forum.io/search.php" class="menu-link"><span class="menu-text">Search</span></a></li>
+
+<li class="menu-item"><a href="https://python-forum.io/stats.php" class="menu-link"><span class="menu-text">Statistics</span></a></li>
+<li class="menu-item"><a href="https://python-forum.io/misc.php?page=interpreter" class="menu-link"><span class="menu-text">Interpreter</span></a></li>
+<li class="menu-item"><a href="https://python-forum.io/misc.php?page=chat" class="menu-link"><span class="menu-text">IRC</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="content d-flex flex-column flex-column-fluid" id="content">
+<div class="container">
+</div>
+
+<div class="subheader py-2 subheader-transparent" id="subheader">
+<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+<div class="d-flex align-items-center flex-wrap mr-1">
+<div class="d-flex align-items-baseline flex-wrap mr-5">
+<h5 class="text-dark font-weight-bold my-1 mr-5">
+<span class="active">Stream via socket with multiple clients</span>
+</h5>
+<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+
+<li class="breadcrumb-item"><a href="https://python-forum.io/index.php" class="text-muted">Python Forum</a></li>
+
+<li class="breadcrumb-item"><a href="forum-7.html" class="text-muted">Python Coding</a></li>
+
+<li class="breadcrumb-item"><a href="forum-8-page-181.html" class="text-muted">General Coding Help</a></li>
+
+</ul>
+</div>
+</div>
+<div class="align-items-center sidebar-button">
+<a class="btn btn-icon clickbutton" title="Close Side Bar">
+<span class="svg-icon svg-icon-primary svg-icon-2x">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<rect fill="#000000" opacity="0.3" transform="translate(14.000000, 12.000000) rotate(-90.000000) translate(-14.000000, -12.000000) " x="13" y="5" width="2" height="14" rx="1" />
+<rect fill="#000000" opacity="0.3" x="3" y="3" width="2" height="18" rx="1" />
+<path d="M11.7071032,15.7071045 C11.3165789,16.0976288 10.6834139,16.0976288 10.2928896,15.7071045 C9.90236532,15.3165802 9.90236532,14.6834152 10.2928896,14.2928909 L16.2928896,8.29289093 C16.6714686,7.914312 17.281055,7.90106637 17.675721,8.26284357 L23.675721,13.7628436 C24.08284,14.136036 24.1103429,14.7686034 23.7371505,15.1757223 C23.3639581,15.5828413 22.7313908,15.6103443 22.3242718,15.2371519 L17.0300721,10.3841355 L11.7071032,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(16.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-16.999999, -11.999997) " />
+</g>
+</svg>
+</span>
+</a>
+<a class="btn btn-icon clickedbuttons" title="Open Side Bar">
+<span class="svg-icon svg-icon-danger svg-icon-2x">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<rect fill="#000000" opacity="0.3" transform="translate(10.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-10.000000, -12.000000) " x="9" y="5" width="2" height="14" rx="1" />
+<rect fill="#000000" opacity="0.3" x="19" y="3" width="2" height="18" rx="1" />
+<path d="M1.7071045,15.7071045 C1.3165802,16.0976288 0.683415225,16.0976288 0.292890933,15.7071045 C-0.0976333589,15.3165802 -0.0976333589,14.6834152 0.292890933,14.2928909 L6.29289093,8.29289093 C6.67146987,7.914312 7.28105631,7.90106637 7.67572234,8.26284357 L13.6757223,13.7628436 C14.0828413,14.136036 14.1103443,14.7686034 13.7371519,15.1757223 C13.3639594,15.5828413 12.7313921,15.6103443 12.3242731,15.2371519 L7.03007346,10.3841355 L1.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(7.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-7.000001, -11.999997) " />
+</g>
+</svg>
+</span>
+</a>
+</div>
+</div>
+</div>
+
+<div class="d-flex flex-column-fluid">
+<div class="container">
+
+<div class="float_left">
+</div>
+<div class="float_right mb-5">
+</div>
+
+<div style="margin-top: 6px; padding-right: 10px;" class="float_right d-none d-sm-none d-md-table-cell">
+<script type="text/javascript">
+		<!--
+			lang.ratings_update_error = "There was an error updating the rating.";
+		// -->
+		</script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/rating.js?ver=1821"></script>
+<div class="inline_rating">
+<strong class="float_left" style="padding-right: 10px;">Thread Rating:</strong>
+<ul class="star_rating star_rating_notrated" id="rating_thread_35427">
+<li style="width: 0%" class="current_rating" id="current_rating_35427">0 Vote(s) - 0 Average</li>
+<li><a class="one_star" title="1 star out of 5" href="./ratethread.php?tid=35427&amp;rating=1&amp;my_post_key=8f97912727031de0b27b6fb27802860a">1</a></li>
+<li><a class="two_stars" title="2 stars out of 5" href="./ratethread.php?tid=35427&amp;rating=2&amp;my_post_key=8f97912727031de0b27b6fb27802860a">2</a></li>
+<li><a class="three_stars" title="3 stars out of 5" href="./ratethread.php?tid=35427&amp;rating=3&amp;my_post_key=8f97912727031de0b27b6fb27802860a">3</a></li>
+<li><a class="four_stars" title="4 stars out of 5" href="./ratethread.php?tid=35427&amp;rating=4&amp;my_post_key=8f97912727031de0b27b6fb27802860a">4</a></li>
+<li><a class="five_stars" title="5 stars out of 5" href="./ratethread.php?tid=35427&amp;rating=5&amp;my_post_key=8f97912727031de0b27b6fb27802860a">5</a></li>
+</ul>
+</div>
+</div>
+
+<table border="0" cellspacing="0" cellpadding="5" class="tborder tfixed clear">
+<tr>
+<td class="thead">
+<div class="float_right">
+<span class="smalltext"><strong><a href="javascript:void(0)" id="thread_modes">Thread Modes</a></strong></span>
+</div>
+<div>
+<strong>Stream via socket with multiple clients</strong>
+</div>
+</td>
+</tr>
+<tr><td id="posts_container">
+<div id="posts">
+
+<a name="pid149367" id="pid149367"></a>
+<div class="post " style id="post_149367">
+<div class="post_author">
+
+<div class="author_avatar">
+<a href="user-32054.html" title>
+<div class="symbol symbol-75">
+<div class="symbol-label" style="background-image: url('https://secure.gravatar.com/avatar/e5e9b9b5e7b992dd7db6843dd6b6a4b7?s=100&amp;d=retro&amp;f=y')!important" width="55" height="55"></div>
+
+<i class="symbol-badge bg-danger"></i>
+
+</div>
+</a>
+</div>
+
+<div class="author_information">
+<strong><span class="largetext"><a href="https://python-forum.io/user-32054.html">principemestizo</a></span></strong><br/>
+<span class="smalltext">
+Unladen Swallow<br/>
+<span class="svg-icon svg-icon-primary"></span>
+</span>
+</div>
+<div class="author_statistics">
+
+<div class="post_statistic">Posts: <span class="float_right">2<span></div>
+<div class="post_statistic">Threads: <span class="float_right">2<span></div>
+<div class="post_statistic">Joined: <span class="float_right">Oct 2021</span></div>
+
+<div class="post_statistic">Reputation: <span class="float_right">
+<a href="reputation.php?uid=32054"><strong class="reputation_neutral">0</strong></a>
+</span></div>
+
+
+</div>
+</div>
+<div class="post_content">
+<div class="post_head">
+
+<div class="float_right" style="vertical-align: top">
+<strong><a href="thread-35427-post-149367.html#pid149367" title="Stream via socket with multiple clients">#1</a></strong>
+</div>
+
+<span class="post_date">Nov-01-2021, 06:25 PM <span class="post_edit" id="edited_by_149367"></span></span>
+</div>
+<div class="post_body scaleimages" id="pid_149367">
+The code that I have already works. What I do is create two servers and two clients to open two different codes with different ports, because when I use the same port I get an error. But, the problem is the problem is that two windows open and that makes me think that consumption is higher (or am I wrong?). What I am looking for is to consume as little as possible, that is, to have one server.py and two clients (client-1.py and cliente-2.py).<br/>
+<br/>
+My code is:<br/>
+<br/>
+server.py<br/>
+<br/>
+<pre class="brush: python" title="Python Code:">import socket
+import cv2
+import pickle
+import struct 
+
+HOST=''
+PORT=8485
+
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+print('Socket created')
+
+s.bind((HOST,PORT))
+print('Socket bind complete')
+s.listen(10)
+print('Socket now listening')
+
+conn,addr=s.accept()
+
+data = b""
+payload_size = struct.calcsize("&gt;L")
+print("payload_size: {}".format(payload_size))
+while True:
+    while len(data) &lt; payload_size:
+        print("Recv: {}".format(len(data)))
+        data += conn.recv(4096)
+
+    print("Done Recv: {}".format(len(data)))
+    packed_msg_size = data[:payload_size]
+    data = data[payload_size:]
+    msg_size = struct.unpack("&gt;L", packed_msg_size)[0]
+    print("msg_size: {}".format(msg_size))
+    while len(data) &lt; msg_size:
+        data += conn.recv(4096)
+    frame_data = data[:msg_size]
+    data = data[msg_size:]
+
+    frame=pickle.loads(frame_data, fix_imports=True, encoding="bytes")
+    frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
+    cv2.imshow('ImageWindow',frame)
+    cv2.waitKey(1)</pre>client.py<br/>
+<br/>
+<pre class="brush: python" title="Python Code:">import cv2
+import socket
+import struct
+import pickle
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect(('0.0.0.0', 8485))
+connection = client_socket.makefile('wb')
+
+cam = cv2.VideoCapture(0)
+
+cam.set(3, 320)
+cam.set(4, 240)
+
+img_counter = 0
+
+encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+
+while True:
+    ret, frame = cam.read()
+    result, frame = cv2.imencode('.jpg', frame, encode_param)
+#    data = zlib.compress(pickle.dumps(frame, 0))
+    data = pickle.dumps(frame, 0)
+    size = len(data)
+
+
+    print("{}: {}".format(img_counter, size))
+    client_socket.sendall(struct.pack("&gt;L", size) + data)
+    img_counter += 1
+    
+    c = cv2.waitKey(1)
+    if c == 27:
+        break
+
+cam.release()
+cv2.destroyAllWindows()</pre>As I said above, for the client-2.py I only use another port (the one that I previously write on the server).
+<div id="notemoderator_post_149367" style="width: 100%;"></div>
+
+</div>
+<div class="post_meta" id="post_meta_149367">
+
+<div class="rin-qc" style="display: none;" id="qr_pid_149367"><span>Reply</span></div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		quick_quote(149367,'principemestizo',1635791138);
+	});
+</script>
+
+<div class="float_right">
+</div>
+</div>
+</div>
+<div class="post_controls">
+<div class="postbit_buttons author_buttons float_left">
+
+<a href="search.php?action=finduser&amp;uid=32054" title="Find all posts by this user" class="postbit_find"><span>Find</span></a>
+
+</div>
+<div class="postbit_buttons post_management_buttons float_right">
+
+<a href="newreply.php?tid=35427&amp;replyto=149367" title="Quote this message in a reply" class="postbit_quote postbit_mirage"><span>Reply</span></a>
+
+</div>
+</div>
+</div>
+
+</div>
+</td></tr>
+<tr>
+<td class="tfoot">
+
+<div class="float_right">
+<form action="search.php" method="post">
+<input type="hidden" name="action" value="thread" />
+<input type="hidden" name="tid" value="35427" />
+<input type="text" name="keywords" value="Enter Keywords" onfocus="if(this.value == 'Enter Keywords') { this.value = ''; }" onblur="if(this.value=='') { this.value='Enter Keywords'; }" class="textbox" size="25" />
+<input type="submit" class="button" value="Search Thread" />
+</form>
+</div>
+
+<div>
+<a href="thread-35427-nextoldest.html" title="Next Oldest" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="fas fa-angle-double-left icon-sm"></i></a>
+<a href="thread-35427-nextnewest.html" title="Next Newest" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="fas fa-angle-double-right icon-sm"></i></a>
+</div>
+</td>
+</tr>
+</table>
+<div class="float_left">
+</div>
+<div style="padding-top: 4px;" class="float_right">
+</div>
+<br class="clear" />
+
+<br/>
+<table border="0" cellspacing="0" cellpadding="5" class="tborder">
+<tr>
+<td class="thead" align="center" colspan="6"><strong>Possibly Related Threads&hellip;</strong></td>
+</tr>
+<tr>
+<td class="tcat" align="center" colspan="2"><span class="smalltext"><strong>Thread</strong></span></td>
+<td class="tcat" align="center"><span class="smalltext"><strong>Author</strong></span></td>
+<td class="tcat" align="center"><span class="smalltext"><strong>Replies</strong></span></td>
+<td class="tcat" align="center"><span class="smalltext"><strong>Views</strong></span></td>
+<td class="tcat" align="center"><span class="smalltext"><strong>Last Post</strong></span></td>
+</tr>
+
+<tr>
+<td align="center" class="trow1" width="2%">&nbsp;</td>
+<td class="trow1"><a href="thread-31878.html">Microphone stream manipulation</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/user-28798.html">Talking2442</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/misc.php?action=whoposted&tid=31878" onclick="MyBB.whoPosted(31878); return false;">1</a></td>
+<td align="center" class="trow1">2,624</td>
+<td class="trow1" style="white-space: nowrap">
+<span class="smalltext">Nov-19-2023, 02:08 PM<br/>
+<a href="thread-31878-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-36749.html">palumanic</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow2" width="2%">&nbsp;</td>
+<td class="trow2"><a href="thread-40578.html">EEG stream data with mne and brainfolw</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/user-36078.html">PaulC</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/misc.php?action=whoposted&tid=40578" onclick="MyBB.whoPosted(40578); return false;">0</a></td>
+<td align="center" class="trow2">424</td>
+<td class="trow2" style="white-space: nowrap">
+<span class="smalltext">Aug-22-2023, 03:17 AM<br/>
+<a href="thread-40578-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-36078.html">PaulC</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow1" width="2%">&nbsp;</td>
+<td class="trow1"><a href="thread-37552.html">Check if clients are online with ips stored in json [SOLVED]</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/user-31315.html">AlphaInc</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/misc.php?action=whoposted&tid=37552" onclick="MyBB.whoPosted(37552); return false;">6</a></td>
+<td align="center" class="trow1">2,299</td>
+<td class="trow1" style="white-space: nowrap">
+<span class="smalltext">Jun-27-2022, 08:28 AM<br/>
+<a href="thread-37552-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-31315.html">AlphaInc</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow2" width="2%">&nbsp;</td>
+<td class="trow2"><a href="thread-32967.html">Decoding a serial stream</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/user-30348.html">AKGentile1963</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/misc.php?action=whoposted&tid=32967" onclick="MyBB.whoPosted(32967); return false;">7</a></td>
+<td align="center" class="trow2">8,077</td>
+<td class="trow2" style="white-space: nowrap">
+<span class="smalltext">Mar-20-2021, 08:07 PM<br/>
+<a href="thread-32967-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-23001.html">deanhystad</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow1" width="2%">&nbsp;</td>
+<td class="trow1"><a href="thread-31312.html">Duplex Named Pipe with Python Server and C# Clients</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/user-28503.html">raybowman</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/misc.php?action=whoposted&tid=31312" onclick="MyBB.whoPosted(31312); return false;">1</a></td>
+<td align="center" class="trow1">2,295</td>
+<td class="trow1" style="white-space: nowrap">
+<span class="smalltext">Dec-03-2020, 09:58 PM<br/>
+<a href="thread-31312-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-6440.html">Gribouillis</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow2" width="2%">&nbsp;</td>
+<td class="trow2"><a href="thread-29122.html">Best Video Quality And Stream</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/user-26705.html">Harshil</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/misc.php?action=whoposted&tid=29122" onclick="MyBB.whoPosted(29122); return false;">2</a></td>
+<td align="center" class="trow2">2,141</td>
+<td class="trow2" style="white-space: nowrap">
+<span class="smalltext">Aug-19-2020, 09:03 AM<br/>
+<a href="thread-29122-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-26705.html">Harshil</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow1" width="2%">&nbsp;</td>
+<td class="trow1"><a href="thread-21137.html">stream audio from pc to pc</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/user-5092.html">floatingshed</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/misc.php?action=whoposted&tid=21137" onclick="MyBB.whoPosted(21137); return false;">2</a></td>
+<td align="center" class="trow1">1,889</td>
+<td class="trow1" style="white-space: nowrap">
+<span class="smalltext">Sep-16-2019, 03:45 PM<br/>
+<a href="thread-21137-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-5092.html">floatingshed</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow2" width="2%">&nbsp;</td>
+<td class="trow2"><a href="thread-20998.html">pi camera stream is upside down</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/user-16354.html">delta1071</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/misc.php?action=whoposted&tid=20998" onclick="MyBB.whoPosted(20998); return false;">3</a></td>
+<td align="center" class="trow2">5,637</td>
+<td class="trow2" style="white-space: nowrap">
+<span class="smalltext">Sep-11-2019, 11:35 AM<br/>
+<a href="thread-20998-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-1.html">metulburr</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow1" width="2%">&nbsp;</td>
+<td class="trow1"><a href="thread-20102.html">Saving and accessing data from different clients</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/user-7627.html">SheeppOSU</a></td>
+<td align="center" class="trow1"><a href="https://python-forum.io/misc.php?action=whoposted&tid=20102" onclick="MyBB.whoPosted(20102); return false;">1</a></td>
+<td align="center" class="trow1">1,913</td>
+<td class="trow1" style="white-space: nowrap">
+<span class="smalltext">Jul-28-2019, 02:15 AM<br/>
+<a href="thread-20102-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-1.html">metulburr</a></span>
+</td>
+</tr>
+
+<tr>
+<td align="center" class="trow2" width="2%">&nbsp;</td>
+<td class="trow2"><a href="thread-6033.html">Need help to read a gzip stream...</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/user-5086.html">pythonchakri</a></td>
+<td align="center" class="trow2"><a href="https://python-forum.io/misc.php?action=whoposted&tid=6033" onclick="MyBB.whoPosted(6033); return false;">5</a></td>
+<td align="center" class="trow2">4,018</td>
+<td class="trow2" style="white-space: nowrap">
+<span class="smalltext">Jun-07-2019, 02:33 AM<br/>
+<a href="thread-6033-lastpost.html">Last Post</a>: <a href="https://python-forum.io/user-589.html">heiner55</a></span>
+</td>
+</tr>
+
+</table>
+
+<div class="mt-5">
+
+<div class="alert alert-custom alert-white alert-shadow fade show gutter-b" role="alert">
+<div class="alert-icon">
+<span class="svg-icon svg-icon-primary svg-icon-xl">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24"></rect>
+<path d="M14.2330207,14.3666907 L16.3111786,18.8233147 C16.4278814,19.0735846 16.3196038,19.3710749 16.0693338,19.4877777 L14.2567182,20.3330142 C14.0064483,20.449717 13.708958,20.3414394 13.5922552,20.0911694 L11.4668267,15.5331733 L8.85355339,18.1464466 C8.7597852,18.2402148 8.63260824,18.2928932 8.5,18.2928932 C8.22385763,18.2928932 8,18.0690356 8,17.7928932 L8,5.13027585 C8,5.00589283 8.04636089,4.88597544 8.13002996,4.79393946 C8.31578343,4.58961065 8.63200759,4.57455235 8.8363364,4.76030582 L18.1424309,13.2203917 C18.2368163,13.3061967 18.2948385,13.424831 18.3046218,13.5520135 C18.3258009,13.8273425 18.1197718,14.0677099 17.8444428,14.088889 L14.2330207,14.3666907 Z" fill="#000000"></path>
+</g>
+</svg>
+</span>
+</div>
+<div class="alert-text">Users browsing this thread: 1 Guest(s)</div>
+</div>
+
+
+</div>
+<br/>
+<div class="float_left d-none d-sm-none d-md-table-cell">
+<ul class="thread_tools">
+
+<li class="printable"><a href="printthread.php?tid=35427">View a Printable Version</a></li>
+
+</ul>
+</div>
+<div class="float_right" style="text-align: right;">
+
+<form action="forumdisplay.php" method="get">
+<span class="smalltext"><strong>Forum Jump:</strong></span>
+<select name="fid" class="forumjump">
+<option value="-4">Private Messages</option>
+<option value="-3">User Control Panel</option>
+<option value="-5">Who's Online</option>
+<option value="-2">Search</option>
+<option value="-1">Forum Home</option>
+
+<option value="7"> Python Coding</option>
+
+<option value="8" selected="selected">-- General Coding Help</option>
+
+<option value="44">-- Data Science</option>
+
+<option value="9">-- Homework</option>
+
+<option value="10">-- GUI</option>
+
+<option value="11">-- Game Development</option>
+
+<option value="12">-- Networking</option>
+
+<option value="13">-- Web Scraping &amp; Web Development</option>
+
+<option value="1"> General</option>
+
+<option value="31">-- News and Discussions</option>
+
+<option value="4">-- Tutorials</option>
+
+<option value="21">---- Tutorial Requests and Submissions</option>
+
+<option value="41">---- Python Installation and Execution</option>
+
+<option value="40">---- Fundamentals</option>
+
+<option value="42">---- Common pitfalls and what to do</option>
+
+<option value="43">---- Web Scraping</option>
+
+<option value="35">---- Web Tutorials</option>
+
+<option value="34">---- GUI tutorials</option>
+
+<option value="33">---- Game Tutorials</option>
+
+<option value="36">---- Networking Tutorials</option>
+
+<option value="5">-- Code sharing</option>
+
+<option value="46">-- Code Review</option>
+
+<option value="6">-- Jobs</option>
+
+<option value="23"> Forum &amp; Off Topic</option>
+
+<option value="26">-- Board</option>
+
+<option value="45">---- Weekly Top Picks</option>
+
+<option value="27">-- Bar</option>
+
+</select>
+
+<input type="submit" class="btn btn-secondary btn-sm" value="Go" />
+
+</form>
+<script type="text/javascript">
+$(".forumjump").on('change', function() {
+	var option = $(this).val();
+
+	if(option < 0)
+	{
+		window.location = 'forumdisplay.php?fid='+option;
+	}
+	else
+	{
+		window.location = 'forum-'+option+'.html';
+	}
+});
+</script>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="footer bg-white py-4 d-flex flex-lg-column" id="footer">
+<div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+<div class="text-dark order-2 order-md-1">
+Powered By <a href="https://mybb.com" target="_blank">MyBB</a>, &copy; <span class="text-muted font-weight-bold mr-2">2020 Designed by</span><a href="https://community.mybb.com/thread-229223.html" target="_blank">rain</a>.
+</div>
+<div class="nav nav-dark order-1 order-md-2">
+<a href="stats.php" class="nav-link pr-3 pl-0">Forum Stats</a>
+
+<a href="https://python-forum.io/contact.php" target="_blank" class="nav-link pr-3 pl-0">Contact Us</a>
+
+<a href="https://python-forum.io/archive/index.php/thread-35427.html" target="_blank" class="nav-link px-3">Lite (Archive) Mode</a>
+<a href="https://python-forum.io/misc.php?action=syndication" target="_blank" class="nav-link pl-3 pr-0">RSS Syndication</a>
+
+<div class="theme">
+<form method="POST" action="/showthread.php" id="theme_select" class="form-inline">
+<input type="hidden" name="tid" value="35427" />
+<input type="hidden" name="my_post_key" value="8f97912727031de0b27b6fb27802860a" />
+
+<select name="theme" onchange="MyBB.changeTheme();" class="form-control ml-5 mr-5">
+<optgroup label="Quick Theme Select">
+
+<option value="50">Dark</option>
+
+<option value="49">Light</option>
+
+</optgroup>
+</select>
+
+
+<input type="submit" class="btn btn-secondary btn-sm" value="Go" />
+
+</form>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="quick_user" class="offcanvas offcanvas-right p-10">
+<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
+<h3 class="font-weight-bold m-0">User Panel
+<small class="text-muted font-size-sm ml-2"> Messages</small>
+</h3>
+<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="quick_user_close">
+<i class="fas fa-times icon-md text-muted"></i>
+</a>
+</div>
+<div class="offcanvas-content pr-5 mr-n5">
+<div class="d-flex align-items-center mt-5">
+<div class="symbol symbol-100 mr-5">
+<div class="symbol-label"><img class="symbol-label" src></div>
+<i class="symbol-badge bg-success"></i>
+</div>
+<div class="d-flex flex-column">
+<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"></a>
+<div class="text-muted mt-1"></div>
+<div class="navi mt-2">
+<a href="https://python-forum.io/member.php?action=logout&amp;logoutkey=" title="Hope to see you again" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Log Out</a>
+</div>
+</div>
+</div>
+<div class="separator separator-dashed mt-8 mb-5"></div>
+<div class="navi navi-spacer-x-0 p-0">
+<a href="https://python-forum.io/member.php?action=profile&uid=0" class="navi-item">
+<div class="navi-link">
+<div class="symbol symbol-40 bg-light mr-3">
+<div class="symbol-label">
+<span class="svg-icon svg-icon-md svg-icon-success">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M6,2 L18,2 C19.6568542,2 21,3.34314575 21,5 L21,19 C21,20.6568542 19.6568542,22 18,22 L6,22 C4.34314575,22 3,20.6568542 3,19 L3,5 C3,3.34314575 4.34314575,2 6,2 Z M12,11 C13.1045695,11 14,10.1045695 14,9 C14,7.8954305 13.1045695,7 12,7 C10.8954305,7 10,7.8954305 10,9 C10,10.1045695 10.8954305,11 12,11 Z M7.00036205,16.4995035 C6.98863236,16.6619875 7.26484009,17 7.4041679,17 C11.463736,17 14.5228466,17 16.5815,17 C16.9988413,17 17.0053266,16.6221713 16.9988413,16.5 C16.8360465,13.4332455 14.6506758,12 11.9907452,12 C9.36772908,12 7.21569918,13.5165724 7.00036205,16.4995035 Z" fill="#000000" />
+</g>
+</svg>
+</span>
+</div>
+</div>
+<div class="navi-text">
+<div class="font-weight-bold">My Profile</div>
+<div class="text-muted">Pay your profile a visit</div>
+</div>
+</div>
+</a>
+<a href="https://python-forum.io/usercp.php" class="navi-item">
+<div class="navi-link">
+<div class="symbol symbol-40 bg-light mr-3">
+<div class="symbol-label">
+<span class="svg-icon svg-icon-md svg-icon-primary">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
+<path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
+</g>
+</svg>
+</span>
+</div>
+</div>
+<div class="navi-text">
+<div class="font-weight-bold">User Control Panel</div>
+<div class="text-muted">Do some changes on your profile</div>
+</div>
+</div>
+</a>
+<a href="https://python-forum.io/private.php" class="navi-item">
+<div class="navi-link">
+<div class="symbol symbol-40 bg-light mr-3">
+<div class="symbol-label">
+<span class="svg-icon svg-icon-md svg-icon-warning">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000" />
+</g>
+</svg>
+</span>
+</div>
+</div>
+<div class="navi-text">
+<div class="font-weight-bold">My Messages</div>
+<div class="text-muted">View private messages
+<span class="label label-light-danger label-inline font-weight-bold"> unread</span>
+</div>
+</div>
+</div>
+</a>
+<a href="https://python-forum.io/usercp.php?action=avatar" class="navi-item">
+<div class="navi-link">
+<div class="symbol symbol-40 bg-light mr-3">
+<div class="symbol-label">
+<span class="svg-icon svg-icon-md svg-icon-danger">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<rect fill="#000000" opacity="0.3" x="2" y="4" width="20" height="16" rx="2" />
+<polygon fill="#000000" opacity="0.3" points="4 20 10.5 11 17 20" />
+<polygon fill="#000000" points="11 20 15.5 14 20 20" />
+<circle fill="#000000" opacity="0.3" cx="18.5" cy="8.5" r="1.5" />
+</g>
+</svg>
+</span>
+</div>
+</div>
+<div class="navi-text">
+<div class="font-weight-bold">Avatar</div>
+<div class="text-muted">Change avatar</div>
+</div>
+</div>
+</a>
+<a href="https://python-forum.io/usercp.php?action=editsig" class="navi-item">
+<div class="navi-link">
+<div class="symbol symbol-40 bg-light mr-3">
+<div class="symbol-label">
+<span class="svg-icon svg-icon-md svg-icon-dark-75">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<path d="M4.85714286,1 L11.7364114,1 C12.0910962,1 12.4343066,1.12568431 12.7051108,1.35473959 L17.4686994,5.3839416 C17.8056532,5.66894833 18,6.08787823 18,6.52920201 L18,19.0833333 C18,20.8738751 17.9795521,21 16.1428571,21 L4.85714286,21 C3.02044787,21 3,20.8738751 3,19.0833333 L3,2.91666667 C3,1.12612489 3.02044787,1 4.85714286,1 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+<path d="M6.85714286,3 L14.7364114,3 C15.0910962,3 15.4343066,3.12568431 15.7051108,3.35473959 L20.4686994,7.3839416 C20.8056532,7.66894833 21,8.08787823 21,8.52920201 L21,21.0833333 C21,22.8738751 20.9795521,23 19.1428571,23 L6.85714286,23 C5.02044787,23 5,22.8738751 5,21.0833333 L5,4.91666667 C5,3.12612489 5.02044787,3 6.85714286,3 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z" fill="#000000" fill-rule="nonzero" />
+</g>
+</svg>
+</span>
+</div>
+</div>
+<div class="navi-text">
+<div class="font-weight-bold">Signature</div>
+<div class="text-muted">Change signature</div>
+</div>
+</div>
+</a>
+</div>
+<div class="separator separator-dashed my-7"></div>
+<div>
+<h5 class="mb-5">Announcements</h5>
+<div class="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
+<span class="svg-icon svg-icon-warning mr-5">
+<span class="svg-icon svg-icon-lg">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000" />
+<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+</g>
+</svg>
+</span>
+</span>
+<div class="d-flex flex-column flex-grow-1 mr-2">
+<a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Announcement #1</a>
+<span class="text-muted font-size-sm">8/1/2020</span>
+</div>
+</div>
+<div class="d-flex align-items-center bg-light-success rounded p-5 gutter-b">
+<span class="svg-icon svg-icon-success mr-5">
+<span class="svg-icon svg-icon-lg">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
+<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+</g>
+</svg>
+</span>
+</span>
+<div class="d-flex flex-column flex-grow-1 mr-2">
+<a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Announcement #2</a>
+<span class="text-muted font-size-sm">8/2/2020</span>
+</div>
+</div>
+<div class="d-flex align-items-center bg-light-danger rounded p-5 gutter-b">
+<span class="svg-icon svg-icon-danger mr-5">
+<span class="svg-icon svg-icon-lg">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="0" y="0" width="24" height="24" />
+<path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000" />
+<path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3" />
+</g>
+</svg>
+</span>
+</span>
+<div class="d-flex flex-column flex-grow-1 mr-2">
+<a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">Announcement #3</a>
+<span class="text-muted font-size-sm">8/6/2020</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-content">
+<div class="login-form text-center p-7 position-relative overflow-hidden" style="background-image: url(images/at/images/bg-3.jpg)">
+<div class="d-flex flex-center mb-15">
+<img src="/images/tips/snowman_light.png" class="max-h-75px" alt>
+</div>
+<div class="login-signin">
+<div class="mb-20">
+<h3>Login to Python Forum</h3>
+<div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
+</div>
+<form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_login_signin_form" method="post" action="https://python-forum.io/member.php">
+<input name="action" type="hidden" value="do_login" />
+<input name="url" type="hidden" value />
+<input name="quick_login" type="hidden" value="1" />
+<input name="my_post_key" type="hidden" value="8f97912727031de0b27b6fb27802860a" />
+
+<div class="form-group mb-5 fv-plugins-icon-container">
+<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Username:" name="quick_username" id="quick_login_username" autocomplete="off">
+</div>
+<div class="form-group mb-5 fv-plugins-icon-container">
+<input class="form-control h-auto form-control-solid py-4 px-8" type="password" placeholder="Password:" id="quick_login_password" value name="quick_password">
+</div>
+<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
+<div class="checkbox-inline">
+<label class="checkbox m-0 text-muted">
+<input type="checkbox" name="quick_remember" id="quick_login_remember" value="yes" checked="checked">
+<span></span>Remember me</label>
+</div>
+<a href="https://python-forum.io/member.php?action=lostpw" id="login_forgot" class="text-muted text-hover-primary">Lost Password?</a>
+</div>
+<button class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4" value="Login">Login</button>
+
+</form>
+<div class="mt-10">
+<span class="opacity-70 mr-4">Don't have an account yet?</span>
+<a href="https://python-forum.io/member.php?action=register" class="text-muted text-hover-primary font-weight-bold">Sign Up!</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="scrolltop" class="scrolltop">
+<span class="svg-icon">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<polygon points="0 0 24 0 24 24 0 24" />
+<rect fill="#000000" opacity="0.3" x="11" y="10" width="2" height="10" rx="1" />
+<path d="M6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 C4.90236893,12.3165825 4.90236893,11.6834175 5.29289322,11.2928932 L11.2928932,5.29289322 C11.6714722,4.91431428 12.2810586,4.90106866 12.6757246,5.26284586 L18.6757246,10.7628459 C19.0828436,11.1360383 19.1103465,11.7686056 18.7371541,12.1757246 C18.3639617,12.5828436 17.7313944,12.6103465 17.3242754,12.2371541 L12.0300757,7.38413782 L6.70710678,12.7071068 Z" fill="#000000" fill-rule="nonzero" />
+</g>
+</svg>
+</span>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+<script src="https://python-forum.io/images/at/js/scripts.js"></script>
+<script>
+   $('[title]').tooltip();
+</script>
+
+<script type="text/javascript">
+RinEditor = {
+	"Video URL:": "Video URL:",
+	"Video Type:": "Video Type:",
+	"Insert": "Insert",
+	"Description (optional):": "Description (optional):",
+	"Enter the image URL:": "Enter the image URL:",
+	"Enter URL:": "Enter URL:",
+	"Dailymotion": "Dailymotion",
+	"MetaCafe": "MetaCafe",
+	"Mixer": "Mixer",
+	"Vimeo": "Vimeo",
+	"Youtube": "Youtube",
+	"Facebook": "Facebook",
+	"LiveLeak": "LiveLeak",
+	"Twitch": "Twitch",
+	"Insert a video": "Insert a video",
+	"More": "More",
+	"Restore": "Restore",
+	"Uploading": " images are uploading...",
+	"Fail": "Failed to upload:",
+	"Wrote": "Wrote:",
+	"Quote": "Quote:"
+};
+var dropdownsmiliesurl = ["https://python-forum.io/images/smilies/smile.png","https://python-forum.io/images/smilies/wink.png","https://python-forum.io/images/smilies/cool.png","https://python-forum.io/images/smilies/biggrin.png","https://python-forum.io/images/smilies/tongue.png","https://python-forum.io/images/smilies/rolleyes.png","https://python-forum.io/images/smilies/shy.png","https://python-forum.io/images/smilies/sad.png","https://python-forum.io/images/smilies/at.png","https://python-forum.io/images/smilies/angel.png","https://python-forum.io/images/smilies/angry.png","https://python-forum.io/images/smilies/blush.png","https://python-forum.io/images/smilies/confused.png","https://python-forum.io/images/smilies/dodgy.png","https://python-forum.io/images/smilies/exclamation.png","https://python-forum.io/images/smilies/heart.png","https://python-forum.io/images/smilies/huh.png","https://python-forum.io/images/smilies/lightbulb.png","https://python-forum.io/images/smilies/sleepy.png","https://python-forum.io/images/smilies/undecided.png","https://python-forum.io/images/smilies/cry.png","https://python-forum.io/images/smilies/sick.png","https://python-forum.io/images/smilies/arrow.png","https://python-forum.io/images/smilies/my.png","https://python-forum.io/images/smilies/eusa_think.gif","https://python-forum.io/images/smilies/eusa_silenced.gif","https://python-forum.io/images/smilies/icon_evil.gif","https://python-forum.io/images/smilies/eusa_snooty.gif","https://python-forum.io/images/smilies/eusa_dance.gif","https://python-forum.io/images/smilies/icon_eek.gif","https://python-forum.io/images/smilies/eusa_shifty.gif","https://python-forum.io/images/smilies/eusa_pray.gif","https://python-forum.io/images/smilies/eusa_naughty.gif","https://python-forum.io/images/smilies/icon_razz.gif","https://python-forum.io/images/smilies/eusa_liar.gif","https://python-forum.io/images/smilies/eusa_hand.gif","https://python-forum.io/images/smilies/eusa_wall.gif","https://python-forum.io/images/smilies/eusa_drool.gif","https://python-forum.io/images/smilies/icon_lol.gif","https://python-forum.io/images/smilies/eusa_doh.gif",],
+dropdownsmiliesdes = ["**smile**","**wink**","**cool**","**biggrin**","**tongue**","**rolleyes**","**shy**","**sad**","**at**","**angel**","**angry**","**blush**","**confused**","**dodgy**","**exclamation**","**heart**","**huh**","**idea**","**sleepy**","**undecided**","**cry**","**sick**","**arrow**","**my**","**think**","**silenced**","**evil**","**snooty**","**dance**","**shocked**","**shifty**","**pray**","**naughty**","**razz**","**liar**","**hand**","**wall**","**drool**","**lol**","**doh**",],
+dropdownsmiliesname = ["Smile","Wink","Cool","Big Grin","Tongue","Rolleyes","Shy","Sad","At","Angel","Angry","Blush","Confused","Dodgy","Exclamation","Heart","Huh","Idea","Sleepy","Undecided","Cry","Sick","Arrow","My","Think","Silenced","Evil","Snooty","Dance","Shocked","Shifty","Pray","Naughty","Razz","Liar","Hand","Wall","Drool","LOL","Doh",],
+dropdownsmiliesurlmore = ["https://python-forum.io/images/smilies/smiley-faces-75.gif","https://python-forum.io/images/smilies/eusa_whistle.gif","https://python-forum.io/images/smilies/eusa_clap.gif","https://python-forum.io/images/smilies/icon_rolleyes.gif","https://python-forum.io/images/smilies/eusa_shhh.gif","https://python-forum.io//images/extra_smilies/tux.png","https://python-forum.io//images/extra_smilies/tux21x21.png","https://python-forum.io/images/extra_smilies/coffee.gif","https://python-forum.io//images/extra_smilies/surfing.gif","https://python-forum.io//images/extra_smilies/funnyface.gif","https://python-forum.io//images/extra_smilies/smash.gif","https://python-forum.io//images/extra_smilies/bonk.gif","https://python-forum.io//images/extra_smilies/bonkself.gif","https://python-forum.io//images/extra_smilies/hypnotic.gif","https://python-forum.io//images/extra_smilies/type.gif","https://python-forum.io//images/extra_smilies/wall_smack.gif","https://python-forum.io//images/extra_smilies/poker.gif","https://python-forum.io//images/extra_smilies/cig.gif","https://python-forum.io//images/extra_smilies/working_out.gif","https://python-forum.io//images/extra_smilies/jumprope.gif","https://python-forum.io//images/extra_smilies/clap.gif","https://python-forum.io/images/python.png","https://python-forum.io/images/icons/thumbsdown.png","https://python-forum.io/images/icons/thumbsup.png","https://python-forum.io//images/extra_smilies/snowman_1.png",],
+dropdownsmiliesdesmore = ["**lolsign**","**whistle**","**clap**","**rollingeyes**","**shh**","**tuxface**","**tux**","**coffee**","**surfing**","**funnyface**","**smash**","**bonk**","**bonkself**","**hypnotic**","**type**","**hitthewall**","**poker**","**cig**","**working_out**","**jumprope**","**clap**","**python**","**thumbdown**","**thumbsup**","**snowman**",],
+dropdownsmiliesnamemore = ["LOL","Whistle","Clap","Roll Eyes","Shh","Tux","Tux","Coffee","Surfing","Funnyface","Smash","Bonk","Bonkself","Hypnotic","Type","Hit the Wall","Poker","Cig","Working_out","Jumprope","Clap","python","Thumbs Down","Thumbs Up","Snowman",],
+smileydirectory = 'https://python-forum.io/images/smilies/',
+rinsmileysc = '0',
+rinstartupmode = 'source',
+rinmobsms = '1',
+rinlanguage = '',
+rinheight = '250',
+rinrmvbut = 'Source,Code,php',
+extrabut = 'python,error,output,inline',
+extrabutdesc = '',
+rinautosave = '',
+rinautosavemsg = '0',
+rinvbquote = 0,
+rinskin = 'rin-moono-lisa',
+rinimgur = '',
+seltext = '1',
+partialmode = '0',
+rin_img_resize = '',
+content_url = 'https://python-forum.io/jscripts/rin/editor/contents.css?ver=1.2.1';
+</script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/rin/editor/rineditor.js?ver=1.2.1"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/rin/editor/ckeditor.js?ver=1.2.1"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/rin/editor/adapters/jquery.js?ver=1.2.1"></script>
+<script type="text/javascript" src="https://python-forum.io/jscripts/rin/editor/thread.quickquote.js?ver=1.2.1"></script>
+<link rel="stylesheet" href="https://python-forum.io/jscripts/rin/editor/quickquote.css?ver=1.2.1" type="text/css" />
+<script type="text/javascript">
+$('#message, #signature').ckeditor();
+
+($.fn.on || $.fn.live).call($(document), 'click', '.quick_edit_button', function () {
+	ed_id = $(this).attr('id');
+	var pid = ed_id.replace( /[^0-9]/g, '');
+	if (typeof CKEDITOR.instances['quickedit_'+pid] !== "undefined") {
+		CKEDITOR.instances['quickedit_'+pid].destroy;
+	}
+	setTimeout(function() {
+		CKEDITOR.replace( 'quickedit_'+pid );
+		if (CKEDITOR.instances['quickedit_'+pid]) {
+			setTimeout(function() {
+				CKEDITOR.instances['quickedit_'+pid].focus();
+			},1000);
+		}
+		offset = $('#quickedit_'+pid).offset().top - 60;
+		setTimeout(function() {
+			$('html, body').animate({
+				scrollTop: offset
+			}, 700);
+			setTimeout(function() {
+			  $('#pid_'+pid).find('button[type="submit"]').attr( 'id', 'quicksub_'+pid );
+			},200);
+		},200);
+	},400);
+});
+
+($.fn.on || $.fn.live).call($(document), 'click', 'button[id*="quicksub_"]', function () {
+	ed_id = $(this).attr('id');
+	var pid = ed_id.replace( /[^0-9]/g, '');
+
+	CKEDITOR.instances['quickedit_'+pid].destroy();
+});
+
+/**********************************
+ * Thread compatibility functions *
+ **********************************/
+if(typeof Thread !== 'undefined')
+{
+	var quickReplyFunc = Thread.quickReply,
+	quickReplyDoneFunc = Thread.quickReplyDone;
+	Thread.quickReply = function(e) {
+		if(typeof CKEDITOR !== 'undefined') {
+			CKEDITOR.instances['message'].updateElement();
+			$('form[id*="quick_reply_form"]').bind('reset', function() {
+				CKEDITOR.instances['message'].setData('');
+				$('#message').val('');
+			});
+		}
+
+		return quickReplyFunc.call(this, e);
+	};
+
+	Thread.quickReplyDone = function(e) {
+		if(typeof CKEDITOR !== 'undefined' && typeof automentionck === "function") {
+			setTimeout(function() {
+				if (CKEDITOR.instances['message'].mode == 'wysiwyg') {
+					$('.atwho-container').remove();
+					automentionck( $(CKEDITOR.instances['message'].document.getBody().$) );
+				}
+			},300);
+		}
+
+		return quickReplyDoneFunc.call(this, e);
+	};
+
+	Thread.multiQuotedLoaded = function(request) {
+		if(typeof CKEDITOR !== 'undefined') {
+			var json = $.parseJSON(request.responseText);
+			if(typeof json == 'object')
+			{
+				if(json.hasOwnProperty("errors"))
+				{
+					$.each(json.errors, function(i, message)
+					{
+						$.jGrowl(lang.post_fetch_error + ' ' + message);
+					});
+					return false;
+				}
+			}
+				MyBBEditor.insertText(json.message,'','','','quote');
+		}
+
+		Thread.clearMultiQuoted();
+		$('#quickreply_multiquote').hide();
+		$('#quoted_ids').val('all');
+	};
+};
+</script>
+
+<div id="thread_modes_popup" class="popup_menu" style="display: none;"><div class="popup_item_container"><a href="showthread.php?mode=linear&amp;tid=35427&amp;pid=149367#pid149367" class="popup_item">Linear Mode</a></div><div class="popup_item_container"><a href="showthread.php?mode=threaded&amp;tid=35427&amp;pid=149367#pid149367" class="popup_item">Threaded Mode</a></div></div>
+<script type="text/javascript">
+	// <!--
+		if(use_xmlhttprequest == "1")
+		{
+			$("#thread_modes").popupMenu();
+		}
+	// -->
+	</script>
+<script type="text/javascript">
+		var thread_deleted = "";
+		if(thread_deleted == "1")
+		{
+			$("#quick_reply_form, .new_reply_button, .thread_tools, .inline_rating").hide();
+			$("#moderator_options_selector option.option_mirage").attr("disabled","disabled");
+		}
+	</script>
+<script>(function(){var js = "window['__CF$cv$params']={r:'85eadc5398bcb7c4',t:'MTcwOTQ4MTg0OS41MjMwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+</html>
