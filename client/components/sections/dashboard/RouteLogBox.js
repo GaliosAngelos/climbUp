@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../../styles/allStyles";
 import { Swipeable } from "react-native-gesture-handler";
 
 export default function RouteLogBox({ item, onDelete }) {
-  // Rendermethode für die rechte Wischaktion
+  const swipeableRef = useRef(null); // Referenz für den Swipeable
+
+  // Verbesserte Rendermethode für die rechte Wischaktion
   const renderRightActions = () => {
     return (
       <TouchableOpacity
-        onPress={() => onDelete(item)}
+        onPress={() => {
+          if (swipeableRef.current) {
+            swipeableRef.current.close(); // Schließe den Swipeable, bevor du onDelete aufrufst
+          }
+          onDelete(item);
+        }}
         style={{
           backgroundColor: "red",
           justifyContent: "center",
@@ -18,16 +25,16 @@ export default function RouteLogBox({ item, onDelete }) {
           padding: 12,
         }}
       >
-        <Text style={{ color: "white" }}>Löschen</Text>
+        <Text style={{ color: "white" }}>Delete</Text>
       </TouchableOpacity>
     );
   };
 
   return (
-    <Swipeable renderRightActions={renderRightActions}>
+    <Swipeable ref={swipeableRef} renderRightActions={renderRightActions}>
       <View
         style={{
-          backgroundColor: item.reachedTop ? "#8FD78F" : "#F5BBBA",
+          backgroundColor: item.successful ? "#8FD78F" : "#F5BBBA",
           marginTop: 15,
           borderRadius: 14,
           padding: 12,
