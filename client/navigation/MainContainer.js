@@ -159,11 +159,11 @@ function HallDashboardTabs() {
 
 function tabBarIconSelector(route, focused) {
   let iconName;
-  if (route.name === "Dashboard") {
+  if (route.name === "Dashboard" || route.name === "HallDashboard") {
     iconName = focused
       ? require("../assets/home-black.png")
       : require("../assets/home-grey.png");
-  } else if (route.name === "ClimbingHall") {
+  } else if (route.name === "ClimbingHall" || route.name === "HallAllRoutes") {
     iconName = focused
       ? require("../assets/shoe-black.png")
       : require("../assets/shoe-grey.png");
