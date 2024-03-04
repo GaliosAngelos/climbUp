@@ -17,7 +17,10 @@ export default function ClimbingHallBox({
   favourite,
 }) {
   const openHallWithRoutes = () => {
-    navigation.navigate("Routen", { hall_name: hall_name });
+    navigation.navigate("Routen", {
+      hall_name: hall_name,
+      favourite: favourite,
+    });
   }; //navigation after the selection of a climbing hall to the RoutenScreen, that contain the routes for this selected hall
 
   return (
