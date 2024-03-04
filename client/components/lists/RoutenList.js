@@ -3,9 +3,10 @@ import { View } from "react-native";
 import RouteBox from "../sections/dashboard/climbing/RouteBox";
 
 export default function RoutenList({ routes, expand, hall_name }) {
+  const routesData = Array.isArray(routes) ? routes : routes.data || [];
   return (
     <View>
-      {routes.map((item, index) => (
+      {routesData.map((item, index) => (
         <RouteItem
           key={item.id || index}
           item={item}

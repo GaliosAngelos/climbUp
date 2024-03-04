@@ -22,18 +22,19 @@ export default function RoutenScreen({ navigation, route }) {
     if (routes) {
       query(Climber.get_routes_by_hall_name.call, [hall_name])
         .then((response) => {
+          console.log("response: " + response);
           setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
         })
         .catch((err) => alert("Error: " + err));
     }
-  }, [hall_name, routes]); // Reagiert auf Änderungen von hall_name oder routes
+  }, [hall_name]); // Reagiert auf Änderungen von hall_name oder routes
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
   return (
     <>
-      <ButtonBack onPress={() => navigation.navigate("ClimbingHall")} />
+      <ButtonBack onPress={() => navigation.navigate("ClimbingHallScreen")} />
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>

@@ -1,23 +1,18 @@
-// Importing necessary components and libraries
-import React, { useState, useEffect } from "react";
-// Components
+import React, { useState } from "react";
 import { TouchableWithoutFeedback, View, Text } from "react-native";
 import ButtonMedium from "../../../buttons/ButtonMedium";
 import ButtonCommit from "../../../buttons/ButtonCommit";
-// Style
 import styles from "../../../styles/allStyles";
 import { useNavigation } from "@react-navigation/native";
 import { Climber } from "../../../../Controller/Procedures";
 import { query } from "../../../../Controller/requestHandler";
-// --------------------------------------------------------------------
-
-// Route component representing a climbing route in a climbing hall.
-// It allows users to track their progress on the route (success, failure, number of attempts).
+import { Alert } from "react-native";
+import getColor from "../../../input/Colors";
 
 export default function Route({
   hallname,
   color,
-  levelOfDificulty,
+  levelOfDifficulty,
   lineNumber,
   routeName,
   Sector,
@@ -25,45 +20,45 @@ export default function Route({
   expanded,
   setExpanded,
 }) {
-  // State hooks for expanding the view and tracking attempts count
   const [rest, setRest] = useState(0);
   const [reachedTop, setReachedTop] = useState(null);
   const navigation = useNavigation();
 
   const handleButtonPress = (buttonId) => {
-    setReachedTop(buttonId);
+    setReachedTop(buttonId === 1);
   };
-  const isSelectionMade = reachedTop !== null;
 
-    useEffect(() => {
-      // insert Route into statistic table
-        query(Climber.insert_user_statistic.call, [hallname, reachedTop, levelOfDificulty, rest, (reachedTop ? true : false)])
-        .then((res) => {
-          if (res.status === 400) {
-            alert("Error setting route progress. Query missing: " + JSON.stringify(res.data));
-          } else if (res.status === 401) {
-            alert("Not logged in : " + JSON.stringify(res.data));
-          } else  if (res.status === 500) {
-            alert("Error setting route progress: " + JSON.stringify(res.data));
-          } else {
-            confirm("Route progress saved. Awesome!");
-            setExpanded(false);
-          }
-        })
+  const commitProgress = () => {
+    query(Climber.insert_user_statistic.call, [
+      hallname,
+      reachedTop,
+      levelOfDifficulty,
+      rest,
+      reachedTop,
+    ])
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          Alert.alert("Success", "Route progress saved. Awesome! ");
+          setExpanded(false);
+          setRest(0); // Zurücksetzen des Zustands für Pausen
+          setReachedTop(null); // Zurücksetzen der Auswahl
+        } else {
+          alert("Error setting route progress: " + JSON.stringify(res.data));
+        }
+      })
       .catch((err) => {
-        console.log("An unknwon error occured. ", err);
-        alert("Saving route progress failed. ");
+        console.log("An unknown error occurred. ", err);
+        alert("Saving route progress failed.");
       });
-
-  }, [reachedTop]);
+  };
 
   const handlePress = () => {
     if (setExpanded) {
-      setExpanded();
+      setExpanded(!expanded);
     } else {
       navigation.navigate("ModifyRoute", {
         color: color,
-        levelOfDificulty: levelOfDificulty,
+        levelOfDifficulty: levelOfDifficulty,
         lineNumber: lineNumber,
         routeName: routeName,
         Sector: Sector,
@@ -74,66 +69,51 @@ export default function Route({
 
   return (
     <>
-      {/* Touchable component to expand or collapse route details */}
       <TouchableWithoutFeedback onPress={handlePress}>
         <View style={expanded ? styles.borderBoxExtended : styles.borderBox}>
-          {/* Route information display */}
           <View style={{ flexDirection: "row" }}>
             <View style={{ flex: 3, justifyContent: "center" }}>
               <Text style={styles.h3}>{routeName}</Text>
               <Text style={styles.text}>
-                {/* tried this @nico  */}
-                Sektor {Sector}, Line {lineNumber}, Tilt:{" "}
-                {Tilt == true ? "yes" : "no"}
+                Sektor {Sector}, Line {lineNumber}, Tilt: {Tilt ? "yes" : "no"}
               </Text>
             </View>
-
-            {/* Display of route's difficulty level */}
             <View style={{ flex: 1, justifyContent: "center" }}>
               <Text
                 style={[
+                  { color: getColor(color) },
+                  styles.text,
                   {
-                    color: color,
                     textAlign: "left",
-                    fontSize: 47,
+                    fontSize: 32,
                     fontWeight: "bold",
                     paddingLeft: 10,
                     marginVertical: -10,
                   },
                 ]}
               >
-                {levelOfDificulty}
+              {levelOfDifficulty}
               </Text>
             </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
-
-      {/* Expanded view to track route completion and attempts */}
       {expanded && (
         <View style={styles.routeExtension}>
-          {/* Buttons for marking the route as 'made' or 'failed' */}
-
           <View style={{ flexDirection: "row" }}>
-            <View style={{ flex: 1 }}>
-              <ButtonMedium
-                text={"Completed!"}
-                color={"#8FD78F"}
-                onPress={() => handleButtonPress(1)}
-                selected={reachedTop === true}
-              />
-            </View>
-            <View style={{ flex: 1 }}>
-              <ButtonMedium
-                text={"Next Time!"}
-                color={"#F5BBBA"}
-                onPress={() => handleButtonPress(2)}
-                selected={reachedTop === false}
-              />
-            </View>
+            <ButtonMedium
+              text={"Completed!"}
+              color={"#8fd78f"}
+              onPress={() => handleButtonPress(1)}
+              selected={reachedTop === true}
+            />
+            <ButtonMedium
+              text={"Next Time!"}
+              color={"#f5bbba"}
+              onPress={() => handleButtonPress(2)}
+              selected={reachedTop === false}
+            />
           </View>
-
-          {/* Counter for tracking the number of attempts */}
           <View
             style={{
               flexDirection: "row",
@@ -148,15 +128,16 @@ export default function Route({
             <View style={{ justifyContent: "center", width: 60 }}>
               <Text style={[styles.h1, { textAlign: "center" }]}>{rest}</Text>
             </View>
-
             <ButtonMedium
               onPress={() => rest < 100 && setRest((c) => c + 1)}
               text={"+"}
             />
           </View>
-
-          {/* Button to commit the tracked data */}
-          <ButtonCommit text="Commit" hasSelection={isSelectionMade} />
+          <ButtonCommit
+            text="Commit"
+            onPress={commitProgress}
+            hasSelection={reachedTop !== null}
+          />
         </View>
       )}
     </>

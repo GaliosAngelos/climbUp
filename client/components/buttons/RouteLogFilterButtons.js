@@ -1,3 +1,16 @@
+
+export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
+  const [selectedButton, setSelectedButton] = useState();
+
+  const handleButtonPress = (buttonId) => {
+    setSelectedButton(buttonId);
+    // Rufen Sie die Callback-Funktion auf, die als Prop übergeben wurde
+    if (onSelectedButtonChange) {
+      onSelectedButtonChange(buttonId);
+    }
+  };
+
+
 import React, { useState } from "react";
 // Components
 import { TouchableOpacity, View, Text } from "react-native";
@@ -7,7 +20,7 @@ import styles from "../styles/allStyles";
 // -----------------------------------------------------------------------
 
 export default function RouteLogFilterButtons() {
-  const [selectedButton, setSelectedButton] = useState(2);
+  const [selectedButton, setSelectedButton] = useState();
 
   const handleButtonPress = (buttonId) => {
     setSelectedButton(buttonId);
@@ -18,12 +31,13 @@ export default function RouteLogFilterButtons() {
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
+            onPress={() => handleButtonPress(1)}
             style={[
               styles.buttonlarge,
               selectedButton === 1 && styles.selectedButton,
               { width: 140 },
             ]}
-            onPress={() => handleButtonPress(1)}
+            
           >
             <Text
               style={[
@@ -38,12 +52,12 @@ export default function RouteLogFilterButtons() {
 
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
+            onPress={() => handleButtonPress(2)}
             style={[
               styles.buttonlarge,
               selectedButton === 2 && styles.selectedButton,
               { width: 140 },
             ]}
-            onPress={() => handleButtonPress(2)}
           >
             <Text
               style={[
@@ -59,12 +73,12 @@ export default function RouteLogFilterButtons() {
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
+            onPress={() => handleButtonPress(3)}
             style={[
               styles.buttonlarge,
               selectedButton === 3 && styles.selectedButton,
               { width: 140 },
             ]}
-            onPress={() => handleButtonPress(3)}
           >
             <Text
               style={[
@@ -78,12 +92,12 @@ export default function RouteLogFilterButtons() {
         </View>
         <View style={{ flex: 1, alignItems: "center" }}>
           <TouchableOpacity
+            onPress={() => handleButtonPress(4)}
             style={[
               styles.buttonlarge,
               selectedButton === 4 && styles.selectedButton,
               { width: 140 },
             ]}
-            onPress={() => handleButtonPress(4)}
           >
             <Text
               style={[
