@@ -1,24 +1,24 @@
 export default function getColor(color) {
     switch (color.toUpperCase()) { // Um sicherzustellen, dass die Funktion unabhängig von der Eingabe funktioniert
-      case 'ROT':
+      case 'RED', 'ROT':
         return 'red';
-      case 'BLAU':
+      case 'BLUE', 'BLAU':
         return 'blue';
-      case 'GRÜN':
+      case 'GREEN', 'GRÜN':
         return 'green';
-      case 'GELB':
+      case 'YELLOW', 'GELB':
         return 'yellow';
-      case 'SCHWARZ':
+      case 'BLACK', 'SCHWARZ':
         return 'black';
-      case 'WEISS':
+      case 'WHITE', 'WEISS':
         return 'white';
       case 'ORANGE':
         return 'orange';
-      case 'LILA':
+      case 'PURPLE', 'LILA':
         return 'purple';
-      case 'ROSA':
+      case 'PINK', 'ROSA':
         return 'pink';
-      case 'GRAU':
+      case 'GRAY', 'GRAU':
         return 'gray';
       default:
         return 'gray'; // Rückgabe eines Standardwerts, falls keine Übereinstimmung gefunden wird

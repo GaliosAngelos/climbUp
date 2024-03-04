@@ -34,7 +34,7 @@ export default function RoutenScreen({ navigation, route }) {
   };
   return (
     <>
-      <ButtonBack onPress={() => navigation.navigate("ClimbingHallScreen")} />
+      <ButtonBack onPress={() => navigation.navigate("ClimbingHal")} />
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
@@ -53,7 +53,7 @@ export default function RoutenScreen({ navigation, route }) {
         </View>
       </View>
 
-      <RouteFilter setRoutes={setRoutes} />
+      <RouteFilter setRoutes={setRoutes} routes={routes} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <RoutenList routes={routes} expand={true} hall_name={hall_name} />
         <View style={{ marginBottom: 130 }} />

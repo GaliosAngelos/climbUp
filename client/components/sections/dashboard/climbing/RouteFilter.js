@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // Components
 import { TouchableOpacity, View } from "react-native";
-import CustTextInput from "./../../../input/CustTextInput.js";
+import CustTextInput from "../../../input/CustTextInput.js";
 // Icons
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Climber } from "../../../../Controller/Procedures.js";
@@ -9,20 +9,25 @@ import { query } from "../../../../Controller/requestHandler.js";
 // ------------------------------------------------------------------
 
 // ClimbingHallBar component, likely used for filtering or searching climbing routes
-export default function RouteFilter({ setRoutes }) {
-  const [filled, setFilled] = useState(false);
-  const handlePress = () => {
-    setFilled(!filled);
-  };
+export default function RouteFilter({ routes, setRoutes }) {
   const [route_name, setRouteName] = useState("");
   const [sector, setSector] = useState("");
   const [level, setLevel] = useState("");
+  
+  useEffect(() => {
+    
+  }, [])
+  
+  //For magic implementation
+  // const [filled, setFilled] = useState(false);
+  // const handlePress = () => {
+  //   setFilled(!filled);
+  // };
 
-  const [isMagic, setIsMagic] = useState(false);
-
-  const toggleMagic = () => {
-    setIsMagic(!isMagic);
-  };
+  // const [isMagic, setIsMagic] = useState(false);
+  // const toggleMagic = () => {
+  //   setIsMagic(!isMagic);
+  // };
 
   
   // Funktionen, um den aktuellen Wert der Textfelder zu aktualisieren
@@ -79,7 +84,7 @@ export default function RouteFilter({ setRoutes }) {
         <View style={{ flex: 3, marginRight: 5 }}>
           <CustTextInput text="Level" value={level} onChangeText={setLevel} />
         </View>
-        <View style={{ margin: 4 }}>
+        {/* <View style={{ margin: 4 }}>
           <TouchableOpacity onPress={toggleMagic}>
             <Ionicons
               name={isMagic ? "sparkles" : "sparkles-outline"}
@@ -87,7 +92,7 @@ export default function RouteFilter({ setRoutes }) {
               color={isMagic ? "#B000B1" : "#B167B1"}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </>
   );
