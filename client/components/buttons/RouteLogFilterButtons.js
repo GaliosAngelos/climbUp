@@ -1,3 +1,8 @@
+import React, { useState } from "react";
+// Components
+import { TouchableOpacity, View, Text } from "react-native";
+// Styles
+import styles from "../styles/allStyles";
 
 export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
   const [selectedButton, setSelectedButton] = useState();
@@ -9,23 +14,7 @@ export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
       onSelectedButtonChange(buttonId);
     }
   };
-
-
-import React, { useState } from "react";
-// Components
-import { TouchableOpacity, View, Text } from "react-native";
-// Styles
-import styles from "../styles/allStyles";
-
-// -----------------------------------------------------------------------
-
-export default function RouteLogFilterButtons() {
-  const [selectedButton, setSelectedButton] = useState();
-
-  const handleButtonPress = (buttonId) => {
-    setSelectedButton(buttonId);
-  };
-
+  
   return (
     <>
       <View style={{ flexDirection: "row" }}>

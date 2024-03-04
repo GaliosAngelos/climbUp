@@ -10,7 +10,7 @@ import { Climber } from "../Controller/Procedures.js";
 import calculateTimeStamps from "../components/input/TimeIntervals.js";
 // --------------------------------------------------------------
 
-export default function DashboardScreen(timeframe) {
+export default function DashboardScreen() {
   const [routes, setRoutes] = useState([]); // Verwenden von useState für den Zustand
   const now = calculateTimeStamps().now;
   const [selectedTimeframe, setSelectedTimeframe] = useState();
@@ -20,17 +20,18 @@ const handleTimeframeChange = (buttonId) => {
   setSelectedTimeframe(buttonId);
   // Zusätzlich können Sie hier die Logik implementieren, um die Routen basierend auf dem neuen Timeframe zu aktualisieren.
 };
-  useEffect(() => {
-    // if (routes) {
-      // query(Climber.get_user_climbed_routes.call, [calculateTimeStamps().now, calculateTimeStamps().oneYearAgo])
-       query(Climber.get_climbing_halls_list.call)
-      .then((response) => {
-          console.log("response" + routes);
-          setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
-        })
-        .catch((err) => alert("Error: " + err));
-    // }
-  }, [selectedTimeframe]); // Reagiert auf Änderungen von hall_name oder routes
+  // useEffect(() => {
+  //   // if (routes) {
+  //     // query(Climber.get_user_climbed_routes.call, [calculateTimeStamps().now, calculateTimeStamps().oneYearAgo])
+  //      query(Climber.get_climbing_halls_list.call)
+  //     .then((response) => {
+  //         setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
+  //       }).then(() => {
+  //         console.log("response new: " + routes.forEach(i => console.log(i)));
+  //       })
+  //       .catch((err) => alert("Error: " + err));
+  //   // }
+  // }, [selectedTimeframe]); // Reagiert auf Änderungen von hall_name oder routes
   
 
   return (

@@ -6,7 +6,7 @@ import { Climber } from "../../Controller/Procedures";
 import { query } from "../../Controller/requestHandler";
 import calculateTimeStamps from "../input/TimeIntervals";
 
-export default function RoutenViewList(timeinterval) {
+export default function RoutenViewList() {
   const [statistics, setStatistics] = useState([]);
   const timesStamp = calculateTimeStamps();
   useEffect(() => {
