@@ -20,8 +20,8 @@ export default function LoginScreen({ navigation }) {
   useEffect(() => {
     if (selectedButton === 1) {
       // Climber
-      setUser("adrian");
-      setPassword("adrian");
+      setUser("angelos");
+      setPassword("angelos");
     } else {
       // Hallowner
       setUser("dav_kletterzentrum_augsburg");
@@ -131,10 +131,7 @@ export default function LoginScreen({ navigation }) {
         password={password}
         setPassword={setPassword}
       />
-      <Button
-        text="Log in"
-        onPress={handleLogin}
-      />
+      <Button text="Log in" onPress={handleLogin} />
       <View style={{ marginBottom: 20 }} />
       <ButtonSmall
         text="Forgot your password?"
