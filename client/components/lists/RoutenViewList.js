@@ -17,10 +17,7 @@ export default function RoutenViewList({ interval }) {
     query(Climber.get_user_climbed_routes.call, [dayone, today])
       // query(Climber.get_routes_by_hall_name.call, ['testhall2'])
       .then((res) => {
-        console.log("interval Viewlist :>> ", interval);
-        console.log("res :>> ", res.data.data);
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
-        console.log("new statistics :>>", newStatistics);
         setStatistics(newStatistics);
       })
       .catch((err) => {

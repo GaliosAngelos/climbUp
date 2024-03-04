@@ -21,7 +21,6 @@ export default function DashboardScreen() {
     query(Climber.get_user_statistics.call, [interval.past, interval.now])
       .then((res) => {
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
-        console.log(newStatistics);
         setStatistics(newStatistics); // Zustand aktualisieren, sobald Daten verfügbar sind
         setIsLoading(false);
       })
