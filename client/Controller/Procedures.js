@@ -77,11 +77,11 @@ export const Climber = Object.freeze({
         values: ['hall_name', 'route', 'difficulty', 'nr_rests', 'reached_top_TRUE_FALSE'],
     },
     get_user_statistics: {
-        call: `CALL climbup.get_user_statistics($1, $2)`,
+        call: `SELECT * from climbup.get_user_statistics2($1, $2)`,
         values: ['start_date_2024-01-01', 'end_date_2024-01-01'],
     },
     get_user_climbed_routes: {
-        call: `CALL climbup.get_user_climbed_routes($1, $2)`,
+        call: `SELECT * FROM climbup.get_user_climbed_routes2($1, $2)`,
         values: ['start_date_2024-01-01', 'end_date_2024-01-01'],
     },
     delete_user_statistic: {

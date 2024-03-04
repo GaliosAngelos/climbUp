@@ -24,14 +24,10 @@ export default function Route({
   const [reachedTop, setReachedTop] = useState(null);
   const navigation = useNavigation();
 
-  const handleButtonPress = (buttonId) => {
-    setReachedTop(buttonId === 1);
-  };
-
   const commitProgress = () => {
     query(Climber.insert_user_statistic.call, [
       hallname,
-      reachedTop,
+      routeName,
       levelOfDifficulty,
       rest,
       reachedTop,
@@ -103,14 +99,14 @@ export default function Route({
           <View style={{ flexDirection: "row" }}>
             <ButtonMedium
               text={"Completed!"}
-              color={"#8fd78f"}
-              onPress={() => handleButtonPress(1)}
+              color={"#8FD78F"}
+              onPress={() => setReachedTop(true)}
               selected={reachedTop === true}
             />
             <ButtonMedium
               text={"Next Time!"}
-              color={"#f5bbba"}
-              onPress={() => handleButtonPress(2)}
+              color={"#F5BBBA"}
+              onPress={() => setReachedTop(false)}
               selected={reachedTop === false}
             />
           </View>

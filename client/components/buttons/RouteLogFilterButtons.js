@@ -6,11 +6,9 @@ import styles from "../styles/allStyles";
 
 export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
   const [selectedButton, setSelectedButton] = useState();
-
   const handleButtonPress = (buttonId) => {
-    setSelectedButton(buttonId);
-    // Rufen Sie die Callback-Funktion auf, die als Prop übergeben wurde
-    if (onSelectedButtonChange) {
+    setSelectedButton(buttonId)
+    if (onSelectedButtonChange){
       onSelectedButtonChange(buttonId);
     }
   };
@@ -101,4 +99,4 @@ export default function RouteLogFilterButtons({ onSelectedButtonChange }) {
       </View>
     </>
   );
-}
+};

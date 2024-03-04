@@ -24,39 +24,40 @@ export default function RouteFilter({ setRoutes }) {
     setIsMagic(!isMagic);
   };
 
+  
   // Funktionen, um den aktuellen Wert der Textfelder zu aktualisieren
-  useEffect(() => {
-    console.log("route: " + route_name);
-    if (route_name) {
-      query(Climber.get_routes_by_route_name.call, [route_name])
-        .then((response) => {
-          // console.log(route_name);
-          setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
-        })
-        .catch((err) => alert("Error: " + err));
-    }
-  }, [route_name]); // Reagiert nur auf Änderungen von route_name
+  // useEffect(() => {
+  //   console.log("route: " + route_name);
+  //   if (route_name) {
+  //     query(Climber.get_routes_by_route_name.call, [route_name])
+  //       .then((response) => {
+  //         // console.log(route_name);
+  //         setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
+  //       })
+  //       .catch((err) => alert("Error: " + err));
+  //   }
+  // }, [route_name]); // Reagiert nur auf Änderungen von route_name
 
-  useEffect(() => {
-    if (sector) {
-      // Angenommen, es gibt eine Abfrage für den Sektor, die hier verwendet werden soll
-      query(Climber.get_routes_by_sector.call, [sector])
-        .then((response) => {
-          setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
-        })
-        .catch((err) => alert("Error: " + err));
-    }
-  }, [sector]); // Reagiert nur auf Änderungen von sector
+  // useEffect(() => {
+  //   if (sector) {
+  //     // Angenommen, es gibt eine Abfrage für den Sektor, die hier verwendet werden soll
+  //     query(Climber.get_routes_by_sector.call, [sector])
+  //       .then((response) => {
+  //         setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
+  //       })
+  //       .catch((err) => alert("Error: " + err));
+  //   }
+  // }, [sector]); // Reagiert nur auf Änderungen von sector
 
-  useEffect(() => {
-    if (level) {
-      query(Climber.get_routes_by_difficulty.call, [level])
-        .then((response) => {
-          setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
-        })
-        .catch((err) => alert("Error: " + err));
-    }
-  }, [level]); // Reagiert nur auf Änderungen von level
+  // useEffect(() => {
+  //   if (level) {
+  //     query(Climber.get_routes_by_difficulty.call, [level])
+  //       .then((response) => {
+  //         setRoutes(response.data); // Zustand aktualisieren, sobald Daten verfügbar sind
+  //       })
+  //       .catch((err) => alert("Error: " + err));
+  //   }
+  // }, [level]); // Reagiert nur auf Änderungen von level
 
   return (
     <>
