@@ -31,7 +31,7 @@ function RouteItem({ item, expand, hall_name }) {
       levelOfDifficulty={item.level_of_difficulty}
       lineNumber={item.line_number}
       routeName={item.route_name}
-      sector={item.sector}
+      Sector={item.sector}
       tilt={item.tilt}
       hallname={hall_name}
       expanded={expanded}

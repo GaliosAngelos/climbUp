@@ -88,7 +88,7 @@ export default function Route({
                   },
                 ]}
               >
-              {levelOfDifficulty}
+                {levelOfDifficulty}
               </Text>
             </View>
           </View>
@@ -96,7 +96,9 @@ export default function Route({
       </TouchableWithoutFeedback>
       {expanded && (
         <View style={styles.routeExtension}>
-          <View style={{ flexDirection: "row" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
             <ButtonMedium
               text={"Completed!"}
               color={"#8FD78F"}
