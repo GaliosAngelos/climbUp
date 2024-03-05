@@ -13,21 +13,20 @@ import { query } from "../Controller/requestHandler.js";
 
 export default function RoutenScreen({ navigation, route }) {
   const { hall_name } = route.params;
-  const [allRoutes, setAllRoutes] = useState([]); // Zustand für alle geladenen Routen
-  const [routes, setRoutes] = useState([]); // Zustand für die aktuell angezeigten (gefilterten) Routen
+  const [routes, setRoutes] = useState([]); // Zustand für alle geladenen Routen
   const [isLiked, setIsLiked] = useState(false);
-
+  const [reload, setReload] = useState(false);
   // Lade alle Routen, wenn hall_name vorhanden ist
   useEffect(() => {
     if (hall_name) {
       query(Climber.get_routes_by_hall_name.call, [hall_name])
         .then((res) => {
           if (res.data) { // Stelle sicher, dass Daten vorhanden sind
-            console.log("response: ", res.data);
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
-
-            setAllRoutes(newRoutes); // Speichere alle Routen
-            setRoutes(newRoutes); // Initial werden alle Routen angezeigt
+            console.log("response :>> ", newRoutes);
+            setRoutes(newRoutes); // Speichere alle Routen
+            setReload(true);
+            // setFilteredRoutes(newRoutes); // Initial werden alle Routen angezeigt
           }
         })
         .catch((err) => alert("Error: ", err));
@@ -35,21 +34,10 @@ export default function RoutenScreen({ navigation, route }) {
   }, [hall_name]);
 
   // Filterfunktion, die die Routenliste im Frontend aktualisiert
-  const handleFilterChange = (routeName, sector, level) => {
-    const filteredRoutes = allRoutes.filter(route => {
-      return (
-        (!routeName || route.route_name.toLowerCase().includes(routeName.toLowerCase())) &&
-        (!sector || route.sector.toLowerCase() === sector.toLowerCase()) &&
-        (!level || route.level_of_difficulty === level)
-      );
-    });
-
-    setRoutes(filteredRoutes); // Aktualisiere die Zustandsvariable mit den gefilterten Routen
-  };
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
-  };
+  }
 
   return (
     <>
@@ -72,7 +60,7 @@ export default function RoutenScreen({ navigation, route }) {
         </View>
       </View>
 
-      <RouteFilter onFilterChange={handleFilterChange} />
+      <RouteFilter setRoutes={setRoutes} routes={routes} reload={reload}/>
       <ScrollView showsVerticalScrollIndicator={false}>
         <RoutenList routes={routes} expand={true} hall_name={hall_name} />
         <View style={{ marginBottom: 130 }} />
