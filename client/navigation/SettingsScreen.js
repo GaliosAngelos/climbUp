@@ -1,24 +1,71 @@
-import React, { useState } from "react";
-// Components
+import React, { useState, useEffect, Alert } from "react";
 import { ScrollView, Text, View } from "react-native";
 import HeadText from "../components/text/HeadText.js";
 import CustTextInputPassword from "../components/input/CustTextInputPassword.js";
 import Button from "../components/buttons/Button.js";
-// Style
 import styles from "../components/styles/allStyles.js";
 import { logout } from "../Controller/logoutHandler.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { query } from "../Controller/requestHandler.js";
+import { Climber } from "../Controller/Procedures.js";
 
 export default function SettingsScreen({ navigation }) {
+  const [user, setUser] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [actualPassword, setActualPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userDataString = await AsyncStorage.getItem("userData");
+        const userData = userDataString ? JSON.parse(userDataString) : null;
+        if (userData) {
+          console.log("userData :>> ", userData);
+          setUser(userData.user);
+          setEmail(userData.email);
+          setPassword(userData.password);
+        }
+      } catch (error) {
+        console.error("Failed to load user data", error);
+        Alert.alert("Fehler", "Laden der Benutzerdaten fehlgeschlagen.");
+      }
+    };
+
+    getUserData();
+  }, []);
+
+  const updatePassword = async () => {
+    // Überprüfe, ob das aktuelle Passwort korrekt ist
+    if (actualPassword !== password) {
+      alert("Fehler! Das aktuelle Passwort ist nicht korrekt.");
+      return;
+    }
+
+    // Überprüfe, ob das neue Passwort und die Bestätigung übereinstimmen
+    if (newPassword !== confirmNewPassword) {
+      alert("Fehler! Die neuen Passwörter stimmen nicht überein.");
+      return;
+    }
+
+    query(Climber.change_climber_pw.call, [newPassword])
+      .then((res) => {
+        alert("Erfolg", "Passwort erfolgreich geändert.");
+        setActualPassword("");
+        setNewPassword("");
+        setConfirmNewPassword("");
+      })
+      .catch((err) => alert("Failed to update password", err));
+  };
 
   return (
     <>
       <HeadText content="Make the change!" />
       <View style={styles.borderBox}>
-        <Text style={styles.h3}>Username: auxTeam69</Text>
-        <Text style={styles.h3}>Email: 123456@via.dk</Text>
+        <Text style={styles.h3}>Username: {user}</Text>
+        <Text style={styles.h3}>Email: {email}</Text>
       </View>
       <ScrollView style={{ flex: 1 }}>
         <View>
@@ -41,10 +88,7 @@ export default function SettingsScreen({ navigation }) {
             password={confirmNewPassword}
             setPassword={setConfirmNewPassword}
           />
-          <Button
-            text="Update Password"
-            onPress={() => alert("Function is infunction is under development")}
-          />
+          <Button text="Update Password" onPress={updatePassword} />
           <Button
             text="Go to Login Page"
             onPress={() => navigation.navigate("Login")}
