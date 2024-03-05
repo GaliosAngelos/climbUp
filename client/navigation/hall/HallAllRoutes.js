@@ -36,10 +36,9 @@ export default function HallAllRoutes({ navigation }) {
         .then((res) => {
           console.log("res :>> ", res);
           if (res.data) {
-            // Stelle sicher, dass Daten vorhanden sind
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
             console.log("newRoutes :>> ", newRoutes);
-            setRoutes(newRoutes); // Initial werden alle Routen angezeigt
+            setRoutes(newRoutes);
           }
         })
         .catch((err) => alert("Error: ", err));

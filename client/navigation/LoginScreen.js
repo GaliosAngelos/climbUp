@@ -40,7 +40,6 @@ export default function LoginScreen({ navigation }) {
     loginFunction([user, password])
       .then(async (res) => {
         if (res.status === 200 || res.status === 409) {
-          // Speichern der Benutzerdaten nach erfolgreichem Login
           await AsyncStorage.setItem(
             "userData",
             JSON.stringify({ user, password })

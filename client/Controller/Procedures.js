@@ -127,6 +127,10 @@ export const Climber = Object.freeze({
   },
   get_climbing_halls_list: {
     call: `SELECT * FROM climbup.get_climbing_halls_list2()`,
+  },
+  get_user_mail: {
+    call: `SELECT climbup.get_user_email($1)`,
+    value: ["user"],
   }, //#endregion
 });
 

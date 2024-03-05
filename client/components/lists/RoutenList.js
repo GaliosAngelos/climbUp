@@ -19,11 +19,10 @@ export default function RoutenList({ routes, expand, hall_name, navigation }) {
 }
 
 function RouteItem({ item, expand, hall_name, navigation }) {
-  const [expanded, setExpanded] = useState(expand);
+  const [expanded, setExpanded] = useState();
 
   const handlePressRoute = () => {
     if (!expand) {
-      // Wenn `expand` false ist, navigiere zur ModifyRoute-Seite und übergebe die Daten
       navigation.navigate("ModifyRoute", {
         color: item.color,
         levelOfDifficulty: item.level_of_difficulty,
@@ -34,7 +33,6 @@ function RouteItem({ item, expand, hall_name, navigation }) {
         hallname: hall_name,
       });
     } else {
-      // Ansonsten toggle den expanded Zustand
       setExpanded(!expanded);
     }
   };

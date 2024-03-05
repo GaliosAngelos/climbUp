@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 12,
     justifyContent: "center",
-    flex: 1, // Sorgt dafür, dass der Button flexibel ist
-    marginHorizontal: 5, // Gibt etwas Abstand zwischen den Buttons
+    flex: 1,
+    marginHorizontal: 5,
   },
 
   buttonsmall: {
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
     height: 300,
   },
   box: {
-    width: 50, // von 60 auf 50 reduziert, um die Box kleiner zu machen
-    height: 50, // von 60 auf 50 reduziert, um die Box kleiner zu machen
+    width: 50,
+    height: 50,
     justifyContent: "center",
     alignItems: "center",
     margin: 3,
     borderWidth: 1,
     borderColor: "#ddd",
-    borderRadius: 10, // Runde Ecken hinzugefügt
+    borderRadius: 10,
   },
 });
 

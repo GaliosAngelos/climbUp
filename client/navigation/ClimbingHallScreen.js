@@ -31,7 +31,7 @@ export default function ClimbingHallScreen({ navigation }) {
 
   useEffect(() => {
     const fetchHallsAndFavourites = async () => {
-      if (!user) return; // Stelle sicher, dass ein Benutzer gesetzt ist, bevor du fortfährst
+      if (!user) return;
 
       try {
         const favsRes = await query(Climber.get_user_favorites.call, [user]);
@@ -60,7 +60,7 @@ export default function ClimbingHallScreen({ navigation }) {
     if (user) {
       fetchHallsAndFavourites();
     }
-  }, [user]); // Füge `user` als Abhängigkeit hinzu, um die Funktion erneut auszuführen, sobald `user` gesetzt ist.
+  }, [user]);
 
   return (
     <>

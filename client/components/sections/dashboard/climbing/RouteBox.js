@@ -36,8 +36,8 @@ export default function Route({
         if (res.status >= 200 && res.status < 300) {
           Alert.alert("Success", "Route progress saved. Awesome! ");
           setExpanded(false);
-          setRest(0); // Zurücksetzen des Zustands für Pausen
-          setReachedTop(null); // Zurücksetzen der Auswahl
+          setRest(0);
+          setReachedTop(null);
         } else {
           alert("Error setting route progress: " + JSON.stringify(res.data));
         }

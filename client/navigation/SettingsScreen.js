@@ -11,7 +11,6 @@ import { Climber } from "../Controller/Procedures.js";
 
 export default function SettingsScreen({ navigation }) {
   const [user, setUser] = useState();
-  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [actualPassword, setActualPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -23,14 +22,12 @@ export default function SettingsScreen({ navigation }) {
         const userDataString = await AsyncStorage.getItem("userData");
         const userData = userDataString ? JSON.parse(userDataString) : null;
         if (userData) {
-          console.log("userData :>> ", userData);
           setUser(userData.user);
-          setEmail(userData.email);
           setPassword(userData.password);
         }
       } catch (error) {
         console.error("Failed to load user data", error);
-        Alert.alert("Fehler", "Laden der Benutzerdaten fehlgeschlagen.");
+        alert("Error", "Failed to load user data.");
       }
     };
 
@@ -38,15 +35,13 @@ export default function SettingsScreen({ navigation }) {
   }, []);
 
   const updatePassword = async () => {
-    // Überprüfe, ob das aktuelle Passwort korrekt ist
     if (actualPassword !== password) {
-      alert("Fehler! Das aktuelle Passwort ist nicht korrekt.");
+      alert("Error!", "The current password is incorrect.");
       return;
     }
 
-    // Überprüfe, ob das neue Passwort und die Bestätigung übereinstimmen
     if (newPassword !== confirmNewPassword) {
-      alert("Fehler! Die neuen Passwörter stimmen nicht überein.");
+      alert("Error!", "The new passwords do not match!");
       return;
     }
 
@@ -65,7 +60,6 @@ export default function SettingsScreen({ navigation }) {
       <HeadText content="Make the change!" />
       <View style={styles.borderBox}>
         <Text style={styles.h3}>Username: {user}</Text>
-        <Text style={styles.h3}>Email: {email}</Text>
       </View>
       <ScrollView style={{ flex: 1 }}>
         <View>
@@ -89,10 +83,6 @@ export default function SettingsScreen({ navigation }) {
             setPassword={setConfirmNewPassword}
           />
           <Button text="Update Password" onPress={updatePassword} />
-          <Button
-            text="Go to Login Page"
-            onPress={() => navigation.navigate("Login")}
-          />
           <Button
             text="Logout"
             onPress={async () => {

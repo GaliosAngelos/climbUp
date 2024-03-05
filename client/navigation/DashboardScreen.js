@@ -9,10 +9,10 @@ import { Climber } from "../Controller/Procedures.js";
 import calculateTimeStamps from "../components/input/TimeIntervals.js";
 
 export default function DashboardScreen() {
-  const [routes, setRoutes] = useState([]); // Verwenden von useState für den Zustand
+  const [routes, setRoutes] = useState([]);
   const [selectedTimeframe, setSelectedTimeframe] = useState();
   const [statistics, setStatistics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Zustand für den Ladevorgang
+  const [isLoading, setIsLoading] = useState(true);
   const interval = calculateTimeStamps(selectedTimeframe);
 
   console.log("interval :>> ", interval);
@@ -21,20 +21,20 @@ export default function DashboardScreen() {
     query(Climber.get_user_statistics.call, [interval.past, interval.now])
       .then((res) => {
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
-        setStatistics(newStatistics); // Zustand aktualisieren, sobald Daten verfügbar sind
+        setStatistics(newStatistics);
         setIsLoading(false);
       })
       .catch((err) => {
         alert("Error: " + err);
         setIsLoading(false);
       });
-  }, [selectedTimeframe]); // Leeres Abhängigkeitsarray, damit der Effekt nur beim Mounten der Komponente ausgeführt wird
+  }, [selectedTimeframe]);
 
   return (
     <>
       <HeadText content="Elevate your progress!" />
       {isLoading ? (
-        <Text>Loading...</Text> // Anzeige eines Ladeindikators
+        <Text>Loading...</Text>
       ) : (
         <>
           <View style={{ flexDirection: "row", marginBottom: 15 }}>

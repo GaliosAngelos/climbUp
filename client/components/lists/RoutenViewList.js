@@ -16,19 +16,14 @@ export default function RoutenViewList({ interval }) {
 
   useEffect(() => {
     query(Climber.get_user_climbed_routes.call, [dayone, today])
-      // query(Climber.get_routes_by_hall_name.call, ['testhall2'])
       .then((res) => {
-        console.log("res :>> ", res.data.data[0].climb_timestamp);
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
         setStatistics(newStatistics);
       })
       .catch((err) => {
         alert("Error: " + err);
       });
-    //how to update?
   }, [interval]);
-
-  // In RoutenViewList
 
   const onDelete = (routeToDelete) => {
     console.log("item :>> ", routeToDelete);
@@ -38,7 +33,6 @@ export default function RoutenViewList({ interval }) {
       routeToDelete.climb_timestamp,
     ])
       .then((res) => {
-        // Löschen erfolgreich, aktualisiere die Liste
         const updatedStatistics = statistics.filter(
           (item) =>
             item.route_name !== routeToDelete.route_name ||
