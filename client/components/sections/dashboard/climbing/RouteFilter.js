@@ -1,58 +1,61 @@
 import React, { useState, useEffect } from "react";
-// Components
 import { View } from "react-native";
-// Icons
-import CustomFilterInput from "../../../input/CustomFilterInput.js";
+import { Climber } from "../../../../Controller/Procedures.js";
+import { query } from "../../../../Controller/requestHandler.js";
+import CustomTextInputFilter from "../../../input/CustomFilterInput.js";
 // ------------------------------------------------------------------
 
-// ClimbingHallBar component, likely used for filtering or searching climbing routes
-export default function RouteFilter({ onFilterChange }) {
+export default function RouteFilter({ setRoutes, hall_name }) {
   const [routeName, setRouteName] = useState("");
   const [level, setLevel] = useState("");
   const [sector, setSector] = useState("");
 
   useEffect(() => {
-    console.log(":>> ", routeName, sector, level);
+    console.log(":>> ", "routename: ", routeName, "sector: ", sector,"level: ", level);
   }, [routeName, sector, level]);
 
-  const handleFilterChange = () => {
-    onFilterChange({ routeName, level, sector });
-  };
-
+   useEffect(() => {
+    query(Climber.get_filtered_routes.call, [hall_name, level, sector, routeName])
+    .then((res) => {
+        if (res.data) { 
+          const filteredRoutes = Array.isArray(res.data.data) ? res.data.data : [];
+          console.log("filteredRoutes :>> ", filteredRoutes);
+          setRoutes(filteredRoutes);
+        }
+    })
+   }, [routeName, sector, level]);
+  
   return (
     <>
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 6, marginRight: 5 }}>
-          <CustomFilterInput
+          <CustomTextInputFilter
             label="Route"
             value={routeName}
             onChange={(text) => {
               setRouteName(text);
-              handleFilterChange();
             }}
           />
         </View>
         <View style={{ flex: 4, marginRight: 5 }}>
-          <CustomFilterInput
+          <CustomTextInputFilter
             label="Sektor"
             value={sector}
             onChange={(text) => {
               setSector(text);
-              handleFilterChange();
             }}
           />
         </View>
         <View style={{ flex: 3, marginRight: 5 }}>
-          <CustomFilterInput
-            label="Level"
-            value={level}
-            onChange={(text) => {
-              setLevel(text);
-              handleFilterChange();
-            }}
-          />
+        <CustomTextInputFilter
+        label="Level"
+        value={level}
+        onChange={(text) => {
+          setLevel(text);
+        }}
+      />
         </View>
       </View>
     </>
   );
-}
+};

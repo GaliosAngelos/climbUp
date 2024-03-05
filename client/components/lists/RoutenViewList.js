@@ -4,12 +4,9 @@ import RouteLogBox from "../sections/dashboard/RouteLogBox";
 // import statistic from "../../_mock/statistic";
 import { Climber } from "../../Controller/Procedures";
 import { query } from "../../Controller/requestHandler";
-import calculateTimeStamps from "../input/TimeIntervals";
 
 export default function RoutenViewList({ interval }) {
   const [statistics, setStatistics] = useState([]);
-  const dateStamps = calculateTimeStamps();
-  const [del, setDel] = useState(false);
 
   const dayone = interval.past;
   const today = interval.now;
@@ -25,7 +22,6 @@ export default function RoutenViewList({ interval }) {
       .catch((err) => {
         alert("Error: " + err);
       });
-    //how to update?
   }, [interval]);
 
   // In RoutenViewList

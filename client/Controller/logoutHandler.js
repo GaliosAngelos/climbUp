@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 
 // Replace with the actual endpoint of your server
+
 const logoutUrl = "http://35.193.105.8:3000/logout";
 
 async function logout(query) {

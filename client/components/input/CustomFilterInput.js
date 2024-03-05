@@ -2,7 +2,7 @@ import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import styles from "../styles/allStyles";
 
-export default function CustomFilterInput({ label, value, onChange }) {
+export default function CustomTextInputFilter({ label, value, onChange }) {
   return (
     <>
       <View style={styles.textinput}>
