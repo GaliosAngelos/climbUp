@@ -7,7 +7,6 @@ const climberUrl = "http://localhost:3000/register_climber";
 
 async function registerClimber(verifyByName, insert, params) {
   try {
-    console.log("verify :>> ", verifyByName);
     return await axios.post(climberUrl, { verifyByName, insert, params });
   } catch (err) {
     console.error("Error sending registry: ", err.response);
@@ -20,7 +19,7 @@ async function registerClimber(verifyByName, insert, params) {
 
 async function registerHallowner(verifyByName, insert, params) {
   try {
-    return await axios.post(hallownerUrl, { verifyByName: verifyByName, queinsert: insert, params: params });
+    return await axios.post(hallownerUrl, { verifyByName, insert, params });
   } catch (err) {
     console.error("Error sending registry: ", err.message);
     return {

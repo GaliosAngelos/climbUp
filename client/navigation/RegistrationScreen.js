@@ -6,7 +6,7 @@ import CustTextInput from "../components/input/CustTextInput";
 import CustTextInputPassword from "../components/input/CustTextInputPassword";
 import ButtonSmall from "../components/buttons/ButtonSmall";
 import Button from "../components/buttons/Button";
-import { registerClimber } from "../Controller/registryHandler";
+import { registerClimber, registerHallowner } from "../Controller/registryHandler";
 import { Climber } from "../Controller/Procedures";
 import CustTextInputEmail from "../components/input/CustTextInputEmail";
 import styles from "../components/styles/allStyles";
@@ -24,10 +24,11 @@ export default function RegistrationScreen({ navigation }) {
   };
 
   const handleRegistration = () => {
-    registerClimber(Climber.verify_climber_username.call, Climber.register_climber.call, [user, password, email])
+    if(selectedButton === 2){
+      registerClimber(Climber.verify_climber_username.call, Climber.register_climber.call, [user, password, email])
       .then((res) => {
         if (res.status === 201) {
-          Alert.alert("Success", "You were registered successfully. Proceed to login. ");          
+          Alert.alert("Success! ", "You were registered successfully. Proceed to login. ");          
           navigation.replace("Login");
         } else if (res.status === 400) {
           alert("Registration Error: " + JSON.stringify(res.data));
@@ -41,6 +42,25 @@ export default function RegistrationScreen({ navigation }) {
         console.log("Error during registration: ", err);
         alert("Error occured during registration process! Please try again later. ");
       });
+    } else if(selectedButton === 1) {
+      registerHallowner(Climber.verify_climber_username.call, Climber.register_climber.call, [user, password, email])
+      .then((res) => {
+        if (res.status === 201) {
+          Alert.alert("Success! ", "You were registered successfully. Proceed to login. ");          
+          navigation.replace("Login");
+        } else if (res.status === 400) {
+          alert("Registration Error: " + JSON.stringify(res.data));
+        } else if (res.status === 403) {
+          alert("Wrong user credentials: " + JSON.stringify(res.data));
+        } else {
+          alert("An unknown Error occured. Please try again later. ");
+        }
+      })
+      .catch((err) => {
+        console.log("Error during registration: ", err);
+        alert("Error occured during registration process! Please try again later. ");
+      });
+    }
   };
 
   return (
