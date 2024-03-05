@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // Components
 import HeadText from "../components/text/HeadText";
 import CustTextInput from "../components/input/CustTextInput";
@@ -25,7 +26,7 @@ export default function LoginScreen({ navigation }) {
     } else {
       // Hallowner
       setUser("dav_kletterzentrum_augsburg");
-      setPassword("1e0a1aed7e");
+      setPassword("123456");
     }
   }, [selectedButton]);
 
@@ -33,40 +34,30 @@ export default function LoginScreen({ navigation }) {
     setSelectedButton(buttonId);
   };
 
-  // Request on backend -> Login
-  const handleLogin = () => {
-    if (selectedButton === 2) {
-      loginHallowner([user, password])
-        .then((res) => {
-          if (res.status === 200 || res.status === 409) {
-            navigation.replace("HallDashboardTabs");
-          } else if (res.status === 400) {
-            alert("Anmeldefehler: " + JSON.stringify(res.data));
-          } else {
-            alert("Ein unbekannter Fehler ist aufgetreten.");
-          }
-        })
+  const handleLogin = async () => {
+    const loginFunction = selectedButton === 2 ? loginHallowner : loginClimber;
 
-        .catch((err) => {
-          console.log("Fehler beim Login-Versuch", err);
-          alert("Login-Versuch fehlgeschlagen.");
-        });
-    } else {
-      loginClimber([user, password])
-        .then((res) => {
-          if (res.status === 200 || res.status === 409) {
-            navigation.replace("ClimberDashboardTabs");
-          } else if (res.status === 400) {
-            alert("Anmeldefehler: " + JSON.stringify(res.data));
-          } else {
-            alert("Ein unbekannter Fehler ist aufgetreten.");
-          }
-        })
-        .catch((err) => {
-          console.log("Fehler beim Login-Versuch", err);
-          alert("Login-Versuch fehlgeschlagen.");
-        });
-    }
+    loginFunction([user, password])
+      .then(async (res) => {
+        if (res.status === 200 || res.status === 409) {
+          // Speichern der Benutzerdaten nach erfolgreichem Login
+          await AsyncStorage.setItem(
+            "userData",
+            JSON.stringify({ user, password })
+          );
+          const nextScreen =
+            selectedButton === 2 ? "HallDashboardTabs" : "ClimberDashboardTabs";
+          navigation.replace(nextScreen);
+        } else if (res.status === 400) {
+          alert("Anmeldefehler: " + JSON.stringify(res.data));
+        } else {
+          alert("Ein unbekannter Fehler ist aufgetreten.");
+        }
+      })
+      .catch((err) => {
+        console.log("Fehler beim Login-Versuch", err);
+        alert("Login-Versuch fehlgeschlagen.");
+      });
   };
 
   return (
