@@ -71,7 +71,7 @@ useEffect(() =>{
       .catch((err) => {
         alert("Error: ", err);
       });
- }, [user]);
+ }, []);
 
   useEffect(() => {
     const fetchHallsAndFavourites = async () => {
@@ -104,7 +104,7 @@ useEffect(() =>{
     if (user) {
       fetchHallsAndFavourites();
     }
-  }, []); // Füge `user` als Abhängigkeit hinzu, um die Funktion erneut auszuführen, sobald `user` gesetzt ist.
+  }, [user]); // Füge `user` als Abhängigkeit hinzu, um die Funktion erneut auszuführen, sobald `user` gesetzt ist.
 
   return (
     <>
