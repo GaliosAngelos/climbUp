@@ -34,17 +34,17 @@ export default function ClimbingHallScreen({ navigation }) {
     getUserData();
   }, []);
 
-  query(Climber.get_filtered_halls.call, [filterRequest])
-  .then((res) => {
-      if (res.data) { 
-        const filteredHalls = Array.isArray(res.data.data) ? res.data.data : [];
-        console.log("filtered Halls :>> ", filteredHalls);
-        setHalls(filteredHalls);
-      }
-  })
-  .catch((err) => {
-    alert("Error: ", err);
-  });
+  // query(Climber.get_filtered_halls.call, [filterRequest])
+  // .then((res) => {
+  //     if (res.data) { 
+  //       const filteredHalls = Array.isArray(res.data.data) ? res.data.data : [];
+  //       console.log("filtered Halls :>> ", filteredHalls);
+  //       setHalls(filteredHalls);
+  //     }
+  // })
+  // .catch((err) => {
+  //   alert("Error: ", err);
+  // });
 
 useEffect(() =>{
   query(Climber.get_user_favorites.call)
@@ -57,7 +57,7 @@ useEffect(() =>{
       .catch((err) => {
         alert("Error: ", err);
       });
- }, [filterRequest,]);
+ }, []);
 
   useEffect(() => {
     const fetchHallsAndFavourites = async () => {
