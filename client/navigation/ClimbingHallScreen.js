@@ -57,7 +57,7 @@ useEffect(() =>{
       .catch((err) => {
         alert("Error: ", err);
       });
- }, []);
+ }, [filterRequest]);
 
   useEffect(() => {
     const fetchHallsAndFavourites = async () => {
