@@ -7,32 +7,35 @@ import CustTextInput from "../../components/input/CustTextInput";
 import Button from "../../components/buttons/ButtonInsert";
 import ButtonDeleteUpdate from "../../components/buttons/ButtonDeleteUpdate";
 import styles from "../../components/styles/allStyles";
+import { query } from "../../Controller/requestHandler";
+import { Hall_Owner } from "../../Controller/Procedures";
 
 export default function ModifyRoute({ navigation, route }) {
   const [item, setItem] = useState({
-    color: "Test",
+    color: "",
     level_of_difficulty: "",
     line_number: "",
     route_name: "",
     sector: "",
-    tilt: "",
+    tilt: false,
+    hallname: "",
   });
-
+  console.log("route :>> ", route);
   console.log("route :>> ", route && route.params);
 
   useEffect(() => {
-    // Prüfe, ob 'route' und 'route.params' existieren, bevor du versuchst, Werte zu setzen
     if (route && route.params) {
       setItem({
         color: route.params.color || "",
-        level_of_difficulty: route.params.levelOfDificulty || "",
+        level_of_difficulty: route.params.levelOfDifficulty || "",
         line_number: route.params.lineNumber || "",
         route_name: route.params.routeName || "",
         sector: route.params.Sector || "",
-        tilt: route.params.Tilt || "",
+        tilt: route.params.Tilt || false,
+        hallname: route.params.hallname || "",
       });
     }
-  }, [route]);
+  }, []);
 
   const updateField = (key, value) => {
     setItem((prev) => ({
@@ -53,18 +56,53 @@ export default function ModifyRoute({ navigation, route }) {
   ];
 
   const onSubmit = () => {
-    // Validierungslogik und Navigation
-    navigation.navigate("HallAllRoutes");
-    setItem({
-      color: "",
-      level_of_difficulty: "",
-      line_number: "",
-      route_name: "",
-      sector: "",
-      tilt: "",
-    });
+    query(Hall_Owner.insert_route.call, [
+      item.route_name,
+      item.sector,
+      item.level_of_difficulty,
+      item.color,
+      item.line_number,
+      item.tilt,
+    ])
+      .then((res) => {
+        alert("Erfolgreich hinzugefügt!");
+        navigation.navigate("HallAllRoutes");
+        // Zurücksetzen des Formulars hier, falls erforderlich
+      })
+      .catch((err) => {
+        console.error("Fehler beim Einfügen der Route: ", err);
+        alert("Fehler beim Einfügen der Route: " + err.message);
+      });
   };
 
+  const onDelete = () => {
+    query(Hall_Owner.delete_route.call, [item.route_name])
+      .then((res) => {
+        alert("Route deleted! ");
+        navigation.navigate("HallAllRoutes");
+      })
+      .catch((err) => {
+        alert("Fehler beim Einfügen der Route: " + err.message);
+      });
+  };
+
+  const onUpdate = () => {
+    query(Hall_Owner.update_route.call, [
+      item.route_name,
+      item.sector,
+      item.level_of_difficulty,
+      item.color,
+      item.line_number,
+      item.tilt,
+    ])
+      .then((res) => {
+        alert("Route updated! ");
+        navigation.navigate("HallAllRoutes");
+      })
+      .catch((err) => {
+        alert("Fehler beim Einfügen der Route: " + err.message);
+      });
+  };
   const back = () => {
     setItem({
       color: "",
@@ -89,8 +127,9 @@ export default function ModifyRoute({ navigation, route }) {
       />
       <View>
         <RouteBox
+          hallname={item.hallname}
           color={item.color}
-          levelOfDificulty={item.level_of_difficulty}
+          levelOfDifficulty={item.level_of_difficulty}
           lineNumber={item.line_number}
           routeName={item.route_name}
           Sector={item.sector}
@@ -165,14 +204,8 @@ export default function ModifyRoute({ navigation, route }) {
         </View>
         {route && route.params ? (
           <>
-            <ButtonDeleteUpdate
-              onPress={() => alert("Delete logic here")}
-              abfrage={true}
-            />
-            <ButtonDeleteUpdate
-              onPress={() => alert("Update logic here")}
-              abfrage={false}
-            />
+            <ButtonDeleteUpdate onPress={() => onDelete()} abfrage={true} />
+            <ButtonDeleteUpdate onPress={() => onUpdate()} abfrage={false} />
           </>
         ) : (
           <Button onPress={onSubmit} name="Create Route" />

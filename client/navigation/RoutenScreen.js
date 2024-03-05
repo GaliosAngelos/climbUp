@@ -16,6 +16,12 @@ export default function RoutenScreen({ navigation, route }) {
   const [allRoutes, setAllRoutes] = useState([]); // Zustand für alle geladenen Routen
   const [routes, setRoutes] = useState([]); // Zustand für die aktuell angezeigten (gefilterten) Routen
   const [isLiked, setIsLiked] = useState(favourite);
+  const [data, setData] = useState({
+    route_name: "So",
+    sector: null,
+    level: null,
+  });
+  const [name, setName] = useState("Z");
 
   // Lade alle Routen, wenn hall_name vorhanden ist
   useEffect(() => {
@@ -56,18 +62,23 @@ export default function RoutenScreen({ navigation, route }) {
     }
   }, [isLiked]);
 
+  // useEffect(() => {
+  //   query(Climber.get_routes_by_letter.call, [
+  //     hall_name,
+  //     `%${data.level}%`,
+  //     `%${data.sector}%`,
+  //     `%${name}%`,
+  //   ]).then((res) => {
+  //     if (res.data) {
+  //       console.log("response: ", res);
+  //       setRoutes(res.data);
+  //     }
+  //   });
+  // }, [name]);
+
   // Filterfunktion, die die Routenliste im Frontend aktualisiert
   const handleFilterChange = (routeName, sector, level) => {
-    const filteredRoutes = allRoutes.filter((route) => {
-      return (
-        (!routeName ||
-          route.route_name.toLowerCase().includes(routeName.toLowerCase())) &&
-        (!sector || route.sector.toLowerCase() === sector.toLowerCase()) &&
-        (!level || route.level_of_difficulty === level)
-      );
-    });
-
-    setRoutes(filteredRoutes); // Aktualisiere die Zustandsvariable mit den gefilterten Routen
+    setData({ route_name: routeName, sector: sector, level: level });
   };
 
   const toggleLike = () => {
