@@ -2,15 +2,13 @@ import React from "react";
 import { View } from "react-native";
 import ClimbingHallBox from "../sections/dashboard/climbing/ClimbingHallBox";
 
-export default function ClimbingHallList({ halls, navigation }) {
+export default function ClimbingHallList({ halls, navigation, favourite }) {
   const isHallsArray = Array.isArray(halls);
-  console.log('Typ von halls:', typeof halls, 'Inhalt von halls:', halls);
+
   return (
-
     <View>
-      {isHallsArray ? 
+      {isHallsArray ? (
         halls.map((item, index) => (
-
           <ClimbingHallBox
             key={index}
             hall_name={item.hall_name}
@@ -18,10 +16,12 @@ export default function ClimbingHallList({ halls, navigation }) {
             city={item.city}
             postal_code={item.postal_code}
             navigation={navigation}
-            favourite={false}
+            favourite={favourite}
           />
-        )) : <View /> // Falls 'halls' kein Array ist, wird nichts gerendert
-      }
+        ))
+      ) : (
+        <View />
+      )}
     </View>
   );
 }

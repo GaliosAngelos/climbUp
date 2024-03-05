@@ -13,18 +13,17 @@ import { query } from "../Controller/requestHandler.js";
 
 export default function RoutenScreen({ navigation, route }) {
   const { hall_name } = route.params;
-  const [routes, setRoutes] = useState([]); // Zustand für alle geladenen Routen
+  const [routes, setRoutes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
-  const [reload, setReload] = useState(false);
-  // Lade alle Routen, wenn hall_name vorhanden ist
+  
   useEffect(() => {
     if (hall_name) {
       query(Climber.get_routes_by_hall_name.call, [hall_name])
         .then((res) => {
-          if (res.data) { // Stelle sicher, dass Daten vorhanden sind
+          if (res.data) { 
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
             console.log("response :>> ", newRoutes);
-            setRoutes(newRoutes); // Speichere alle Routen
+            setRoutes(newRoutes); 
             setReload(true);
           }
         })
@@ -32,7 +31,27 @@ export default function RoutenScreen({ navigation, route }) {
     }
   }, [hall_name]);
 
-  // Filterfunktion, die die Routenliste im Frontend aktualisiert
+  useEffect(() => {
+    if (isLiked) {
+      query(Climber.add_favorite.call, [hall_name])
+        .then((res) => {
+          if (res.data) {
+            // Stelle sicher, dass Daten vorhanden sind
+            console.log("response: ", res);
+          }
+        })
+        .catch((err) => alert("Error: ", err));
+    } else if (!isLiked) {
+      query(Climber.remove_favorite.call, [hall_name])
+        .then((res) => {
+          if (res.data) {
+            // Stelle sicher, dass Daten vorhanden sind
+            console.log("response: ", res);
+          }
+        })
+        .catch((err) => alert("Error: ", err));
+    }
+  }, [isLiked]);
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
@@ -40,7 +59,7 @@ export default function RoutenScreen({ navigation, route }) {
 
   return (
     <>
-      <ButtonBack onPress={() => navigation.goBack()} />
+      <ButtonBack onPress={() => navigation.navigate("ClimbingHall")} />
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>

@@ -15,6 +15,7 @@ export default function RoutenViewList({ interval }) {
     query(Climber.get_user_climbed_routes.call, [dayone, today])
       // query(Climber.get_routes_by_hall_name.call, ['testhall2'])
       .then((res) => {
+        console.log("res :>> ", res.data.data[0].climb_timestamp);
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
         setStatistics(newStatistics);
       })
@@ -23,16 +24,31 @@ export default function RoutenViewList({ interval }) {
       });
   }, [interval]);
 
+  // In RoutenViewList
+
+  const onDelete = (routeToDelete) => {
+    console.log("item :>> ", routeToDelete);
+    query(Climber.delete_user_statistic.call, [
+      routeToDelete.hall_name,
+      routeToDelete.route_name,
+      routeToDelete.climb_timestamp,
+    ])
+      .then((res) => {
+        // Löschen erfolgreich, aktualisiere die Liste
+        const updatedStatistics = statistics.filter(
+          (item) =>
+            item.route_name !== routeToDelete.route_name ||
+            item.climb_timestamp !== routeToDelete.climb_timestamp
+        );
+        setStatistics(updatedStatistics);
+      })
+      .catch((err) => alert("Error: " + err));
+  };
+
   return (
     <View>
       {statistics.map((item, index) => (
-        <RouteLogBox
-          key={index}
-          route_name={item.route_name}
-          level_of_difficulty={item.level_of_difficulty}
-          paused={item.paused}
-          reachedTop={item.successful}
-        />
+        <RouteLogBox key={index} item={item} onDelete={onDelete} />
       ))}
     </View>
   );
