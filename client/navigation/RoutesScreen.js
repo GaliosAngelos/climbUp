@@ -7,32 +7,26 @@ import ButtonBack from "../components/buttons/ButtonBack.js";
 import styles from "../components/styles/allStyles.js";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // Query
-import RoutenList from "../components/lists/RoutenList.js";
+import RoutesList from "../components/lists/RoutesList.js";
 import { Climber } from "../Controller/Procedures.js";
 import { query } from "../Controller/requestHandler.js";
 
-export default function RoutenScreen({ navigation, route }) {
+export default function RoutesScreen({ navigation, route }) {
   const { hall_name } = route.params;
-  const [routes, setRoutes] = useState([]); // Zustand für alle geladenen Routen
+  const [routes, setRoutes] = useState([]); 
   const [isLiked, setIsLiked] = useState(false);
-  const [reload, setReload] = useState(false);
-  // Lade alle Routen, wenn hall_name vorhanden ist
+
   useEffect(() => {
-    if (hall_name) {
       query(Climber.get_routes_by_hall_name.call, [hall_name])
         .then((res) => {
-          if (res.data) { // Stelle sicher, dass Daten vorhanden sind
+          if (res.data) { 
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
             console.log("response :>> ", newRoutes);
-            setRoutes(newRoutes); // Speichere alle Routen
-            setReload(true);
+            setRoutes(newRoutes); 
           }
         })
         .catch((err) => alert("Error: ", err));
-    }
-  }, [hall_name]);
-
-  // Filterfunktion, die die Routenliste im Frontend aktualisiert
+    }, []);
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
@@ -58,10 +52,9 @@ export default function RoutenScreen({ navigation, route }) {
           </TouchableOpacity>
         </View>
       </View>
-
-      <RouteFilter hall_name={hall_name} setRoutes={setRoutes} routes={routes} reload={reload}/>
+      <RouteFilter hall_name={hall_name} setRoutes={setRoutes}/>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <RoutenList routes={routes} expand={true} hall_name={hall_name} />
+        <RoutesList routes={routes} expand={true} hall_name={hall_name} />
         <View style={{ marginBottom: 130 }} />
       </ScrollView>
     </>

@@ -5,7 +5,7 @@ import RouteLogBox from "../sections/dashboard/RouteLogBox";
 import { Climber } from "../../Controller/Procedures";
 import { query } from "../../Controller/requestHandler";
 
-export default function RoutenViewList({ interval }) {
+export default function RoutesViewList({ interval }) {
   const [statistics, setStatistics] = useState([]);
 
   const dayone = interval.past;
@@ -13,7 +13,6 @@ export default function RoutenViewList({ interval }) {
 
   useEffect(() => {
     query(Climber.get_user_climbed_routes.call, [dayone, today])
-      // query(Climber.get_routes_by_hall_name.call, ['testhall2'])
       .then((res) => {
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
         setStatistics(newStatistics);

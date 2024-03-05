@@ -7,6 +7,7 @@ const queryUrl = 'http://35.193.105.8:3000/query';
 async function query (query, params) {
     try {
         const request = params ? { query: query, params: params } : { query: query };
+        console.log("request :>> ", request);
         return await axios.post(queryUrl, request);
     } catch (err) {
         // console.error('Error sending query:', err.message);

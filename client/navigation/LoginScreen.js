@@ -41,15 +41,15 @@ export default function LoginScreen({ navigation }) {
           if (res.status === 200 || res.status === 409) {
             navigation.replace("HallDashboardTabs");
           } else if (res.status === 400) {
-            alert("Anmeldefehler: " + JSON.stringify(res.data));
+            alert("Error during login: ", JSON.stringify(res.data));
           } else {
-            alert("Ein unbekannter Fehler ist aufgetreten.");
+            alert("Unknown Error occured. ");
           }
         })
 
         .catch((err) => {
-          console.log("Fehler beim Login-Versuch", err);
-          alert("Login-Versuch fehlgeschlagen.");
+          console.log("Error durin login: ", err);
+          alert("Login failed. ");
         });
     } else {
       loginClimber([user, password])
@@ -57,14 +57,15 @@ export default function LoginScreen({ navigation }) {
           if (res.status === 200 || res.status === 409) {
             navigation.replace("ClimberDashboardTabs");
           } else if (res.status === 400) {
-            alert("Anmeldefehler: " + JSON.stringify(res.data));
+            alert("Error during login: ", JSON.stringify(res.data));
           } else {
-            alert("Ein unbekannter Fehler ist aufgetreten.");
+            alert("Unknown Error occured. ");
           }
         })
+
         .catch((err) => {
-          console.log("Fehler beim Login-Versuch", err);
-          alert("Login-Versuch fehlgeschlagen.");
+          console.log("Error durin login: ", err);
+          alert("Login failed. ");
         });
     }
   };

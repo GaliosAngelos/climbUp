@@ -11,7 +11,7 @@ import SettingsScreen from "./SettingsScreen";
 import ClimbingHallScreen from "./ClimbingHallScreen";
 import RegistrationScreen from "./RegistrationScreen";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
-import RoutenScreen from "./RoutenScreen";
+import RoutesScreen from "./RoutesScreen";
 import HallDashboardScreen from "./hall/HallDashboardScreen";
 import HallAllRoutes from "./hall/HallAllRoutes";
 import ModifyRoute from "./hall/ModifyRoute";
@@ -86,8 +86,8 @@ function ClimberDashboardTabs() {
         options={{ tabBarShowLabel: false, headerShown: false }}
       />
       <Tab.Screen
-        name="Routen"
-        component={RoutenScreen}
+        name="Routes"
+        component={RoutesScreen}
         options={{
           tabBarShowLabel: false,
           headerShown: false,

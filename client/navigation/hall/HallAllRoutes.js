@@ -3,7 +3,7 @@ import { View, ScrollView } from "react-native";
 import HeadText from "../../components/text/HeadText.js";
 import ButtonInsert from "../../components/buttons/ButtonInsert.js";
 import RouteFilter from "../../components/sections/dashboard/climbing/RouteFilter.js";
-import RoutenList from "../../components/lists/RoutenList.js";
+import RoutesList from "../../components/lists/RoutesList.js";
 import Routes from "../../_mock/routes.js";
 
 export default function HallAllRoutes({ navigation }) {
@@ -23,7 +23,7 @@ export default function HallAllRoutes({ navigation }) {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <RoutenList routes={Routes} expand={false} />
+        <RoutesList routes={Routes} expand={false} />
 
         <View style={{ marginBottom: 130 }} />
       </ScrollView>

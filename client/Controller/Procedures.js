@@ -110,7 +110,11 @@ export const Climber = Object.freeze({
     get_filtered_routes: {
         call: `SELECT * FROM climbup.get_routes_details($1, $2, $3, $4)`,
         values: ['hall_name', 'difficulty', 'sector', 'route_name'],
-    } 
+    },
+    get_filtered_halls: {
+        call: `SELECT * FROM climbup.get_climbing_halls_list3($1, $2)`,
+        values: ['hall/NULL', 'city/NULL'],
+    }
     //#endregion
 });
 
