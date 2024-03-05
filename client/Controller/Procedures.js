@@ -75,6 +75,22 @@ export const Climber = Object.freeze({
         call: `CALL climbup.drop_climber_user($1)`,
         values: ['climber_name'],   
     },
+    climber_email_exists: {
+      call: `SELECT verify_climber_email_exists($1)`,
+      values: ['e-mail'],
+    },
+    verify_climber_username: {
+      call: `SELECT verify_climber_credentials(_user_name => $1, _hashed_password => $2)`,
+      values: ['username', 'password'],
+    },
+    verify_climber_email: {
+      call: `SELECT verify_climber_credentials(_hashed_password => $1, _email_address => $2)`,
+      values: [ 'password', 'email' ],
+    },
+    reset_and_get_climber_password: {
+      call: `SELECT * FROM reset_and_get_climber_password($1)`,
+      values: ['e-mail'],
+    },
     add_favorite: {
         call:`CALL climbup.add_favorite($1)`,
         values: ['hall_name'],
