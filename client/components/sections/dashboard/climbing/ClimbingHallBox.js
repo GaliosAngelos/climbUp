@@ -17,7 +17,7 @@ export default function ClimbingHallBox({
   favourite,
 }) {
   const openHallWithRoutes = () => {
-    navigation.navigate("Routen", {
+    navigation.navigate("Routes", {
       hall_name: hall_name,
       favourite: favourite,
     });

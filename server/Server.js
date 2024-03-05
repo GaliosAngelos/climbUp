@@ -1,7 +1,6 @@
 const express = require("express");
 const { Client: SSHClient } = require("ssh2");
 const { Pool, Client: PGClient } = require("pg");
-
 const net = require("net");
 const fs = require("fs");
 const app = express();
@@ -143,16 +142,20 @@ app.post("/register_climber", async (req, res) => {
   try {
     //TODO: Add functionality to add user in database! (Procedures)
     const client = "climber";
+    const dbadmin = {user: 'dbadmin',  password:'dbadmin'};
+    const  adminClient = addClient(client, dbadmin.user, dbadmin.password);
     const newClient = addClient(client, user, password);
-    if (newClient === false) {
-      return res.status(403).send({ message: "Choose another username. " });
-    } else {
-      dbClient = await dbadmin.connect();
+    // if (newClient === false) {
+    //   return res.status(403).send({ message: "Choose another username. " });
+    // } else {
+
+      await adminClient.connect();
+
       // await newClient.connect();
       await dbClient.query(query, params);
       dbClient.release();
       return res.status(201).send({ message: "Climber created. " });
-    }
+    // }
   } catch (err) {
     console.error("Error during registry request: ", err);
     await endClientAndRestartSSHTunnel(true);

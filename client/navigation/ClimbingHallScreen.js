@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { View, ScrollView, Alert } from "react-native";
 import HeadText from "../components/text/HeadText.js";
-import CustTextInput from "../components/input/CustTextInput.js";
 import ClimbingHallList from "../components/lists/ClimbingHallList.js";
 import { Climber } from "../Controller/Procedures.js";
 import { query } from "../Controller/requestHandler.js";
+import CustomTextInputFilter from "../components/input/CustomFilterInput.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ClimbingHallScreen({ navigation }) {
   const [user, setUser] = useState();
   const [halls, setHalls] = useState([]);
   const [favouriteHalls, setFavouriteHalls] = useState([]);
+  const [filterRequest, setFilterRequest] = useState("");
+  const requestArray = filterRequest.split(',');
+  useEffect(() => {
+    console.log("Name/City Request :>> ", requestArray);
+  }, [filterRequest]);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -28,6 +33,45 @@ export default function ClimbingHallScreen({ navigation }) {
 
     getUserData();
   }, []);
+
+  useEffect(() => {
+    const fetchFilteredHalls = async () => {
+      let nameSearch = null;
+      let citySearch = null;
+      
+      if (filterRequest) {
+        const requestParts = filterRequest.split(',');
+        nameSearch = requestParts[0] ? requestParts[0].trim() : null; // Nimmt den Namen vor dem Komma, falls vorhanden
+        citySearch = requestParts[1] ? requestParts[1].trim() : null; // Nimmt die Stadt nach dem Komma, falls vorhanden
+      }
+  
+      try {
+        const res = await query(Climber.get_filtered_halls.call, [nameSearch, citySearch]);
+        if (res.data) {
+          const filteredHalls = Array.isArray(res.data.data) ? res.data.data : [];
+          console.log("Filtered Halls :>> ", filteredHalls);
+          setHalls(filteredHalls);
+        }
+      } catch (err) {
+        alert("Error: ", err);
+      }
+    };
+  
+    fetchFilteredHalls();
+  }, [filterRequest]);
+
+useEffect(() =>{
+  query(Climber.get_user_favorites.call)
+      .then((res) => {
+        const hallsFavourites = Array.isArray(res.data.data)
+          ? res.data.data
+          : [];
+        setFavouriteHalls(hallsFavourites);
+      })
+      .catch((err) => {
+        alert("Error: ", err);
+      });
+ }, []);
 
   useEffect(() => {
     const fetchHallsAndFavourites = async () => {
@@ -65,7 +109,13 @@ export default function ClimbingHallScreen({ navigation }) {
   return (
     <>
       <HeadText content="Where every climb feels like home." />
-      <CustTextInput text={"Name, City"} />
+      <CustomTextInputFilter
+        label="Hallname, City"
+        value={filterRequest}
+        onChange={(text) => {
+          setFilterRequest(text);
+        }}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           {favouriteHalls.length >= 0 && (
