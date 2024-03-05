@@ -34,11 +34,12 @@ export default function HallAllRoutes({ navigation }) {
     if (user) {
       query(Climber.get_routes_by_hall_name.call, [user])
         .then((res) => {
-          console.log("res :>> ", res);
+          // console.log("res :>> ", res.data);
+          console.log("user :>> ", user);
           if (res.data) {
             // Stelle sicher, dass Daten vorhanden sind
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
-            console.log("newRoutes :>> ", newRoutes);
+            // console.log("newRoutes :>> ", newRoutes);
             setRoutes(newRoutes); // Initial werden alle Routen angezeigt
           }
         })
@@ -51,7 +52,7 @@ export default function HallAllRoutes({ navigation }) {
       <View>
         <HeadText content="Keep your Routes updated." />
 
-        <RouteFilter setRoutes={setRoutes} />
+        <RouteFilter hall_name={user} setRoutes={setRoutes} />
       </View>
 
       <View>

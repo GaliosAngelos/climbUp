@@ -14,7 +14,7 @@ export default function ClimbingHallScreen({ navigation }) {
   const [filterRequest, setFilterRequest] = useState("");
   const requestArray = filterRequest.split(',');
   useEffect(() => {
-    console.log(":>> ", "Name/City Request: ", requestArray);
+    console.log("Name/City Request :>> ", requestArray);
   }, [filterRequest]);
 
   useEffect(() => {
@@ -34,17 +34,31 @@ export default function ClimbingHallScreen({ navigation }) {
     getUserData();
   }, []);
 
-  // query(Climber.get_filtered_halls.call, [filterRequest])
-  // .then((res) => {
-  //     if (res.data) { 
-  //       const filteredHalls = Array.isArray(res.data.data) ? res.data.data : [];
-  //       console.log("filtered Halls :>> ", filteredHalls);
-  //       setHalls(filteredHalls);
-  //     }
-  // })
-  // .catch((err) => {
-  //   alert("Error: ", err);
-  // });
+  useEffect(() => {
+    const fetchFilteredHalls = async () => {
+      let nameSearch = null;
+      let citySearch = null;
+      
+      if (filterRequest) {
+        const requestParts = filterRequest.split(',');
+        nameSearch = requestParts[0] ? requestParts[0].trim() : null; // Nimmt den Namen vor dem Komma, falls vorhanden
+        citySearch = requestParts[1] ? requestParts[1].trim() : null; // Nimmt die Stadt nach dem Komma, falls vorhanden
+      }
+  
+      try {
+        const res = await query(Climber.get_filtered_halls.call, [nameSearch, citySearch]);
+        if (res.data) {
+          const filteredHalls = Array.isArray(res.data.data) ? res.data.data : [];
+          console.log("Filtered Halls :>> ", filteredHalls);
+          setHalls(filteredHalls);
+        }
+      } catch (err) {
+        alert("Error: ", err);
+      }
+    };
+  
+    fetchFilteredHalls();
+  }, [filterRequest]);
 
 useEffect(() =>{
   query(Climber.get_user_favorites.call)
@@ -57,7 +71,7 @@ useEffect(() =>{
       .catch((err) => {
         alert("Error: ", err);
       });
- }, [filterRequest]);
+ }, [user]);
 
   useEffect(() => {
     const fetchHallsAndFavourites = async () => {
@@ -90,7 +104,7 @@ useEffect(() =>{
     if (user) {
       fetchHallsAndFavourites();
     }
-  }, [user]); // Füge `user` als Abhängigkeit hinzu, um die Funktion erneut auszuführen, sobald `user` gesetzt ist.
+  }, []); // Füge `user` als Abhängigkeit hinzu, um die Funktion erneut auszuführen, sobald `user` gesetzt ist.
 
   return (
     <>
