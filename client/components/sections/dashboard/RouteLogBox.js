@@ -4,15 +4,13 @@ import styles from "../../styles/allStyles";
 import { Swipeable } from "react-native-gesture-handler";
 
 export default function RouteLogBox({ item, onDelete }) {
-  const swipeableRef = useRef(null); // Referenz für den Swipeable
-
-  // Verbesserte Rendermethode für die rechte Wischaktion
+  const swipeableRef = useRef(null);
   const renderRightActions = () => {
     return (
       <TouchableOpacity
         onPress={() => {
           if (swipeableRef.current) {
-            swipeableRef.current.close(); // Schließe den Swipeable, bevor du onDelete aufrufst
+            swipeableRef.current.close();
           }
           onDelete(item);
         }}

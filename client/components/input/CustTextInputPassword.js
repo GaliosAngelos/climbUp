@@ -27,7 +27,7 @@ export default function CustTextInputPassword({ text, password, setPassword }) {
         onChangeText={setPassword}
         style={[styles.text, { flex: 10 }]}
         placeholder={text}
-        autoCapitalize='none'
+        autoCapitalize="none"
       />
       <Ionicons
         name={showPassword ? "eye" : "eye-off"}

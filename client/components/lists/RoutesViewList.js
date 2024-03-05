@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import RouteLogBox from "../sections/dashboard/RouteLogBox";
-// import statistic from "../../_mock/statistic";
 import { Climber } from "../../Controller/Procedures";
 import { query } from "../../Controller/requestHandler";
 
@@ -23,8 +22,6 @@ export default function RoutesViewList({ interval }) {
       });
   }, [interval]);
 
-  // In RoutenViewList
-
   const onDelete = (routeToDelete) => {
     console.log("item :>> ", routeToDelete);
     query(Climber.delete_user_statistic.call, [
@@ -33,7 +30,6 @@ export default function RoutesViewList({ interval }) {
       routeToDelete.climb_timestamp,
     ])
       .then((res) => {
-        // Löschen erfolgreich, aktualisiere die Liste
         const updatedStatistics = statistics.filter(
           (item) =>
             item.route_name !== routeToDelete.route_name ||

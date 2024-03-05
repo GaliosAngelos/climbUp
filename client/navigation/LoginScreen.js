@@ -40,7 +40,6 @@ export default function LoginScreen({ navigation }) {
     loginFunction([user, password])
       .then(async (res) => {
         if (res.status === 200 || res.status === 409) {
-          // Speichern der Benutzerdaten nach erfolgreichem Login
           await AsyncStorage.setItem(
             "userData",
             JSON.stringify({ user, password })
@@ -51,12 +50,12 @@ export default function LoginScreen({ navigation }) {
         } else if (res.status === 400) {
           alert("Anmeldefehler: " + JSON.stringify(res.data));
         } else {
-          alert("Ein unbekannter Fehler ist aufgetreten.");
+          alert("An unknown error has occurred.");
         }
       })
       .catch((err) => {
-        console.log("Fehler beim Login-Versuch", err);
-        alert("Login-Versuch fehlgeschlagen.");
+        console.log("Error during login attempt", err);
+        alert("Login attempt failed.");
       });
   };
 

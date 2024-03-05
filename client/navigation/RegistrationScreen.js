@@ -22,9 +22,7 @@ export default function RegistrationScreen({ navigation }) {
     setSelectedButton(buttonId);
   };
 
-  // Request on backend + send verification to Email
   const handleRegistration = () => {
-    // registerClimber(Climber.register_climber, [user, password, email])
     registerClimber(Climber.register_climber.call, [user, password, email])
       .then((res) => {
         if (res.status === 201 || res.status === 409) {

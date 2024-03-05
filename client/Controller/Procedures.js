@@ -63,73 +63,77 @@ export const Hall_Owner = Object.freeze({
 });
 
 export const Climber = Object.freeze({
-    register_climber: {
-        call: "SELECT climbup.register_climber_user($1, $2, $3)",
-        values: [ 'new_username', 'new_pw', 'email' ],
-    },
-    change_climber_pw: {
-        call:`Call climbup.change_climber_password($1)`,
-        values: ['new_pw'],
-    },
-    drop_climber: {
-        call: `CALL climbup.drop_climber_user($1)`,
-        values: ['climber_name'],   
-    },
-    add_favorite: {
-        call:`CALL climbup.add_favorite($1)`,
-        values: ['hall_name'],
-    },
-    remove_favorite: {
-        call: `CALL climbup.remove_favorite($1)`,
-        values: ['hall_name'],
-    },
-    get_user_favorites: {
-        call:`SELECT * FROM climbup.get_user_favorites();`,
-    },
-    insert_user_statistic: {
-        call: `CALL climbup.insert_user_statistic($1, $2, $3, $4, $5)`,
-        values: ['hall_name', 'route', 'difficulty', 'nr_rests', 'reached_top_TRUE_FALSE'],
-    },
-    get_user_statistics: {
-        call: `SELECT * from climbup.get_user_statistics2($1, $2)`,
-        values: ['start_date_2024-01-01', 'end_date_2024-01-01'],
-    },
-    get_user_climbed_routes: {
-        call: `SELECT * FROM climbup.get_user_climbed_routes2($1, $2)`,
-        values: ['start_date_2024-01-01', 'end_date_2024-01-01'],
-    },
-    delete_user_statistic: {
-        call:`CALL climbup.delete_user_statistic($1, $2, $3)`,
-        values: [ 'hall_name', 'route', 'time_stamp_2024-02-16 14:00:00'],
-    },
-    get_routes_by_hall_name: {
-        call: `SELECT * FROM climbup.get_routes_details_by_hall_name2($1)`,
-        value: ['testhall2'],
-    },
-    get_routes_by_route_name: {
-        call: `SELECT * FROM climbup.get_route_details_by_name2($1, $2)`,
-        values: ['hall_name', 'route_name'],
-    },
-    get_routes_by_sector: {
-        call: `SELECT * FROM climbup.get_routes_details_by_sector2($1, $2)`,
-        values: ['hall_name', 'sector_label'],
-    },
-    get_routes_by_difficulty: {
-        call: `SELECT * FROM climbup.get_routes_details_by_difficulty2($1, $2)`,
-        value: ['hall_name', 'difficulty_5.10a'],
-    },
-    get_climbing_halls_list: {
-        call: `SELECT * FROM climbup.get_climbing_halls_list2()`,
-    },
-    get_filtered_routes: {
-        call: `SELECT * FROM climbup.get_routes_details($1, $2, $3, $4)`,
-        values: ['hall_name', 'difficulty', 'sector', 'route_name'],
-    },
-    get_filtered_halls: {
-        call: `SELECT * FROM climbup.get_climbing_halls_list3($1, $2)`,
-        values: ['hall/NULL', 'city/NULL'],
-    }
-    //#endregion
+  register_climber: {
+    call: "SELECT climbup.register_climber_user($1, $2, $3)",
+    values: ["new_username", "new_pw", "email"],
+  },
+  change_climber_pw: {
+    call: `Call climbup.change_climber_password($1)`,
+    values: ["new_pw"],
+  },
+  drop_climber: {
+    call: `CALL climbup.drop_climber_user($1)`,
+    values: ["climber_name"],
+  },
+  add_favorite: {
+    call: `CALL climbup.add_favorite($1)`,
+    values: ["hall_name"],
+  },
+  remove_favorite: {
+    call: `CALL climbup.remove_favorite($1)`,
+    values: ["hall_name"],
+  },
+  get_user_favorites: {
+    call: `SELECT * FROM climbup.get_user_favorites();`,
+  },
+  insert_user_statistic: {
+    call: `CALL climbup.insert_user_statistic($1, $2, $3, $4, $5)`,
+    values: [
+      "hall_name",
+      "route",
+      "difficulty",
+      "nr_rests",
+      "reached_top_TRUE_FALSE",
+    ],
+  },
+  get_user_statistics: {
+    call: `SELECT * from climbup.get_user_statistics2($1, $2)`,
+    values: ["start_date_2024-01-01", "end_date_2024-01-01"],
+  },
+  get_user_climbed_routes: {
+    call: `SELECT * FROM climbup.get_user_climbed_routes2($1, $2)`,
+    values: ["start_date_2024-01-01", "end_date_2024-01-01"],
+  },
+  delete_user_statistic: {
+    call: `CALL climbup.delete_user_statistic($1, $2, $3)`,
+    values: ["hall_name", "route", "time_stamp_2024-02-16 14:00:00"],
+  },
+  get_routes_by_hall_name: {
+    call: `SELECT * FROM climbup.get_routes_details_by_hall_name2($1)`,
+    value: ["testhall2"],
+  },
+  get_routes_by_route_name: {
+    call: `SELECT * FROM climbup.get_route_details_by_name2($1, $2)`,
+    values: ["hall_name", "route_name"],
+  },
+  get_routes_by_sector: {
+    call: `SELECT * FROM climbup.get_routes_details_by_sector2($1, $2)`,
+    values: ["hall_name", "sector_label"],
+  },
+  get_routes_by_difficulty: {
+    call: `SELECT * FROM climbup.get_routes_details_by_difficulty2($1, $2)`,
+    value: ["hall_name", "difficulty_5.10a"],
+  },
+  get_climbing_halls_list: {
+    call: `SELECT * FROM climbup.get_climbing_halls_list2()`,
+  },
+  get_filtered_routes: {
+    call: `SELECT * FROM climbup.get_routes_details($1, $2, $3, $4)`,
+    values: ["hall_name", "difficulty", "sector", "route_name"],
+  },
+  get_filtered_halls: {
+    call: `SELECT * FROM climbup.get_climbing_halls_list3($1, $2)`,
+    values: ["hall/NULL", "city/NULL"],
+  },
+  //#endregion
 });
-
-// module.exports = { Hall_Owner, Climber };

@@ -13,24 +13,24 @@ import { query } from "../Controller/requestHandler.js";
 
 export default function RoutesScreen({ navigation, route }) {
   const { hall_name } = route.params;
-  const [routes, setRoutes] = useState([]); 
+  const [routes, setRoutes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-      query(Climber.get_routes_by_hall_name.call, [hall_name])
-        .then((res) => {
-          if (res.data) { 
-            const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
-            console.log("response :>> ", newRoutes);
-            setRoutes(newRoutes); 
-          }
-        })
-        .catch((err) => alert("Error: ", err));
-    }, []);
+    query(Climber.get_routes_by_hall_name.call, [hall_name])
+      .then((res) => {
+        if (res.data) {
+          const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
+          console.log("response :>> ", newRoutes);
+          setRoutes(newRoutes);
+        }
+      })
+      .catch((err) => alert("Error: ", err));
+  }, []);
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
-  }
+  };
 
   return (
     <>
@@ -52,7 +52,7 @@ export default function RoutesScreen({ navigation, route }) {
           </TouchableOpacity>
         </View>
       </View>
-      <RouteFilter hall_name={hall_name} setRoutes={setRoutes}/>
+      <RouteFilter hall_name={hall_name} setRoutes={setRoutes} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <RoutesList routes={routes} expand={true} hall_name={hall_name} />
         <View style={{ marginBottom: 130 }} />

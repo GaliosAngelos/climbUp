@@ -34,13 +34,10 @@ export default function HallAllRoutes({ navigation }) {
     if (user) {
       query(Climber.get_routes_by_hall_name.call, [user])
         .then((res) => {
-          // console.log("res :>> ", res.data);
           console.log("user :>> ", user);
           if (res.data) {
-            // Stelle sicher, dass Daten vorhanden sind
             const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
-            // console.log("newRoutes :>> ", newRoutes);
-            setRoutes(newRoutes); // Initial werden alle Routen angezeigt
+            setRoutes(newRoutes);
           }
         })
         .catch((err) => alert("Error: ", err));

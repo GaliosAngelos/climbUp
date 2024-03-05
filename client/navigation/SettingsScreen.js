@@ -30,7 +30,7 @@ export default function SettingsScreen({ navigation }) {
         }
       } catch (error) {
         console.error("Failed to load user data", error);
-        Alert.alert("Fehler", "Laden der Benutzerdaten fehlgeschlagen.");
+        Alert.alert("Failed to load user data.");
       }
     };
 
@@ -40,19 +40,19 @@ export default function SettingsScreen({ navigation }) {
   const updatePassword = async () => {
     // Überprüfe, ob das aktuelle Passwort korrekt ist
     if (actualPassword !== password) {
-      alert("Fehler! Das aktuelle Passwort ist nicht korrekt.");
+      alert("Error! The current password is incorrect.");
       return;
     }
 
     // Überprüfe, ob das neue Passwort und die Bestätigung übereinstimmen
     if (newPassword !== confirmNewPassword) {
-      alert("Fehler! Die neuen Passwörter stimmen nicht überein.");
+      alert("Error! The new passwords do not matchn.");
       return;
     }
 
     query(Climber.change_climber_pw.call, [newPassword])
       .then((res) => {
-        alert("Erfolg", "Passwort erfolgreich geändert.");
+        alert("Success", "Password successfully changed.");
         setActualPassword("");
         setNewPassword("");
         setConfirmNewPassword("");

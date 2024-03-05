@@ -6,7 +6,6 @@ import styles from "../../components/styles/allStyles";
 
 // -----------------------------------------------------------------------
 
-//large Buttons that will appear directly on the main canvas (not in RouteBox etc.)
 export default function Button({ text, onPress }) {
   return (
     <>

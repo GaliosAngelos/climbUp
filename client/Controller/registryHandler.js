@@ -3,7 +3,6 @@ const axios = require("axios").default;
 const climberUrl = "http://35.193.105.8:3000/register_climber";
 const hallownerUrl = "http://35.193.105.8:3000/register_hallowner";
 
-//TODO: params mit null?
 async function registerClimber(query, params) {
   try {
     return await axios.post(climberUrl, { query: query, params: params });
