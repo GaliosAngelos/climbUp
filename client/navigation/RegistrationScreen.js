@@ -10,6 +10,7 @@ import { registerClimber } from "../Controller/registryHandler";
 import { Climber } from "../Controller/Procedures";
 import CustTextInputEmail from "../components/input/CustTextInputEmail";
 import styles from "../components/styles/allStyles";
+import { Alert } from "react-native";
 // -----------------------------------------------------------
 
 export default function RegistrationScreen({ navigation }) {
@@ -22,13 +23,12 @@ export default function RegistrationScreen({ navigation }) {
     setSelectedButton(buttonId);
   };
 
-  // Request on backend + send verification to Email
   const handleRegistration = () => {
-    // registerClimber(Climber.register_climber, [user, password, email])
-    registerClimber(Climber.register_climber.call, [user, password, email])
+    registerClimber(Climber.verify_climber_username.call, Climber.register_climber.call, [user, password, email])
       .then((res) => {
-        if (res.status === 201 || res.status === 409) {
-          navigation.replace("DashboardTabs");
+        if (res.status === 201) {
+          Alert.alert("Success", "You were registered successfully. Proceed to login. ");          
+          navigation.replace("Login");
         } else if (res.status === 400) {
           alert("Registration Error: " + JSON.stringify(res.data));
         } else if (res.status === 403) {
@@ -39,7 +39,7 @@ export default function RegistrationScreen({ navigation }) {
       })
       .catch((err) => {
         console.log("Error during registration: ", err);
-        alert("Registrationmfailed! Try again later. ");
+        alert("Error occured during registration process! Please try again later. ");
       });
   };
 
