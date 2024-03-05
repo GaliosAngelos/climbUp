@@ -39,7 +39,7 @@ export default function DashboardScreen() {
           <View style={{ flexDirection: "row", marginBottom: 15 }}>
             <View style={{ flex: 1, alignItems: "center" }}>
               <Text style={{ fontSize: 50, fontWeight: "bold" }}>
-                {statistics[0]?.total_routes_count || "N/A"}
+                {statistics[0]?.total_routes || "N/A"}
               </Text>
               <Text style={styles.h3}>Climbs</Text>
             </View>
