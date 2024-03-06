@@ -1,8 +1,11 @@
+// Import axios for making HTTP requests
 const axios = require("axios").default;
 
+// Define URLs for login endpoint
 const climberUrl = "http://35.193.105.8:3000/login_climber";
 const hallownerUrl = "http://35.193.105.8:3000/login_hallowner";
 
+// Asynchronous function to login a climber using provided parameters
 async function loginClimber(params) {
   try {
     return await axios.post(climberUrl, { params: params });
@@ -15,6 +18,7 @@ async function loginClimber(params) {
   }
 }
 
+// Asynchronous function to login a hall owner using provided parameters
 async function loginHallowner(params) {
   try {
     return await axios.post(hallownerUrl, { params: params });

@@ -6,6 +6,7 @@ import { TouchableOpacity, Text } from "react-native";
 
 // medium sized Buttons that will appear in RouteBox etc.
 export default function ButtonCommit({ onPress, selected, hasSelection }) {
+  // Need to change the button to disabled
   const isDisabled = !hasSelection;
 
   return (

@@ -2,6 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../../../styles/allStyles";
 
+// the box with all informations from the climbing hall
 export default function ClimbingHallBox({
   hall_name,
   street_address,
@@ -10,13 +11,14 @@ export default function ClimbingHallBox({
   navigation,
   favourite,
 }) {
+  // function who navigates to the routesscreen
   const openHallWithRoutes = () => {
     navigation.navigate("Routes", {
       hall_name,
       favourite,
     });
-    console.log("favouritebox :>> ", favourite);
   };
+  // the function 'replace' replaces the underscore with a space
   const hallname = hall_name.replace(/_/g, " ");
 
   return (

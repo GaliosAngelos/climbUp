@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../../styles/allStyles";
 import { Swipeable } from "react-native-gesture-handler";
 
+// This code defines a RouteLogBox component that displays information about a climbing route and enables users to delete the route by swiping.
 export default function RouteLogBox({ item, onDelete }) {
   const swipeableRef = useRef(null);
   const renderRightActions = () => {

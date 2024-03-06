@@ -23,6 +23,7 @@ const Tab = createBottomTabNavigator();
 
 // ---------------------------------------------------------
 
+// all navigation functionality and the bottom navigation bar
 export default function MainContainer() {
   return (
     <NavigationContainer>

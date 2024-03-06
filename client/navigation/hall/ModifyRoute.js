@@ -10,6 +10,7 @@ import styles from "../../components/styles/allStyles";
 import { query } from "../../Controller/requestHandler";
 import { Hall_Owner } from "../../Controller/Procedures";
 
+// Screen for insert, update and delete routes in the climbing hall
 export default function ModifyRoute({ navigation, route }) {
   const [item, setItem] = useState({
     color: "",

@@ -4,6 +4,7 @@ import RouteLogBox from "../sections/dashboard/RouteLogBox";
 import { Climber } from "../../Controller/Procedures";
 import { query } from "../../Controller/requestHandler";
 
+// Routesviewlist is mapping the climbed routes
 export default function RoutesViewList({ interval }) {
   const [statistics, setStatistics] = useState([]);
 

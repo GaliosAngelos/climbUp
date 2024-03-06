@@ -1,3 +1,4 @@
+// function for the statistics for the climber
 export default function calculateTimeStamps(date) {
   const now = new Date();
   const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);

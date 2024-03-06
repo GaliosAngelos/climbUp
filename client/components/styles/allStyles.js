@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+// All styles for the components
 const styles = StyleSheet.create({
   h1: {
     fontSize: 30,
