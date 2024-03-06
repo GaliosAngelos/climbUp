@@ -1,5 +1,5 @@
 import axios from "axios";
-import { registerClimber, registerHallowner } from '../controller/'
+import { registerClimber, registerHallowner } from "../../Controller/registryHandler";
 
 describe("Register Functions", () => {
   beforeEach(() => {

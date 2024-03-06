@@ -1,7 +1,7 @@
-import axios from "axios"
+import axios from ("axios").default;
 import { logout } from "../../Controller/logoutHandler";
 
-// Test Case 1: logout function
+// Test Case 1: logout functionsvc   
 describe("logout function", () => {
   // Preparation
   beforeEach(() => {
