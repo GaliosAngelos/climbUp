@@ -4,6 +4,7 @@ import ClimbingHallBox from "../sections/dashboard/climbing/ClimbingHallBox";
 
 export default function ClimbingHallList({ halls, navigation, favourite }) {
   const isHallsArray = Array.isArray(halls);
+
   return (
     <View>
       {isHallsArray ? (

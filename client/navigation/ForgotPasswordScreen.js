@@ -1,7 +1,7 @@
 import React from "react";
 // Components
-import { View, Text, Button } from "react-native";
-
+import { View, Text } from "react-native";
+import Button from "../components/buttons/Button";
 // -------------------------------------------------------------------
 
 export default function ForgotPasswordScreen({ navigation }) {
@@ -11,7 +11,6 @@ export default function ForgotPasswordScreen({ navigation }) {
         onPress={() => navigation.navigate("Login")}
         style={{ fontSize: 26, fontWeight: "bold" }}
       >
-        {" "}
         ForgotPasswordScreen
       </Text>
       <Button

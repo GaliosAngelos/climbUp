@@ -9,8 +9,12 @@ import styles from "../styles/allStyles";
 // ------------------------------------------------------------------
 
 // same like the CustTextInput especially for passwords
-export default function CustTextInputEmail({ text, keyboardType, email, setEmail}) {
-
+export default function CustTextInputEmail({
+  text,
+  keyboardType,
+  email,
+  setEmail,
+}) {
   return (
     <View style={styles.textinput}>
       <TextInput
@@ -19,7 +23,7 @@ export default function CustTextInputEmail({ text, keyboardType, email, setEmail
         value={email}
         placeholder={text}
         keyboardType={keyboardType}
-        autoCapitalize='none'
+        autoCapitalize="none"
       />
     </View>
   );

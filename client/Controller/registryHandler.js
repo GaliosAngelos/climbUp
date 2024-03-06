@@ -1,7 +1,5 @@
 const axios = require("axios").default;
 
-// const hallownerUrl = "http://localhost:3000/register_hallowner";
-// const climberUrl = "http://localhost:3000/register_climber";
 const hallownerUrl = "http://35.193.105.8:3000/register_hallowner";
 const climberUrl = "http://35.193.105.8:3000/register_climber";
 

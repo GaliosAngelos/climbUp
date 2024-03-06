@@ -17,7 +17,7 @@ export default function CustTextInput({ text, keyboardType, user, setUser }) {
           value={user}
           placeholder={text}
           keyboardType={keyboardType}
-          autoCapitalize='none'
+          autoCapitalize="none"
         />
       </View>
     </>

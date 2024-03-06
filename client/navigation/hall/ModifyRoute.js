@@ -65,13 +65,12 @@ export default function ModifyRoute({ navigation, route }) {
       item.tilt,
     ])
       .then((res) => {
-        alert("Erfolgreich hinzugefügt!");
+        alert("Successfully added!");
         navigation.navigate("HallAllRoutes");
-        // Zurücksetzen des Formulars hier, falls erforderlich
       })
       .catch((err) => {
-        console.error("Fehler beim Einfügen der Route: ", err);
-        alert("Fehler beim Einfügen der Route: " + err.message);
+        console.error("Error when inserting the route: ", err);
+        alert("Error when inserting the route: " + err.message);
       });
   };
 
@@ -82,7 +81,7 @@ export default function ModifyRoute({ navigation, route }) {
         navigation.navigate("HallAllRoutes");
       })
       .catch((err) => {
-        alert("Fehler beim Einfügen der Route: " + err.message);
+        alert("Error when inserting the route: " + err.message);
       });
   };
 
@@ -100,7 +99,7 @@ export default function ModifyRoute({ navigation, route }) {
         navigation.navigate("HallAllRoutes");
       })
       .catch((err) => {
-        alert("Fehler beim Einfügen der Route: " + err.message);
+        alert("Error when inserting the route: " + err.message);
       });
   };
   const back = () => {
@@ -140,7 +139,7 @@ export default function ModifyRoute({ navigation, route }) {
         <Text style={styles.h3}>Routename</Text>
         <CustTextInput
           text=""
-          keyboardType="default" // Geändert zu einem gültigen keyboardType Wert
+          keyboardType="default"
           user={item.route_name}
           setUser={(value) => updateField("route_name", value)}
         />
@@ -158,8 +157,8 @@ export default function ModifyRoute({ navigation, route }) {
             <Text style={styles.h3}>Line</Text>
             <CustTextInput
               text=""
-              keyboardType="numeric" // Angenommen, dass line_number numerisch ist
-              user={item.line_number} // Konvertierung zu String, da TextInput erwartet einen String
+              keyboardType="numeric"
+              user={item.line_number}
               setUser={(value) => updateField("line_number", value)}
             />
           </View>
@@ -192,7 +191,7 @@ export default function ModifyRoute({ navigation, route }) {
                   { backgroundColor: color },
                   item.color === color
                     ? {
-                        borderColor: "black", // Grauer Rand für ausgewähltes Kästchen
+                        borderColor: "black",
                         borderWidth: 3,
                       }
                     : null,

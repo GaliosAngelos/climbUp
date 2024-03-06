@@ -147,5 +147,3 @@ export const Climber = Object.freeze({
     }
     //#endregion
 });
-
-// module.exports = { Hall_Owner, Climber };

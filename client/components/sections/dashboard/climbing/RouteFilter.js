@@ -11,20 +11,38 @@ export default function RouteFilter({ setRoutes, hall_name }) {
   const [sector, setSector] = useState("");
 
   useEffect(() => {
-    console.log(":>> ", "routename: ", routeName, "sector: ", sector,"level: ", level);
+    console.log(
+      ":>> ",
+      "routename: ",
+      routeName,
+      "sector: ",
+      sector,
+      "level: ",
+      level
+    );
   }, [routeName, sector, level]);
 
-   useEffect(() => {
-    query(Climber.get_filtered_routes.call, [hall_name, level, sector, routeName])
-    .then((res) => {
-        if (res.data) { 
-          const filteredRoutes = Array.isArray(res.data.data) ? res.data.data : [];
+  useEffect(() => {
+    query(Climber.get_filtered_routes.call, [
+      hall_name,
+      level,
+      sector,
+      routeName,
+    ])
+      .then((res) => {
+        if (res.data) {
+          const filteredRoutes = Array.isArray(res.data.data)
+            ? res.data.data
+            : [];
           console.log("filteredRoutes :>> ", filteredRoutes);
           setRoutes(filteredRoutes);
         }
-    })
-   }, [routeName, sector, level]);
-  
+      })
+      .catch((err) => {
+        console.log("Error occured while fetching routes. ", err);
+      });
+  }, [routeName, sector, level]);
+
   return (
     <>
       <View style={{ flexDirection: "row" }}>
@@ -47,15 +65,15 @@ export default function RouteFilter({ setRoutes, hall_name }) {
           />
         </View>
         <View style={{ flex: 3, marginRight: 5 }}>
-        <CustomTextInputFilter
-        label="Level"
-        value={level}
-        onChange={(text) => {
-          setLevel(text);
-        }}
-      />
+          <CustomTextInputFilter
+            label="Level"
+            value={level}
+            onChange={(text) => {
+              setLevel(text);
+            }}
+          />
         </View>
       </View>
     </>
   );
-};
+}

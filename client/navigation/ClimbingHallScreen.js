@@ -12,7 +12,7 @@ export default function ClimbingHallScreen({ navigation }) {
   const [halls, setHalls] = useState([]);
   const [favouriteHalls, setFavouriteHalls] = useState([]);
   const [filterRequest, setFilterRequest] = useState("");
-  const requestArray = filterRequest.split(',');
+  const requestArray = filterRequest.split(",");
   useEffect(() => {
     console.log("Name/City Request :>> ", requestArray);
   }, [filterRequest]);
@@ -35,47 +35,8 @@ export default function ClimbingHallScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    const fetchFilteredHalls = async () => {
-      let nameSearch = null;
-      let citySearch = null;
-      
-      if (filterRequest) {
-        const requestParts = filterRequest.split(',');
-        nameSearch = requestParts[0] ? requestParts[0].trim() : null; // Nimmt den Namen vor dem Komma, falls vorhanden
-        citySearch = requestParts[1] ? requestParts[1].trim() : null; // Nimmt die Stadt nach dem Komma, falls vorhanden
-      }
-  
-      try {
-        const res = await query(Climber.get_filtered_halls.call, [nameSearch, citySearch]);
-        if (res.data) {
-          const filteredHalls = Array.isArray(res.data.data) ? res.data.data : [];
-          console.log("Filtered Halls :>> ", filteredHalls);
-          setHalls(filteredHalls);
-        }
-      } catch (err) {
-        alert("Error: ", err);
-      }
-    };
-  
-    fetchFilteredHalls();
-  }, [filterRequest]);
-
-useEffect(() =>{
-  query(Climber.get_user_favorites.call)
-      .then((res) => {
-        const hallsFavourites = Array.isArray(res.data.data)
-          ? res.data.data
-          : [];
-        setFavouriteHalls(hallsFavourites);
-      })
-      .catch((err) => {
-        alert("Error: ", err);
-      });
- }, []);
-
-  useEffect(() => {
     const fetchHallsAndFavourites = async () => {
-      if (!user) return; // Stelle sicher, dass ein Benutzer gesetzt ist, bevor du fortfährst
+      if (!user) return;
 
       try {
         const favsRes = await query(Climber.get_user_favorites.call, [user]);
@@ -97,14 +58,44 @@ useEffect(() =>{
 
         setHalls(filteredHalls);
       } catch (err) {
-        Alert.alert("Error", "Error: " + err);
+        alert("Error", "Error: " + err);
       }
     };
 
     if (user) {
       fetchHallsAndFavourites();
     }
-  }, [user]); // Füge `user` als Abhängigkeit hinzu, um die Funktion erneut auszuführen, sobald `user` gesetzt ist.
+  }, [user]);
+
+  useEffect(() => {
+    const fetchFilteredHalls = async () => {
+      let nameSearch = null;
+      let citySearch = null;
+
+      if (filterRequest) {
+        const requestParts = filterRequest.split(",");
+        nameSearch = requestParts[0] ? requestParts[0].trim() : null; // Nimmt den Namen vor dem Komma, falls vorhanden
+        citySearch = requestParts[1] ? requestParts[1].trim() : null; // Nimmt die Stadt nach dem Komma, falls vorhanden
+      }
+
+      try {
+        const res = await query(Climber.get_filtered_halls.call, [
+          nameSearch,
+          citySearch,
+        ]);
+        if (res.data) {
+          const filteredHalls = Array.isArray(res.data.data)
+            ? res.data.data
+            : [];
+          setHalls(filteredHalls);
+        }
+      } catch (err) {
+        alert("Error: ", err);
+      }
+    };
+
+    fetchFilteredHalls();
+  }, [filterRequest]);
 
   return (
     <>
@@ -118,7 +109,7 @@ useEffect(() =>{
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          {favouriteHalls.length >= 0 && (
+          {favouriteHalls.length > 0 && (
             <ClimbingHallList
               halls={favouriteHalls}
               navigation={navigation}

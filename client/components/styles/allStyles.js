@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold",
     textAlign: "right",
-    color: "grey",
+    color: "#339C54",
   },
 
   selectedButton: {

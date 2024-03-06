@@ -1,11 +1,10 @@
 export default function calculateTimeStamps(date) {
   const now = new Date();
-  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000); // +1 Tag
+  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
-  // Hilfsfunktion zur Formatierung des Datums
   const formatDate = (date) => {
     const year = date.getFullYear();
-    const month = date.getMonth() + 1; // Monate beginnen bei 0
+    const month = date.getMonth() + 1;
     const day = date.getDate();
     return `${year}-${month.toString().padStart(2, "0")}-${day
       .toString()

@@ -26,6 +26,7 @@ export default function RegistrationScreen({ navigation }) {
   const handleRegistration = () => {
     if(selectedButton === 2){
       registerClimber(Climber.verify_climber_username.call, Climber.register_climber.call, [user, password, email])
+
       .then((res) => {
         if (res.status === 201) {
           Alert.alert("Success! ", "You were registered successfully. Proceed to login. ");          

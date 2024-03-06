@@ -9,10 +9,10 @@ import { Climber } from "../Controller/Procedures.js";
 import calculateTimeStamps from "../components/input/TimeIntervals.js";
 
 export default function DashboardScreen() {
-  // const [routes, setRoutes] = useState([]); 
+  // const [routes, setRoutes] = useState([]);
   const [selectedTimeframe, setSelectedTimeframe] = useState();
   const [statistics, setStatistics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const interval = calculateTimeStamps(selectedTimeframe);
 
   console.log("interval :>> ", interval);
@@ -21,19 +21,19 @@ export default function DashboardScreen() {
     query(Climber.get_user_statistics.call, [interval.past, interval.now])
       .then((res) => {
         const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
-        setStatistics(newStatistics); 
+        setStatistics(newStatistics);
         setIsLoading(false);
       })
       .catch((err) => {
         alert("Error: " + err);
         setIsLoading(false);
       });
-  }, [selectedTimeframe]); 
+  }, [selectedTimeframe]);
   return (
     <>
       <HeadText content="Elevate your progress!" />
       {isLoading ? (
-        <Text>Loading...</Text> 
+        <Text>Loading...</Text>
       ) : (
         <>
           <View style={{ flexDirection: "row", marginBottom: 15 }}>
@@ -44,9 +44,7 @@ export default function DashboardScreen() {
               <Text style={styles.h3}>Climbs</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text style={{ fontSize: 50, fontWeight: "bold" }}>
-                {statistics[0]?.highest_difficulty_level || "N/A"}
-              </Text>
+              <Text style={{ fontSize: 50, fontWeight: "bold" }}>"N/A"</Text>
               <Text style={styles.h3}>best Level</Text>
             </View>
           </View>
