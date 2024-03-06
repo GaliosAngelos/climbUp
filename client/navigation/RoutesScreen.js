@@ -75,7 +75,7 @@ export default function RoutesScreen({ navigation, route }) {
         </View>
       </View>
 
-      <RouteFilter
+      <RouteFilter setRoutes={setRoutes} hall_name={hall_name}
         onFilterChange={(routeName, sector, level) => {
           const filteredRoutes = allRoutes.filter((route) => {
             return (

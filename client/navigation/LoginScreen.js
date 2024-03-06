@@ -21,8 +21,8 @@ export default function LoginScreen({ navigation }) {
   useEffect(() => {
     if (selectedButton === 1) {
       // Climber
-      setUser("angelos");
-      setPassword("angelos");
+      setUser("adrian");
+      setPassword("adrian");
     } else {
       // Hallowner
       setUser("dav_kletterzentrum_augsburg");

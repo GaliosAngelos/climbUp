@@ -44,7 +44,8 @@ export default function DashboardScreen() {
               <Text style={styles.h3}>Climbs</Text>
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Text style={{ fontSize: 50, fontWeight: "bold" }}>"N/A"</Text>
+              <Text style={{ fontSize: 50, fontWeight: "bold" }}>
+              {statistics[0]?.highest_difficulty_level || "N/A"}</Text>
               <Text style={styles.h3}>best Level</Text>
             </View>
           </View>
