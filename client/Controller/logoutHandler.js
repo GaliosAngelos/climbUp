@@ -1,12 +1,12 @@
 const axios = require("axios").default;
 
-// Replace with the actual endpoint of your server
-
-// const logoutUrl = "http://localhost:3000/logout";
+// Logout endpoint URL (replace with your actual server endpoint)
 const logoutUrl = "http://35.193.105.8:3000/logout";
 
+// Asynchronous logout function accepting a query parameter
 async function logout(query) {
   try {
+    // Attempt to send a POST request to the logout URL with the query
     return await axios.post(logoutUrl, query);
   } catch (err) {
     console.error("Error sending query:", err.message);

@@ -13,6 +13,7 @@ import styles from "../components/styles/allStyles";
 
 // --------------------------------------------------------------------
 
+// Loginscreen for the climber and hallowner for the app
 export default function LoginScreen({ navigation }) {
   const [user, setUser] = useState();
   const [password, setPassword] = useState();

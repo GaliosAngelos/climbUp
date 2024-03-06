@@ -5,6 +5,7 @@ import { query } from "../../../../Controller/requestHandler.js";
 import CustomTextInputFilter from "../../../input/CustomFilterInput.js";
 // ------------------------------------------------------------------
 
+// The RouteFilter allows users to filter routes by name, sector, and difficulty level.
 export default function RouteFilter({ setRoutes, hall_name }) {
   const [routeName, setRouteName] = useState("");
   const [level, setLevel] = useState("");

@@ -3,9 +3,11 @@ import { Text, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import styles from "../styles/allStyles";
 
+// Define the ButtonDeleteUpdate component that accepts 'onPress' and 'abfrage' (a boolean to determine the button's function) as props
 export default function ButtonDeleteUpdate({ onPress, abfrage }) {
   let name, iconName, color;
 
+  // Conditional logic to determine the button's appearance and function based on the 'abfrage' prop
   if (abfrage === true) {
     name = "Delete";
     iconName = "trash";

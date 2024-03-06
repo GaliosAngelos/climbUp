@@ -6,6 +6,7 @@ import styles from "../../components/styles/allStyles.js";
 
 // --------------------------------------------------------------
 
+// Dashboard for the hallowner
 export default function HallDashboardScreen() {
   return (
     <>

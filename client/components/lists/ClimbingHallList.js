@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import ClimbingHallBox from "../sections/dashboard/climbing/ClimbingHallBox";
 
+// the climbinghalllist component map the halls
 export default function ClimbingHallList({ halls, navigation, favourite }) {
   const isHallsArray = Array.isArray(halls);
 

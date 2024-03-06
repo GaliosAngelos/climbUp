@@ -7,6 +7,7 @@ import { query } from "../Controller/requestHandler.js";
 import CustomTextInputFilter from "../components/input/CustomFilterInput.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// all favourite halls and halls for the climber
 export default function ClimbingHallScreen({ navigation }) {
   const [user, setUser] = useState();
   const [halls, setHalls] = useState([]);

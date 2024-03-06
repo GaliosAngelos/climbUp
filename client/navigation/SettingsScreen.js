@@ -10,6 +10,7 @@ import { query } from "../Controller/requestHandler.js";
 import { Climber } from "../Controller/Procedures.js";
 import { Alert } from "react-native";
 
+// the user can see the username and change the password
 export default function SettingsScreen({ navigation }) {
   const [user, setUser] = useState();
   const [password, setPassword] = useState();

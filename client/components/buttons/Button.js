@@ -6,6 +6,7 @@ import styles from "../../components/styles/allStyles";
 
 // -----------------------------------------------------------------------
 
+// Define the Button component that accepts 'text' and 'onPress' props
 export default function Button({ text, onPress }) {
   return (
     <>

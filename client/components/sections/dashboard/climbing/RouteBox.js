@@ -9,6 +9,7 @@ import { query } from "../../../../Controller/requestHandler";
 import { Alert } from "react-native";
 import getColor from "../../../input/Colors";
 
+// In the RouteBox, climbers can view all the necessary information related to the route.
 export default function Route({
   hallname,
   color,

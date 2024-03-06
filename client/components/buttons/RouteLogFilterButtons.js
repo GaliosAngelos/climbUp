@@ -4,8 +4,12 @@ import { TouchableOpacity, View, Text } from "react-native";
 // Styles
 import styles from "../styles/allStyles";
 
+// Define the RouteLogFilterButtons component that accepts 'setSelectedTimeframe' as a prop
 export default function RouteLogFilterButtons({ setSelectedTimeframe }) {
+  // useState hook to manage the state of the currently selected button
   const [selectedButton, setSelectedButton] = useState();
+
+  // Function to handle button presses, setting the selected button and optionally updating the parent component's state
   const handleButtonPress = (buttonId) => {
     setSelectedButton(buttonId);
     if (setSelectedTimeframe) {

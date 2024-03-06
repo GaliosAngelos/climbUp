@@ -1,8 +1,10 @@
 const axios = require("axios").default;
 
+// Define the URLs for the hallowner and climber registration endpoints.
 const hallownerUrl = "http://35.193.105.8:3000/register_hallowner";
 const climberUrl = "http://35.193.105.8:3000/register_climber";
 
+// Registration connection with server
 async function registerClimber(verifyByName, insert, params) {
   try {
     return await axios.post(climberUrl, { verifyByName, insert, params });

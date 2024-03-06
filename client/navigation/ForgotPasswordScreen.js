@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import Button from "../components/buttons/Button";
 // -------------------------------------------------------------------
 
+// forgot password screen
 export default function ForgotPasswordScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

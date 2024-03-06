@@ -9,6 +9,7 @@ import { enableScreens } from "react-native-screens";
 enableScreens();
 // ----------------------------------------------------
 
+// the start of the app
 export default function App() {
   return (
     <>

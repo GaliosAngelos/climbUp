@@ -8,6 +8,8 @@ import { query } from "../Controller/requestHandler.js";
 import { Climber } from "../Controller/Procedures.js";
 import calculateTimeStamps from "../components/input/TimeIntervals.js";
 
+// DashboardScreen for the climber
+// Statistics and climbed routes
 export default function DashboardScreen() {
   // const [routes, setRoutes] = useState([]);
   const [selectedTimeframe, setSelectedTimeframe] = useState();
@@ -45,7 +47,8 @@ export default function DashboardScreen() {
             </View>
             <View style={{ flex: 1, alignItems: "center" }}>
               <Text style={{ fontSize: 50, fontWeight: "bold" }}>
-              {statistics[0]?.highest_difficulty_level || "N/A"}</Text>
+                {statistics[0]?.highest_difficulty_level || "N/A"}
+              </Text>
               <Text style={styles.h3}>best Level</Text>
             </View>
           </View>

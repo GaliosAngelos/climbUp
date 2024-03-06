@@ -1,5 +1,7 @@
 export default function getColor(color) {
+  // Convert the input color to uppercase to make the switch case-insensitive.
   switch (color.toUpperCase()) {
+    // If the color matches one of the cases, return the corresponding color in lowercase.
     case "RED":
       return "red";
     case "BLUE":

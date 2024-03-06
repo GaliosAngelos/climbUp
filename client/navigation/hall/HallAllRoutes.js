@@ -8,10 +8,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Climber } from "../../Controller/Procedures.js";
 import { query } from "../../Controller/requestHandler.js";
 
+// Main component for displaying all routes in a climbing hall
 export default function HallAllRoutes({ navigation }) {
   const [user, setUser] = useState("");
   const [routes, setRoutes] = useState([]);
 
+  // Effect to load user data from local storage on component mount
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -27,10 +29,13 @@ export default function HallAllRoutes({ navigation }) {
         alert("Fehler", "Laden der Benutzerdaten fehlgeschlagen.");
       }
     };
-    getUserData();  }, []);
+    getUserData();
+  }, []);
 
+  // Effect to fetch routes from the database when the user is set
   useEffect(() => {
     if (user) {
+      // Query to get routes by hall name using the user's name
       query(Climber.get_routes_by_hall_name.call, [user])
         .then((res) => {
           console.log("user :>> ", user);

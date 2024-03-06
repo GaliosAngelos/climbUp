@@ -8,6 +8,7 @@ import RoutesList from "../components/lists/RoutesList";
 import { Climber } from "../Controller/Procedures";
 import { query } from "../Controller/requestHandler";
 
+// the climber see all the routes from the choosen climbing hall
 export default function RoutesScreen({ navigation, route }) {
   const { hall_name } = route.params;
   const [isLike, setIsLike] = useState(route.params.favourite); // Direkt aus route.params.favourite initialisieren
@@ -75,7 +76,9 @@ export default function RoutesScreen({ navigation, route }) {
         </View>
       </View>
 
-      <RouteFilter setRoutes={setRoutes} hall_name={hall_name}
+      <RouteFilter
+        setRoutes={setRoutes}
+        hall_name={hall_name}
         onFilterChange={(routeName, sector, level) => {
           const filteredRoutes = allRoutes.filter((route) => {
             return (
