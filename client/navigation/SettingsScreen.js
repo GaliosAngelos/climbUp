@@ -11,7 +11,6 @@ import { Climber } from "../Controller/Procedures.js";
 
 export default function SettingsScreen({ navigation }) {
   const [user, setUser] = useState();
-  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [actualPassword, setActualPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -25,7 +24,6 @@ export default function SettingsScreen({ navigation }) {
         if (userData) {
           console.log("userData :>> ", userData);
           setUser(userData.user);
-          setEmail(userData.email);
           setPassword(userData.password);
         }
       } catch (error) {
@@ -65,7 +63,6 @@ export default function SettingsScreen({ navigation }) {
       <HeadText content="Make the change!" />
       <View style={styles.borderBox}>
         <Text style={styles.h3}>Username: {user}</Text>
-        <Text style={styles.h3}>Email: {email}</Text>
       </View>
       <ScrollView style={{ flex: 1 }}>
         <View>

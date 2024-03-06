@@ -28,15 +28,19 @@ export default function RouteFilter({ setRoutes, hall_name }) {
       level,
       sector,
       routeName,
-    ]).then((res) => {
-      if (res.data) {
-        const filteredRoutes = Array.isArray(res.data.data)
-          ? res.data.data
-          : [];
-        console.log("filteredRoutes :>> ", filteredRoutes);
-        setRoutes(filteredRoutes);
-      }
-    });
+    ])
+      .then((res) => {
+        if (res.data) {
+          const filteredRoutes = Array.isArray(res.data.data)
+            ? res.data.data
+            : [];
+          console.log("filteredRoutes :>> ", filteredRoutes);
+          setRoutes(filteredRoutes);
+        }
+      })
+      .catch((err) => {
+        console.log("Error occured while fetching routes. ", err);
+      });
   }, [routeName, sector, level]);
 
   return (

@@ -84,7 +84,8 @@ export const Climber = Object.freeze({
     values: ["hall_name"],
   },
   get_user_favorites: {
-    call: `SELECT * FROM climbup.get_user_favorites();`,
+    call: `SELECT * FROM climbup.get_user_favorites($1);`,
+    values: ["user"],
   },
   insert_user_statistic: {
     call: `CALL climbup.insert_user_statistic($1, $2, $3, $4, $5)`,
