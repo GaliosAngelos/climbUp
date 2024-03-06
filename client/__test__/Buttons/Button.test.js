@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import Button from '../components/buttons/Button'; // Adjust the import path according to your project structure
+import Button from '../../components/buttons/Button'; // Adjust the import path according to your project structure
 
 describe('Button Component', () => {
   it('renders correctly and responds to press events', () => {
