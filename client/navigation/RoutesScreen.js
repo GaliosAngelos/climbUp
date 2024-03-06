@@ -9,10 +9,8 @@ import { Climber } from "../Controller/Procedures";
 import { query } from "../Controller/requestHandler";
 
 export default function RoutesScreen({ navigation, route }) {
-  const { hall_name, favourite } = route.params;
-  let favorite = favourite;
-  const [isLike, setIsLike] = useState(favourite);
-  console.log("isLike :>> ", isLike);
+  const { hall_name } = route.params;
+  const [isLike, setIsLike] = useState(route.params.favourite); // Direkt aus route.params.favourite initialisieren
   const [allRoutes, setAllRoutes] = useState([]);
   const [routes, setRoutes] = useState([]);
 
@@ -31,14 +29,18 @@ export default function RoutesScreen({ navigation, route }) {
     }
   }, [hall_name]);
 
+  useEffect(() => {
+    setIsLike(route.params.favourite); // Aktualisiere `isLike` wenn sich `favourite` ändert
+  }, [route.params.favourite]);
+
   const updateFavouriteStatus = () => {
-    const method = favorite ? Climber.add_favorite : Climber.remove_favorite;
+    const method = isLike ? Climber.remove_favorite : Climber.add_favorite;
     query(method.call, [hall_name])
       .then(() => {
-        if (favorite) {
-          console.log("Climbing in your favourites");
-        } else {
+        if (isLike) {
           console.log("Climbing is now not in your favourites");
+        } else {
+          console.log("Climbing in your favourites");
         }
       })
       .catch((err) => {
@@ -48,10 +50,8 @@ export default function RoutesScreen({ navigation, route }) {
   };
 
   const toggleLike = () => {
-    favorite = favorite === true ? false : true;
-    setIsLike(!isLike);
-    console.log("favorite :>> ", favorite);
-    updateFavouriteStatus();
+    setIsLike(!isLike); // Zustand umschalten
+    updateFavouriteStatus(); // Favoritenstatus aktualisieren
   };
 
   return (
