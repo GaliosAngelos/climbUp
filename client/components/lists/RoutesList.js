@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import RouteBox from "../sections/dashboard/climbing/RouteBox";
+import RouteBox from "../../..sections/dashboard/climbing/RouteBox";
 
 export default function RoutesList({ routes, expand, hall_name }) {
   const routesData = Array.isArray(routes) ? routes : routes.data || [];
