@@ -38,9 +38,11 @@ export default function HallAllRoutes({ navigation }) {
       // Query to get routes by hall name using the user's name
       query(Climber.get_routes_by_hall_name.call, [user])
         .then((res) => {
-          const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
-          setRoutes(newRoutes);
-          console.log("routes :>> ", routes);
+          console.log("user :>> ", user);
+          if (res.data) {
+            const newRoutes = Array.isArray(res.data.data) ? res.data.data : [];
+            setRoutes(newRoutes);
+          }
         })
         .catch((err) => alert("Error: ", err));
     }

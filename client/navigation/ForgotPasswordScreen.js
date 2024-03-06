@@ -1,39 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 // Components
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Button from "../components/buttons/Button";
-import HeadText from "../components/text/HeadText";
-import CustTextInput from "../components/input/CustTextInput";
-import ButtonSmall from "../components/buttons/ButtonSmall";
-
 // -------------------------------------------------------------------
 
 // forgot password screen
 export default function ForgotPasswordScreen({ navigation }) {
-  const [user, setUser] = useState();
   return (
-    <>
-      <HeadText content="Forgot password." />
-      <View style={{ marginBottom: 50 }} />
-      <CustTextInput
-        text={"Email"}
-        keyboardType={"email-address"}
-        user={user}
-        setUser={setUser}
-      />
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text
+        onPress={() => navigation.navigate("Login")}
+        style={{ fontSize: 26, fontWeight: "bold" }}
+      >
+        ForgotPasswordScreen
+      </Text>
       <Button
-        text="Commit"
-        onPress={() =>
-          alert(
-            "ForgotPassword function is in progress! (New Password sended to your email) "
-          )
-        }
+        title="Go to Login Page "
+        onPress={() => navigation.navigate("Login")}
       />
-      <View style={{ marginBottom: 20 }} />
-      <ButtonSmall
-        text="Back to login?"
-        onPress={() => navigation.replace("Login")}
-      />
-    </>
+    </View>
   );
 }

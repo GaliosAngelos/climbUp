@@ -19,7 +19,7 @@ export default function RoutesViewList({ interval }) {
         setStatistics(newStatistics);
       })
       .catch((err) => {
-        console.log("Error: " + err);
+        alert("Error: " + err);
       });
   }, [interval]);
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, ScrollView, Text, TouchableOpacity, Alert } from "react-native";
 import RouteFilter from "../components/sections/dashboard/climbing/RouteFilter";
+import ButtonBack from "../components/buttons/ButtonBack";
 import styles from "../components/styles/allStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import RoutesList from "../components/lists/RoutesList";
@@ -56,6 +57,7 @@ export default function RoutesScreen({ navigation, route }) {
 
   return (
     <>
+      <ButtonBack onPress={() => navigation.navigate("ClimbingHall")} />
       <View style={styles.head}>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>

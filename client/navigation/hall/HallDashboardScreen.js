@@ -2,8 +2,7 @@ import React from "react";
 // Components
 import { View, Text } from "react-native";
 import HeadText from "../../components/text/HeadText.js";
-
-import Ionicons from "react-native-vector-icons/Ionicons";
+import styles from "../../components/styles/allStyles.js";
 
 // --------------------------------------------------------------
 
@@ -11,15 +10,15 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 export default function HallDashboardScreen() {
   return (
     <>
-      <HeadText content="Dashboard is in Progress!" />
-      <View style={{ flexDirection: "row", marginTop: 120 }}>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Ionicons name="build-outline" size={120} color="grey" />
-          <Text style={{ textAlign: "center", marginTop: 10 }}>
-            In Progress...
-          </Text>
+      <HeadText content="Elevate your progress!" />
+      <View style={{ flexDirection: "row", marginBottom: 15 }}>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <Text style={{ fontSize: 50, fontWeight: "bold" }}>125</Text>
+          <Text style={styles.h3}>Climbs</Text>
+        </View>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <Text style={{ fontSize: 50, fontWeight: "bold" }}>6+</Text>
+          <Text style={styles.h3}>best Level</Text>
         </View>
       </View>
     </>

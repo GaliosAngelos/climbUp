@@ -7,7 +7,6 @@ import RoutesViewList from "../components/lists/RoutesViewList.js";
 import { query } from "../Controller/requestHandler.js";
 import { Climber } from "../Controller/Procedures.js";
 import calculateTimeStamps from "../components/input/TimeIntervals.js";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 // DashboardScreen for the climber
 // Statistics and climbed routes
@@ -18,19 +17,17 @@ export default function DashboardScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const interval = calculateTimeStamps(selectedTimeframe);
 
+  console.log("interval :>> ", interval);
+
   useEffect(() => {
     query(Climber.get_user_statistics.call, [interval.past, interval.now])
       .then((res) => {
-        if (res.data.data[0].total_routes !== 0) {
-          const newStatistics = Array.isArray(res.data.data)
-            ? res.data.data
-            : [];
-          setStatistics(newStatistics);
-        }
+        const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
+        setStatistics(newStatistics);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("Error: " + err);
+        alert("Error: " + err);
         setIsLoading(false);
       });
   }, [selectedTimeframe]);
@@ -38,12 +35,7 @@ export default function DashboardScreen() {
     <>
       <HeadText content="Elevate your progress!" />
       {isLoading ? (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Ionicons name="reload-outline" size={50} color="grey" />
-          <Text style={{ textAlign: "center", marginTop: 10 }}>Loading...</Text>
-        </View>
+        <Text>Loading...</Text>
       ) : (
         <>
           <View style={{ flexDirection: "row", marginBottom: 15 }}>
