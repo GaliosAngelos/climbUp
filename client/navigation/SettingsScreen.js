@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Alert } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, Text, View } from "react-native";
 import HeadText from "../components/text/HeadText.js";
 import CustTextInputPassword from "../components/input/CustTextInputPassword.js";
@@ -8,6 +8,7 @@ import { logout } from "../Controller/logoutHandler.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { query } from "../Controller/requestHandler.js";
 import { Climber } from "../Controller/Procedures.js";
+import { Alert } from "react-native";
 
 export default function SettingsScreen({ navigation }) {
   const [user, setUser] = useState();
@@ -50,7 +51,7 @@ export default function SettingsScreen({ navigation }) {
 
     query(Climber.change_climber_pw.call, [newPassword])
       .then((res) => {
-        alert("Success", "Password successfully changed.");
+        Alert.alert("Success", "Password successfully changed.");
         setActualPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
