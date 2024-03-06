@@ -1,11 +1,11 @@
 const axios = require("axios").default;
 
-const climberUrl = "http://35.193.105.8:3000/register_climber";
 const hallownerUrl = "http://35.193.105.8:3000/register_hallowner";
+const climberUrl = "http://35.193.105.8:3000/register_climber";
 
-async function registerClimber(query, params) {
+async function registerClimber(verifyByName, insert, params) {
   try {
-    return await axios.post(climberUrl, { query: query, params: params });
+    return await axios.post(climberUrl, { verifyByName, insert, params });
   } catch (err) {
     console.error("Error sending registry: ", err.response);
     return {
@@ -15,9 +15,9 @@ async function registerClimber(query, params) {
   }
 }
 
-async function registerHallowner(query, params) {
+async function registerHallowner(verifyByName, insert, params) {
   try {
-    return await axios.post(hallownerUrl, { query: query, params: params });
+    return await axios.post(hallownerUrl, { verifyByName, insert, params });
   } catch (err) {
     console.error("Error sending registry: ", err.message);
     return {

@@ -131,8 +131,8 @@ function addClient(client, username, password) {
 }
 
 app.post("/register_climber", async (req, res) => {
-  console.log(req.body);
-  const { query, params } = req.body;
+  console.log(req.body.verifyByName);
+  const { verifyByName, insert, params } = req.body;
   const user = params[0];
   const password = params[1];
   const email = params[2];
@@ -140,50 +140,63 @@ app.post("/register_climber", async (req, res) => {
     return res.status(400).send({ message: "missing registry credentials" });
   }
   try {
-    //TODO: Add functionality to add user in database! (Procedures)
     const client = "climber";
     const dbadmin = {user: 'dbadmin',  password:'dbadmin'};
-    const  adminClient = addClient(client, dbadmin.user, dbadmin.password);
-    const newClient = addClient(client, user, password);
-    // if (newClient === false) {
-    //   return res.status(403).send({ message: "Choose another username. " });
-    // } else {
-
-      await adminClient.connect();
-
-      // await newClient.connect();
-      await dbClient.query(query, params);
-      dbClient.release();
+    const adminClient = climberClients.get(dbadmin.user) == undefined ? addClient(client, dbadmin.user, dbadmin.password) : climberClients.get(dbadmin.user);
+    await adminClient.connect();
+    dbClient = adminClient;
+    await adminClient.query(verifyByName,[user, password]);
+    if(res){
+      await adminClient.query(insert,[user, password, email]);
+      console.log("Success! - Climber created. ");
       return res.status(201).send({ message: "Climber created. " });
-    // }
+    } else {
+      return res.status(403).send({ message: "Choose another username. " });
+    }
   } catch (err) {
-    console.error("Error during registry request: ", err);
+      console.error("Error during Climber registry request: ", err);
+      return res
+        .status(500)
+        .send({ message: "Registration Error. Please try again later." });
+  } finally {
     await endClientAndRestartSSHTunnel(true);
     climberClients.delete(user);
-    return res
-      .status(500)
-      .send({ message: "Registration Error. Please try again later." });
   }
 });
 
-// app.post('/register_hallowner' , async (req, res) => {
-//     const { user, email, password } = req.body;
-//     if (!user || !email || !password) {
-//       return res.status(400).send({ message: 'Missing login credentials' });
-//     }
-//     try {
-//         const client = "hallowner";
-//         const result = addClient(client, user);
-//         if(result === false){
-//             return res.status(403).send({ message: 'User exists already'});
-//         } else {
-//             return res.status(201).send({message: 'User created'});
-//         }
-//     } catch (err) {
-//         console.error('Error occured during registration process: ', err);
-//         res.status(500).send({ message: 'Registration error. Please try again later.' });
-//     }
-// });
+app.post("/register_hallowner", async (req, res) => {
+  console.log(req.body.verifyByName);
+  const { verifyByName, insert, params } = req.body;
+  const user = params[0];
+  const password = params[1];
+  const email = params[2];
+  if (!user || !email || !password) {
+    return res.status(400).send({ message: "missing registry credentials" });
+  }
+  try {
+    const client = "hallowner";
+    const dbadmin = {user: 'dbadmin',  password:'dbadmin'};
+    const adminClient = hallownerClients.get(dbadmin.user) == undefined ? addClient(client, dbadmin.user, dbadmin.password) : climberClients.get(dbadmin.user);
+    await adminClient.connect();
+    dbClient = adminClient;
+    await adminClient.query(verifyByName,[user, password]);
+    if(res){
+      await adminClient.query(insert,[user, password, email]);
+      console.log("Success! - Hallowner created. ");
+      return res.status(201).send({ message: "Hall owner created. " });
+    } else {
+      return res.status(403).send({ message: "Choose another username. " });
+    }
+  } catch (err) {
+      console.error("Error during Hall owner registry request: ", err);
+      return res
+        .status(500)
+        .send({ message: "Registration Error. Please try again later." });
+  } finally {
+    await endClientAndRestartSSHTunnel(true);
+    hallownerClients.delete(user);
+  }
+});
 
 app.post("/login_climber", async (req, res) => {
   const { params } = req.body;

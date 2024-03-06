@@ -1,6 +1,5 @@
 const axios = require("axios").default;
 
-// Replace with the actual endpoint of your server
 const queryUrl = "http://35.193.105.8:3000/query";
 
 async function query(query, params) {

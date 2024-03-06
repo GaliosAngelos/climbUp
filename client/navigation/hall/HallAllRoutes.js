@@ -27,8 +27,7 @@ export default function HallAllRoutes({ navigation }) {
         alert("Fehler", "Laden der Benutzerdaten fehlgeschlagen.");
       }
     };
-    getUserData();
-  }, []);
+    getUserData();  }, []);
 
   useEffect(() => {
     if (user) {
