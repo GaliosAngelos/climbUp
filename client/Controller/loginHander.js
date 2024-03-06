@@ -10,7 +10,7 @@ async function loginClimber(params) {
   try {
     return await axios.post(climberUrl, { params: params });
   } catch (err) {
-    console.error("Error sending climber login: ", err.message);
+    console.log("Error sending climber login: ", err.message);
     return {
       status: err.response ? err.response.status : 500,
       data: { message: err.message },
@@ -23,7 +23,7 @@ async function loginHallowner(params) {
   try {
     return await axios.post(hallownerUrl, { params: params });
   } catch (err) {
-    console.error("Error sending hallowner login: ", err.message);
+    console.log("Error sending hallowner login: ", err.message);
     return {
       status: err.response ? err.response.status : 500,
       data: { message: err.message },

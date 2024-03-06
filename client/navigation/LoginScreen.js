@@ -19,18 +19,6 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState();
   const [selectedButton, setSelectedButton] = useState(1);
 
-  useEffect(() => {
-    if (selectedButton === 1) {
-      // Climber
-      setUser("adrian");
-      setPassword("adrian");
-    } else {
-      // Hallowner
-      setUser("dav_kletterzentrum_augsburg");
-      setPassword("123456");
-    }
-  }, [selectedButton]);
-
   const handleButtonPress = (buttonId) => {
     setSelectedButton(buttonId);
   };

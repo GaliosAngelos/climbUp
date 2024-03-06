@@ -17,17 +17,19 @@ export default function DashboardScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const interval = calculateTimeStamps(selectedTimeframe);
 
-  console.log("interval :>> ", interval);
-
   useEffect(() => {
     query(Climber.get_user_statistics.call, [interval.past, interval.now])
       .then((res) => {
-        const newStatistics = Array.isArray(res.data.data) ? res.data.data : [];
-        setStatistics(newStatistics);
-        setIsLoading(false);
+        if (res.data.data[0].total_routes === 0) {
+          const newStatistics = Array.isArray(res.data.data)
+            ? res.data.data
+            : [];
+          setStatistics(newStatistics);
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
-        alert("Error: " + err);
+        console.log("Error: " + err);
         setIsLoading(false);
       });
   }, [selectedTimeframe]);
