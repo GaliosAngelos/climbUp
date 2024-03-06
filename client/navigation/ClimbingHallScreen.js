@@ -27,12 +27,45 @@ export default function ClimbingHallScreen({ navigation }) {
         }
       } catch (error) {
         console.error("Failed to load user data", error);
-        alert("Error: Failed to load user data.");
+        Alert.alert("Fehler", "Laden der Benutzerdaten fehlgeschlagen.");
       }
     };
 
     getUserData();
   }, []);
+
+  useEffect(() => {
+    const fetchHallsAndFavourites = async () => {
+      if (!user) return;
+
+      try {
+        const favsRes = await query(Climber.get_user_favorites.call, [user]);
+        const hallsRes = await query(Climber.get_climbing_halls_list.call);
+        const hallsFavourites = Array.isArray(favsRes.data.data)
+          ? favsRes.data.data
+          : [];
+        const hallsData = Array.isArray(hallsRes.data.data)
+          ? hallsRes.data.data
+          : [];
+        setFavouriteHalls(hallsFavourites);
+
+        const filteredHalls = hallsData.filter(
+          (hall) =>
+            !hallsFavourites.some(
+              (favHall) => favHall.hall_name === hall.hall_name
+            )
+        );
+
+        setHalls(filteredHalls);
+      } catch (err) {
+        alert("Error", "Error: " + err);
+      }
+    };
+
+    if (user) {
+      fetchHallsAndFavourites();
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchFilteredHalls = async () => {
@@ -64,51 +97,6 @@ export default function ClimbingHallScreen({ navigation }) {
     fetchFilteredHalls();
   }, [filterRequest]);
 
-  useEffect(() => {
-    query(Climber.get_user_favorites.call)
-      .then((res) => {
-        const hallsFavourites = Array.isArray(res.data.data)
-          ? res.data.data
-          : [];
-        setFavouriteHalls(hallsFavourites);
-      })
-      .catch((err) => {
-        alert("Error: ", err);
-      });
-  }, []);
-
-  useEffect(() => {
-    const fetchHallsAndFavourites = async () => {
-      if (!user) return;
-      try {
-        const favsRes = await query(Climber.get_user_favorites.call, [user]);
-        const hallsRes = await query(Climber.get_climbing_halls_list.call);
-        const hallsFavourites = Array.isArray(favsRes.data.data)
-          ? favsRes.data.data
-          : [];
-        const hallsData = Array.isArray(hallsRes.data.data)
-          ? hallsRes.data.data
-          : [];
-        setFavouriteHalls(hallsFavourites);
-
-        const filteredHalls = hallsData.filter(
-          (hall) =>
-            !hallsFavourites.some(
-              (favHall) => favHall.hall_name === hall.hall_name
-            )
-        );
-
-        setHalls(filteredHalls);
-      } catch (err) {
-        Alert.alert("Error", "Error: " + err);
-      }
-    };
-
-    if (user) {
-      fetchHallsAndFavourites();
-    }
-  }, [user]);
-
   return (
     <>
       <HeadText content="Where every climb feels like home." />
@@ -121,7 +109,7 @@ export default function ClimbingHallScreen({ navigation }) {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          {favouriteHalls.length >= 0 && (
+          {favouriteHalls.length > 0 && (
             <ClimbingHallList
               halls={favouriteHalls}
               navigation={navigation}

@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
-// Components
+import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-// Styles
 import styles from "../../../styles/allStyles";
 
-// ----------------------------------------------------------------
-
-// the display for a ClimbingHall, that display for the user necessary data of a climbing hall
 export default function ClimbingHallBox({
-  index,
   hall_name,
   street_address,
   city,
@@ -18,20 +12,16 @@ export default function ClimbingHallBox({
 }) {
   const openHallWithRoutes = () => {
     navigation.navigate("Routes", {
-      hall_name: hall_name,
-      favourite: favourite,
+      hall_name,
+      favourite,
     });
-  }; //navigation after the selection of a climbing hall to the RoutenScreen, that contain the routes for this selected hall
-
-  const replaceUnderscoresWithSpaces = (text) => {
-    return text.replace(/_/g, " ");
+    console.log("favouritebox :>> ", favourite);
   };
+  const hallname = hall_name.replace(/_/g, " ");
 
-  const hallname = replaceUnderscoresWithSpaces(hall_name);
   return (
     <TouchableOpacity onPress={openHallWithRoutes}>
       <View
-        key={index}
         style={[
           styles.borderBox,
           { borderColor: favourite ? "green" : "lightgrey" },
