@@ -1,3 +1,6 @@
+
+<img src="https://github.com/GaliosAngelos/climbUp/blob/main/client/assets/appicon.png" width="100" height="100">
+
 # climbUp
 
 Denmarkproject
