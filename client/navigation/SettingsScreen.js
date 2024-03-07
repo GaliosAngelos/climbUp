@@ -89,6 +89,10 @@ export default function SettingsScreen({ navigation }) {
           />
           <Button text="Update Password" onPress={updatePassword} />
           <Button
+            text="Go to Login Page"
+            onPress={() => navigation.navigate("Login")}
+          />
+          <Button
             text="Logout"
             onPress={async () => {
               try {
