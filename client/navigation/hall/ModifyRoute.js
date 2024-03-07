@@ -10,7 +10,6 @@ import styles from "../../components/styles/allStyles";
 import { query } from "../../Controller/requestHandler";
 import { Hall_Owner } from "../../Controller/Procedures";
 
-// Screen for insert, update and delete routes in the climbing hall
 export default function ModifyRoute({ navigation, route }) {
   const [item, setItem] = useState({
     color: "",
@@ -36,7 +35,7 @@ export default function ModifyRoute({ navigation, route }) {
         hallname: route.params.hallname || "",
       });
     }
-  }, []);
+  }, [navigation, route]);
 
   const updateField = (key, value) => {
     setItem((prev) => ({
@@ -80,6 +79,14 @@ export default function ModifyRoute({ navigation, route }) {
       .then((res) => {
         alert("Route deleted! ");
         navigation.navigate("HallAllRoutes");
+        setItem({
+          color: "",
+          level_of_difficulty: "",
+          line_number: "",
+          route_name: "",
+          sector: "",
+          tilt: "",
+        });
       })
       .catch((err) => {
         alert("Error when inserting the route: " + err.message);
@@ -98,6 +105,14 @@ export default function ModifyRoute({ navigation, route }) {
       .then((res) => {
         alert("Route updated! ");
         navigation.navigate("HallAllRoutes");
+        setItem({
+          color: "",
+          level_of_difficulty: "",
+          line_number: "",
+          route_name: "",
+          sector: "",
+          tilt: "",
+        });
       })
       .catch((err) => {
         alert("Error when inserting the route: " + err.message);
@@ -117,7 +132,7 @@ export default function ModifyRoute({ navigation, route }) {
 
   return (
     <>
-      <ButtonBack onPress={back} />
+      {/* <ButtonBack onPress={back} /> */}
       <HeadText
         content={
           route && route.params
